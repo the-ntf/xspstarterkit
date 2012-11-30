@@ -15,7 +15,6 @@
  */
 package org.openntf.xsp.starter.resources;
 
-import java.util.IdentityHashMap;
 import javax.faces.context.FacesContext;
 
 import com.ibm.xsp.component.UIViewRootEx;
@@ -37,9 +36,9 @@ public class Resources {
 	public static final Resource[] starterResourceCollection = { starterDojoModule1, starterDojoModule2, starterStyleSheet1,
 			starterClientLibrary1, starterClientLibrary2 };
 
-	public static void addAllEncodeResources() {
-
-	}
+	// public static void addAllEncodeResources() {
+	//
+	// }
 
 	public static void addEncodeResources(FacesContext context, Resource[] resources) {
 		UIViewRootEx rootEx = (UIViewRootEx) context.getViewRoot();
@@ -59,18 +58,7 @@ public class Resources {
 		addEncodeResource(rootEx, resource);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static void addEncodeResource(UIViewRootEx rootEx, Resource resource) {
-		IdentityHashMap<Resource, Boolean> m = (IdentityHashMap<Resource, Boolean>) rootEx.getEncodeProperty("genesis.EncodeResource");
-		if (m == null) {
-			m = new IdentityHashMap<Resource, Boolean>();
-		} else {
-			if (m.containsKey(resource)) {
-				return;
-			}
-		}
-		m.put(resource, Boolean.TRUE);
-
 		rootEx.addEncodeResource(resource);
 	}
 

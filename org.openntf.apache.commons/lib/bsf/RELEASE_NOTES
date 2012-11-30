@@ -1,0 +1,115 @@
+Apache BSF 3.1 Release Notes
+----------------------------
+
+Apache BSF 3 is an open-source implementation of JSR-223, 
+         "Scripting for the Java Platform".
+
+*----------------------------------------------------------------------*
+* BSF3 was developed according to the JSR-223 specs, but has not yet   *
+* been tested via the JSR-223 TCK. BSF can therefore not be considered *
+* a compatible implementation of JSR-223.                              *
+*----------------------------------------------------------------------*
+
+However, the implementation is believed to be complete.
+
+* BSF-3.x is not compatible with BSF-2.4 - the API is completely different.
+* BSF-3.x can be deployed and used on Java 1.4+ - it does not require Java 1.6
+
+What the jars contain
+---------------------
+bsf-api.jar     - javax.script package which implements JSR-223 for Java 1.4+
+bsf-utils.jar   - additional utilities for use with all JSR-223 implementations.
+bsf-all.jar     - both the above
+
+IMPORTANT
+=========
+Note that BSF 3.1 does not contain bsf-engines.jar, which was a repackaging
+of the JSR-223 factories from https://scripting.dev.java.net/.
+
+This is because:
+- the jar contained all the engine factories as a single bundle. It was not
+  possible to select individual factories, and this could lead to clashes with
+  other factories on the classpath.
+- the jar did not contain any implementations, so it was still necessary to download
+  the engine.
+Many engines contain their own factories now; for those that don't the factory can
+still be downloaded from https://scripting.dev.java.net/.
+
+Incomplete package
+------------------
+The org.apache.bsf.utils.http package in bsf-utils.jar contains several classes.
+These are not complete, and should not be relied on.
+They are not needed in order to use the javax.script API.
+
+Changes from previous releases
+------------------------------
+
+This 3.1 release is a maintenance release update to fix a few bugs.
+
+Compared with 3.0, the 3.1 release fixes the following:
+* BSF-30 ScriptEngineManager no longer catches ThreadDeath
+* BSF-29 ScriptException constructed via chained constructor 
+  ScriptException(Exception) always returns String "null" for getMessage()
+* Prevent Maven deploy from uploading test modules
+
+There are also a few improvements:
+
+* Test suite changes: renamed duplicate classes, better support for testing on Java 1.6/1.7
+* Added java-1.4/5/6/7 Maven profiles to allow cross-compilation and testing
+* removed duplicated and unnecessary test modules
+
+----
+
+Compared with 3.0-beta3, the 3.0 release fixes the following:
+* updated test application.
+* BSF-35 Wrong parameter type for [Simple]Bindings.put - key must be a String, not an Object
+* Test run detects Java version and skips tests that don't apply to Java 1.4
+* Added JEXL test.
+* Tidied build process to delete temporary directories
+
+The classes in the javax.script package have been overhauled to align the API, Javadoc and 
+the behaviour with the JSR-223 spec, and several unit tests have been added. 
+
+Some of these changes may cause problems for programs that have been written to the BSF 3.0
+Javadoc rather than the JSR-223 spec.
+
+javax.script class changes
+==========================
+AbstractScriptEngine - Javadoc only
+Bindings - Javadoc only
+Compilable - Javadoc only
+CompiledScript - Javadoc only
+Invocable - Javadoc only
+ScriptContext - Javadoc only
+ScriptEngine - Javadoc only
+ScriptEngineFactory - Javadoc only
+
+ScriptEngineManager - Javadoc, also protected fields made private:
+- engineSpis
+- nameAssociations
+- extensionAssocitions
+- mimeTypeAssociations
+- globalscope
+- now uses javax.imageio.spi.ServiceRegistry.lookupProviders() 
+  rather than the Sun-specfic method sun.misc.Service.providers()
+- put() method checks that key is non-null (NullPointerException)
+  and non-empty (IllegalArgumentException)
+- setBindings() throws IllegalArgumentException if the parameter is non-null
+- the registerXXX() methods throw NullPointerException if any of their parameters is null
+- the getEngineByXXX() methods throw NullPointerException if their parameter is null
+
+ScriptException 
+- all fields made private and final
+
+SimpleBindings
+- Javadoc
+- protected field "map" made private & final
+- methods now check keys to ensure that they are non-null, non-empty strings
+
+SimpleScriptContext
+- globalScope field now defaults to null
+- reader, writer and errorWriter fields are now protected (rather than private)
+  This is required by JSR-223
+- name parameters are now checked to ensure that they are non-null, non-empty strings
+- getBindings() throws IllegalArgumentException if the scope is invalid
+- getScopes() now returns an unmodifiable List

@@ -1,0 +1,27 @@
+$Id: RELEASE-NOTES.txt 549548 2007-06-21 17:03:51Z niallp $
+
+                          Commons Modeler Package
+                                Version 2.0.1
+                               Release Notes
+
+
+INTRODUCTION:
+============
+
+This document contains the release notes for this version of the Commons
+Modeler package, and highlights changes since the previous version.
+
+For more information on Jakarta Commons Modeler, see
+o http://jakarta.apache.org/commons/modeler/
+
+Compatibility with 2.0
+======================
+Modeler 2.0.1 is binary and source compatible with Modeler 2.0
+
+BUG REPORTS ADDRESSED:
+=====================
+
+o MODELER-20 	 ant jar in trunk fails
+o MODELER-21 	 MbeansDescriptorsDigesterSource.java is never build if just setting commons-digester.jar property in build.properties
+o MODELER-22 	 ant.properties is missing from the Modeler jar
+o MODELER-23 	 mbeans-descriptors.dtd is missing from the Modeler jar and binary distro

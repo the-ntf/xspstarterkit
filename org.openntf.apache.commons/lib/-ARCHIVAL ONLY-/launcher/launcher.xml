@@ -1,0 +1,96 @@
+<!--
+
+  Sample XML file for launching a sample application - Ant - using the Launcher.
+
+  By default, the sample application will be launched in the background.
+  To run it in the foreground, execute the Launcher with a "-Dwait=true"
+  argument.
+
+  To run the sample application in the JDB debugger, execute the Launcher with
+  a "-Ddebug=true" argument.
+
+  To run the sample application in JPDA mode, execute the Launcher with a
+  "-Djpda=true" argument.
+
+-->
+
+<project name="Ant Launcher" default="ant" basedir=".">
+
+  <!-- Set the application home to the parent directory of this directory -->
+  <property name="app.home" location="${basedir}/.."/>
+
+  <!-- Build the classpath relative to the application home -->
+  <path id="base.class.path">
+    <fileset dir="${app.home}/lib" includes="*.jar"/>
+  </path>
+
+  <!-- Build the sysproperties relative to the application home -->
+  <syspropertyset id="base.sys.properties">
+    <sysproperty key="ant.home" file="${app.home}"/>
+  </syspropertyset>
+
+  <!-- Build the standard jvmargs -->
+  <jvmargset id="base.jvm.args">
+    <jvmarg value="-sourcepath" if="jdb"/>
+    <jvmarg path="${app.home}/../src/java" if="jdb"/>
+    <jvmarg value="-Xdebug" if="jpda.settings"/>
+    <jvmarg value="-Xrunjdwp:${jpda.settings}" if="jpda.settings"/>
+  </jvmargset>
+
+  <!-- Target that sets JDB properties when the "debug" property is set -->
+  <target name="setjdb" description="Set JDB properties" if="debug">
+
+    <property name="jdb" value="true"/>
+
+  </target>
+
+  <!-- Target that sets JPDA properties when the "jpda" property is set -->
+  <target name="setjpda" description="Set JPDA properties" if="jpda">
+
+    <condition property="jpda.transport" value="dt_shmem">
+      <os family="windows"/>
+    </condition>
+    <condition property="jpda.transport" value="dt_socket">
+      <not>
+        <os family="windows"/>
+      </not>
+    </condition>
+    <condition property="jpda.address" value="jdbconn">
+      <equals arg1="${jpda.transport}" arg2="dt_shmem"/>
+    </condition>
+    <condition property="jpda.address" value="8000">
+      <not>
+        <equals arg1="${jpda.transport}" arg2="dt_shmem"/>
+      </not>
+    </condition>
+    <property name="jpda.suspend" value="y"/>
+    <property name="jpda.settings" value="transport=${jpda.transport},address=${jpda.address},server=y,suspend=${jpda.suspend}"/>
+
+  </target>
+
+  <!-- Target that executes Ant -->
+  <target name="ant" description="Execute Ant using the Launcher"
+    depends="setjdb,setjpda">
+
+    <!--
+      Execute Ant in a separate process. Note the use if "if" and "unless"
+      attributes to control the passing of arguments to Ant.
+     -->
+    <launch classname="org.apache.tools.ant.Main"
+      waitforchild="${wait}"
+      debug="${jdb}"
+      print="${print}"
+      requiretools="true"
+      redirectoutput="true"
+      output="${app.home}/logs/ant.log"
+      displayMinimizedWindow="true"
+      disposeMinimizedWindow="true"
+      minimizedWindowTitle="Ant">
+        <jvmargset refid="base.jvm.args"/>
+        <syspropertyset refid="base.sys.properties"/>
+        <classpath refid="base.class.path"/>
+    </launch>
+
+  </target>
+
+</project>

@@ -1,0 +1,84 @@
+<!--
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+$Id: RELEASE-NOTES.txt 719758 2008-11-22 00:10:31Z rahul $
+
+                         Commons SCXML Package
+                             Version 0.9
+                            Release Notes
+
+INTRODUCTION:
+
+Commons SCXML 0.9 is a minor release containing a few enhancements and
+bug fixes. Changes to SCXML documents may be necessary before upgrading
+from 0.8, see detailed changes list below. See about section at the end
+for general information on Commons SCXML.
+
+BREAKING CHANGES:
+
+ o The "event" attribute of the <send> element is now correctly evaluated
+   as an expression, rather than a String.
+
+ o In line with the rest of the logs used in the library, the default
+   SCXMLSemantics implementation now uses SCXMLSemantics.class to derive
+   its log name, instead of the previous logical name "scxml.app.log".
+
+NEW FEATURES:
+
+ o [SCXML-74] - <data> should support use of id attribute
+ o [SCXML-75] - TriggerEvent should be Serializable
+ o [SCXML-78] - SCXMLListeners are not be processed in a defined order
+ o [SCXML-80] - SCXMLParser should throw exception if it fails to resolve the
+                src attribute of the <state> element
+ o [SCXML-81] - <parallel> does not support <onentry> and <onexit>
+ o [SCXML-82] - <transition> element as an child of <parallel> ignored
+ o [SCXML-84] - Add SCXML on Android usecase to website
+ o [SCXML-86] - Support initial attribute of <state>
+
+BUG FIXES:
+
+ o [SCXML-73] - <send> delay attribute should be a value expression
+ o [SCXML-76] - Serialization of expressions may produce invalid XML
+ o [SCXML-77] - <param> semantics for using name attribute by itself are
+                not correct
+ o [SCXML-79] - SCXMLSerializer produces nested states with a parentid
+                attribute
+ o [SCXML-83] - Errors on serialization of <send>
+ o [SCXML-87] - Delayed events not passing payload
+ o [SCXML-88] - SCXMLSerializer does not serialize custom namespace
+                declarations
+ o [SCXML-89] - <assign> does not remove all previous children at location
+ o [SCXML-90] - event attribute of <send> is not evaluated as an expression
+
+OTHER COMMENTS:
+
+ o This is a Maven 2 release.
+
+ABOUT COMMONS SCXML:
+
+The Commons SCXML (State Chart XML) project provides a generic
+state-machine based execution environment. It borrows most semantics
+from its namesake Working Draft at the W3C. Anything that can be
+represented as a UML state chart -- business process flows, view
+navigation bits, interaction or dialog management, and many more -- can
+leverage the Commons SCXML library. The library abstracts out the
+environment interfaces, and can be used in numerous server-side and
+client-side runtimes.
+
+Please visit the website for project information and documentation:
+
+http://commons.apache.org/scxml/
+

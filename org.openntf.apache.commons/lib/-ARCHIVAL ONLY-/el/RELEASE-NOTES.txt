@@ -1,0 +1,18 @@
+$Id: RELEASE-NOTES.txt,v 1.1 2003/06/06 22:16:05 luehe Exp $
+
+                          Commons EL Package
+                              Version 1.0
+                             Release Notes
+
+Introduction
+------------
+
+This is the first release of the commons-el package, which provides an
+implementation of the standard interfaces and abstract classes of the
+javax.servlet.jsp.el package, which is part of the JSP 2.0
+specification.
+
+Bug Status
+----------
+
+There are no outstanding bugs.

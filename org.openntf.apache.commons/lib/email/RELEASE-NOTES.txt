@@ -1,0 +1,107 @@
+                         Commons Email Package
+                              Version 1.2
+                             Release Notes
+
+INTRODUCTION:
+-------------
+
+Commons Email aims to provide a API for sending email. It builds on the JavaMail
+API with the aim of presenting a simplified API which is easy for developers who
+are not mail experts to use. It is a compact component with a small number of
+classes.
+
+The Commons Email website is the source for the most recent information,
+downloads, reports, and bug status:
+
+http://commons.apache.org/email/
+
+This is a maintenance release which fixes several bugs present in the 1.1
+release and adds a number of small enhancements requested by
+users. All current users are encouraged to upgrade.
+
+CHANGES FROM 1.1:
+-----------------
+
+== Compatibility ==
+
+* Java 1.4 or later is now required. Earlier versions are no longer
+  supported by Sun.
+
+* JavaMail 1.4 or later and JavaBeans Activation Framework 1.1 or later are now
+  required.
+
+== New Features ==
+
+* Email.setFrom and Email.addTo are using Email.charset to properly encode 
+  the name.
+  
+* SimpleEmail#setMsg() with UTF-8 content honors correct charset in header 
+  and does encode the content correctly now.
+  
+* Created additional methods to support timeouts.
+
+* Create an overridable method in Email.java to create the MimeMessage instance.
+
+* Add getTo and getReplyTo to Email class. 
+
+== Fixed Bugs ==
+
+* If setHostName() has not been called, getHostName() tries to return
+  this.session.getProperty(MAIL_HOST). If mail session has not been
+  created yet, this will throw a NullPointerException. Now getHostName()
+  checks that this.session is not null before trying to access it. 
+
+* Provide better diagnostics when attaching  documents fail. 
+
+* When mail authentication is required and no username/password is supplied
+  than the provided mail session is used. If a username/password is found
+  the implementation creates a new mail session and a DefaultAuthenticator
+  as convinence implementation. 
+
+* Using Kenneth's implementation of HtmlEmail.buildMimeMessage() to fix a
+  couple of HtmlEmail layout issues. Also thanks to Martin Lau and Morten
+  Hattesen for providing in-depth analysis of the problem. 
+
+* During regression tests write out the generated MimeMessage instead of
+  WiserEmail.toString(). 
+
+
+REQUIREMENTS:
+
+J2SE environments
+-----------------
+
+Commons Email requires JavaMail 1.4 or later. The Sun implementation
+is available at:
+
+http://java.sun.com/products/javamail/
+
+However, the Apache Geronimo project (http://geronimo.apache.org)
+provides a J2EE-certified implementation of the JavaMail 1.4
+specification licensed under the Apache Software License.  
+
+Commons Email also requires the JavaBeans Activation Framework unless
+you are runnning on Java SE 6 or later. The Sun implementation is available
+at:
+
+http://java.sun.com/javase/technologies/desktop/javabeans/jaf/
+
+Apache Geronimo likewise provides an implementation under the Apache
+Software License.
+
+Commons Email has been tested with JDK 1.4, 1.5 and 1.6
+
+J2EE environments
+-----------------
+
+Commons Email is compatible with all certified Java Enterprise Edition
+5 implementations; no further dependencies are required. 
+
+Java 2 Enterprise Edition 1.4 users must ensure that the versions of
+JavaMail and JAF indicated above are available to their applications;
+the J2EE 1.4 specification only requires earlier versions.
+
+Earlier versions of J2EE are not supported.
+
+
+

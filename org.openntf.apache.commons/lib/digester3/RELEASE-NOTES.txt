@@ -1,0 +1,79 @@
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+$Id: RELEASE-NOTES.txt 1212338 2011-12-09 11:40:40Z simonetripodi $
+
+
+                          Commons Digester Package
+                                Version 3.2
+                               Release Notes
+
+
+INTRODUCTION
+============
+
+This is a maintenance release with new features. New projects are encouraged to
+use this release of digester. There is no urgency for existing projects to
+upgrade; Digester 3.1 has proven to be a stable release.
+
+IMPORTANT NOTES
+================
+
+BREAKING CHANGES:
+
+ * NONE.
+
+DEPENDENCIES
+=============
+
+Digester 3.2 users should upgrade to the recommended dependency set below
+where possible.
+
+The Recommended Dependency Set for Digester 3.0 is:
+   Digester 3.1 + Logging 1.1.1 + BeanUtils 1.8.3
+
+It is also possible to use Logging 1.0.x or BeanUtils 1.7.0 instead.
+
+NEW FEATURES
+=============
+
+ * [DIGESTER-153] Add Constructor support to ObjectCreateRule.
+
+BUGS FIXED SINCE PREVIOUS RELEASE
+===========================
+
+ * [DIGESTER-159] */object-param-rule is not managed in the XML rules.
+ * [DIGESTER-155] ClassLoader reference set to DigesterLoader not set in produced Digester instances
+ * [DIGESTER-154] The DigesterBinder is not able to load primitive classes by name
+
+IMPROVEMENTS OVER PREVIOUS RELEASE
+===================================
+
+ * [DIGESTER-160] provide an additional artifact with shaded dependencies
+ * [DIGESTER-157] Improve Set(Nested)PropertiesRuleAlias performances in the XML ruleset while binding rules
+ * [DIGESTER-156] Make (Nested|Set)PropertiesBuilder#addAlias() fluent.
+ * [DIGESTER-152] The DigesterLoader doesn't allow binding a default Locator
+ * [DIGESTER-151] The DigesterLoader doesn't allow binding a default ErrorHandler.
+
+DEPRECATIONS
+============
+
+ * NONE
+
+OTHER NOTES
+============
+
+ * NONE
