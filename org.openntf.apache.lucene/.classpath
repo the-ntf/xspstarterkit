@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="lib" path="lib/lucene-icu-3.6.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/lucene-xml-query-parser-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-lib/icu4j-49_1.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-lib/icu4j-charset-49_1.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-lib/icu4j-localespi-49_1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/lucene-lib/jakarta-regexp-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-analyzers-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-benchmark-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-core-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-facet-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-grouping-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-highlighter-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-instantiated-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-join-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-memory-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-misc-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-pruning-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-queries-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-queryparser-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-remote-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-spatial-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-spellchecker-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-test-framework-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/analysis/lucene-kuromoji-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/analysis/lucene-phonetic-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/analysis/lucene-smartcn-3.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/analysis/lucene-stempel-3.6.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
