@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.openntf.misc.feature_1.0.0.201212011355.jar" id="org.openntf.misc.feature" version="1.0.0.201212011355"/>
+</site>

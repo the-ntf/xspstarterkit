@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.openntf.misc.feature"
+      label="Miscellaneous Xsp Library wrappers for open source"
+      version="1.0.0.qualifier"
+      provider-name="Red Pill Development, LLC">
+
+   <description>
+      This collection of plugins deploys the major Apache Commons,
+Apache Poi, Apache Lucene, Apache XmlBeans, Leagion of the Bouncy Castle, Google Guava, and every open source
+XML package I could find. Suggestions for additional
+plugins are welcome.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      The aggregation is copyright 2012 Red Pill Development, LLC
+
+The individual libraries are copyright their respective owners. License information can be found in the lib folders in each plugin.
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <plugin
+         id="org.openntf.apache.commons"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.openntf.apache.lucene"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.openntf.apache.poi"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.openntf.apache.xmlbeans"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.openntf.bouncycastle"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.openntf.google.guava"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.openntf.xmltools"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.openntf.xsp.starter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
