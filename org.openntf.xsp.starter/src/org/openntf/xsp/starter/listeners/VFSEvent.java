@@ -6,7 +6,7 @@ import com.ibm.commons.vfs.VFS;
 import com.ibm.commons.vfs.VFSEventAdapter;
 
 public class VFSEvent extends VFSEventAdapter {
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	static {
 		if (_debug)
 			System.out.println(VFSEvent.class.getName() + " loaded");

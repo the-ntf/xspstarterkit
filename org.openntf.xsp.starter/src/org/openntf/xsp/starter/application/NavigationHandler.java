@@ -26,7 +26,7 @@ import com.ibm.xsp.util.Delegation;
 
 public class NavigationHandler extends javax.faces.application.NavigationHandler {
 	private final javax.faces.application.NavigationHandler _delegate;
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 
 	public NavigationHandler(javax.faces.application.NavigationHandler handler) throws FacesException, ClassNotFoundException,
 			InstantiationException, IllegalAccessException {

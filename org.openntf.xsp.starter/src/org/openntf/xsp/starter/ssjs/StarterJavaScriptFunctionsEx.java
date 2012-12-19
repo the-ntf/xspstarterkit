@@ -26,7 +26,7 @@ import com.ibm.jscript.types.FBSValueVector;
 public class StarterJavaScriptFunctionsEx extends FBSDefaultObject {
 	private static final int FCT_GET_EXTENDED_CONTEXT = 1;
 	private static final int FCT_CHARLIE = 2;
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	static {
 		if (_debug)
 			System.out.println(StarterJavaScriptFunctionsEx.class.getName() + " loaded");

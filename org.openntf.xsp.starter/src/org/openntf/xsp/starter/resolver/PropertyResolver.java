@@ -25,7 +25,7 @@ import com.ibm.xsp.util.Delegation;
 
 public class PropertyResolver extends javax.faces.el.PropertyResolver {
 	protected final javax.faces.el.PropertyResolver _resolver;
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 
 	public PropertyResolver() throws FacesException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		this._resolver = ((javax.faces.el.PropertyResolver) Delegation.getImplementation("property-resolver"));

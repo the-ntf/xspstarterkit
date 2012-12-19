@@ -4,7 +4,7 @@ import org.openntf.xsp.starter.Activator;
 import com.sun.faces.application.ActionListenerImpl;
 
 public class ActionListener extends ActionListenerImpl {
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	static {
 		if (_debug)
 			System.out.println(ActionListener.class.getName() + " loaded");

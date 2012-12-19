@@ -20,7 +20,7 @@ import com.ibm.xsp.domino.context.DominoExternalContext;
 
 public class StarterExternalContext extends ExternalContextEx {
 	private final DominoExternalContext delegate;
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	static {
 		if (_debug)
 			System.out.println(StarterExternalContext.class.getName() + " loaded");

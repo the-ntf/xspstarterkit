@@ -10,7 +10,7 @@ import com.sun.faces.lifecycle.LifecycleImpl;
 
 public class Lifecycle extends LifecycleImpl {
 	private javax.faces.lifecycle.Lifecycle delegate;
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	static {
 		if (_debug)
 			System.out.println(Lifecycle.class.getName() + " loaded");

@@ -24,7 +24,7 @@ import org.openntf.xsp.starter.util.LibraryUtils;
 import com.ibm.xsp.context.FacesContextEx;
 
 public class AbstractBean implements Serializable {
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	private static final long serialVersionUID = 4755914366416862241L;
 
 	public static AbstractBean getCurrentInstance(String suffix) {

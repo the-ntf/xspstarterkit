@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE database>
+<database xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='2.0'
+ replicaid='85257832001E5FC2' path='CN=DAVIDT11/O=DAVDEV!!osgi.nsf' title='Osgi'>
+<databaseinfo dbid='85257832001E5FC2' odsversion='43' diskspace='663552' percentused='89.5447530864198'
+ numberofdocuments='11'><datamodified><datetime dst='true'>20110602T165854,87-04</datetime></datamodified><designmodified
+><datetime dst='true'>20110603T125416,17-04</datetime></designmodified></databaseinfo>
+<view name='OSGi Configuration' alias='OSGi Configuration' showinmenu='false'
+ publicaccess='false' designerversion='8.5.2' default='true' unreadmarks='none'
+ onopengoto='lastopened' onrefresh='displayindicator' headers='beveled' opencollapsed='false'
+ showresponsehierarchy='true' showmargin='true' shrinkrows='false' extendlastcolumn='false'
+ showhierarchies='false' unreadcolor='black' rowlinecount='1' headerlinecount='1'
+ rowspacing='1' bgcolor='white' totalscolor='black' headerbgcolor='white'
+ boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='false' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='116' unid='2497ABF73D174BCF85257832001E5FD8' sequence='29'>
+<created><datetime>20110209T003146,16-05</datetime></created>
+<modified><datetime dst='true'>20110603T125416,17-04</datetime></modified>
+<revised><datetime dst='true'>20110603T125416,16-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20110603T125416,17-04</datetime></lastaccessed>
+<addedtofile><datetime>20110209T003146,18-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=David Taieb/OU=Cambridge/O=IBM</name></updatedby>
+<wassignedby><name>CN=David Taieb/OU=Cambridge/O=IBM</name></wassignedby><code
+ event='selection'><formula>SELECT @IsAvailable($OSGi_Profile)</formula></code>
+<actionbar bgcolor='#f0f0f0' bordercolor='black'>
+<actionbuttonstyle bgcolor='#f0f0f0'/><font color='system'/><border style='solid'
+ width='0px 0px 1px'/>
+<action title='Categori_ze' showinbar='false' systemcommand='categorize'/>
+<action title='_Edit Document' showinbar='false' systemcommand='edit'/>
+<action title='_Send Document' showinbar='false' systemcommand='send'/>
+<action title='_Forward' showinbar='false' systemcommand='forward'/>
+<action title='_Move To Folder...' showinbar='false' systemcommand='movetofolder'/>
+<action title='_Remove From Folder' showinbar='false' systemcommand='removefromfolder'/>
+<action title='_Read' showinbar='false' systemcommand='markread'/>
+<action title='_Unread' showinbar='false' systemcommand='markunread'/>
+<action title='_Open in New Window' showinbar='false' systemcommand='openinnewwindow'/>
+<action title='_Print...' showinbar='false' systemcommand='print'/>
+<action title='_Delete' showinbar='false' systemcommand='delete'/>
+<action title='_Document Properties' showinbar='false' systemcommand='properties'/>
+<action title='C_ut' showinbar='false' systemcommand='cut'/>
+<action title='_Copy' showinbar='false' systemcommand='copy'/>
+<action title='Copy as Document _Link' showinbar='false' systemcommand='copyasdoclink'/>
+<action title='Copy as _Table' showinbar='false' systemcommand='copyastable'/>
+<action title='P_aste' showinbar='false' systemcommand='paste'/>
+<action title='_Open' showinbar='false' systemcommand='open'/>
+<action title='Bookmark' showinbar='false' systemcommand='bookmark'/></actionbar>
+<column sort='ascending' hidedetailrows='false' itemname='Server' width='1.5000'
+ resizable='false' separatemultiplevalues='true' sortnoaccent='false' sortnocase='true'
+ showaslinks='false' categorized='true' twisties='true'><columnheader><font
+ size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='Name' width='1.6250' resizable='false'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'
+ responsesonly='true'><columnheader><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$OSGi_Profile' width='4.8750' resizable='true'
+ separatemultiplevalues='true' sortnoaccent='true' sortnocase='true' showaslinks='false'
+ twisties='true'><columnheader title='Name'><font size='9pt' style='bold'/></columnheader></column></view>
+</database>
+

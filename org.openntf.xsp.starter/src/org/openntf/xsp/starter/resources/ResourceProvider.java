@@ -29,7 +29,7 @@ import com.ibm.xsp.webapp.resources.BundleResourceProvider;
 import com.ibm.xsp.webapp.resources.URLResourceProvider;
 
 public class ResourceProvider extends BundleResourceProvider {
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	static {
 		if (_debug)
 			System.out.println(ResourceProvider.class.getName() + " loaded");

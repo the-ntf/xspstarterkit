@@ -18,7 +18,7 @@ package org.openntf.xsp.starter.listeners;
 import org.openntf.xsp.starter.Activator;
 
 public abstract class AbstractListener {
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 
 	protected void _debugOut(String message) {
 		if (_debug)

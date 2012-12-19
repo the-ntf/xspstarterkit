@@ -26,7 +26,7 @@ import com.ibm.xsp.util.TypedUtil;
 
 public class ImplicitObjectFactory implements com.ibm.xsp.el.ImplicitObjectFactory {
 	private final String[][] implicitObjectList = { { "server", ImplicitObject.class.getName() } };
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 
 	public ImplicitObjectFactory() {
 		if (_debug)

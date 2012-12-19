@@ -1,0 +1,8 @@
+#### Debugging options for org.eclipse.osgi
+
+# Turn on general debugging for com.ibm.dots
+com.ibm.dots/logger/console=false
+com.ibm.dots/logger/console/level=INFO
+
+#logging groups
+com.ibm.dots/logger/serverTaskManager/level=INFO

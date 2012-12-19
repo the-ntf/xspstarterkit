@@ -22,7 +22,7 @@ import org.openntf.xsp.starter.Activator;
 
 public class PhaseListener extends AbstractListener implements javax.faces.event.PhaseListener {
 	public static final long serialVersionUID = -6528380677556637393L;
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	static {
 		if (_debug)
 			System.out.println(PhaseListener.class.getName() + " loaded");

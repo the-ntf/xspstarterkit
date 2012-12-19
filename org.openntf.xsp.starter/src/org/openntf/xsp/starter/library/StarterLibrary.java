@@ -24,7 +24,7 @@ public class StarterLibrary extends AbstractXspLibrary {
 	// change this string to establish a namespace for your resources:
 	public final static String LIBRARY_RESOURCE_NAMESPACE = "Starter";
 	public final static String LIBRARY_BEAN_PREFIX = "Starter";
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 
 	static {
 		if (_debug) {
@@ -49,29 +49,41 @@ public class StarterLibrary extends AbstractXspLibrary {
 
 	@Override
 	public String[] getDependencies() {
-		return new String[] { "com.ibm.xsp.core.library",
-				"com.ibm.xsp.extsn.library", "com.ibm.xsp.domino.library",
+		return new String[] { "com.ibm.xsp.core.library", "com.ibm.xsp.extsn.library", "com.ibm.xsp.domino.library",
 				"com.ibm.xsp.designer.library" };
 	}
 
 	@Override
 	public String[] getXspConfigFiles() {
-		String[] files = new String[] { "META-INF/starter.xsp-config",
-				"META-INF/html.xsp-config", "META-INF/canvas.xsp-config" };
+		String[] files = new String[] { "META-INF/starter.xsp-config", "META-INF/html.xsp-config", "META-INF/canvas.xsp-config" };
 
 		return files;
 	}
 
 	@Override
 	public String[] getFacesConfigFiles() {
-		String[] files = new String[] { "META-INF/starter-faces-config.xml",
-				"META-INF/html-faces-config.xml",
+		String[] files = new String[] { "META-INF/starter-faces-config.xml", "META-INF/html-faces-config.xml",
 				"META-INF/canvas-faces-config.xml" };
 		return files;
 	}
 
+	private static Boolean GLOBAL = null;
+
+	private static boolean isGlobal() {
+		if (GLOBAL = null) {
+			GLOBAL = Boolean.FALSE;
+			String[] envs = Activator.getEnvironmentStrings();
+			for (String s : envs) {
+				if (s.equalsIgnoreCase("global")) {
+					GLOBAL = Boolean.TRUE;
+				}
+			}
+		}
+		return GLOBAL.booleanValue();
+	}
+
 	@Override
 	public boolean isGlobalScope() {
-		return false;
+		return isGlobal();
 	}
 }

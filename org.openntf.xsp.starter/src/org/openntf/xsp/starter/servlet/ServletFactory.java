@@ -15,7 +15,7 @@ public class ServletFactory implements IServletFactory {
 	/*
 	 * NTF - This class loads and constructs, but I have not yet figured out how to make it be the Factory for the primary servlets
 	 */
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	static {
 		if (_debug)
 			System.out.println(ServletFactory.class.getName() + " loaded");

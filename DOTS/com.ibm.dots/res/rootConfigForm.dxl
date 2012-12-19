@@ -1,0 +1,573 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE database>
+<database xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='8525788E007517D9' path='C:\dev\javaddin\workspace\com.ibm.dots\res\osgiconf.ntf'
+ title='Osgiconf' increasemaxfields='true'>
+<databaseinfo dbid='8525788E007517D9' odsversion='51' diskspace='589824' percentused='84.5052083333333'
+ numberofdocuments='0'><datamodified><datetime dst='true'>20110524T221239,45-04</datetime></datamodified><designmodified
+><datetime dst='true'>20110922T103652,34-04</datetime></designmodified></databaseinfo>
+<form name='RootConfiguration' publicaccess='false' designerversion='8.5.3'
+ bgcolor='#f7f7f7' renderpassthrough='true'>
+<noteinfo noteid='152' unid='9F69AC4FFD7794CD8525788E00752582' sequence='277'>
+<created><datetime dst='true'>20110512T171933,14-04</datetime></created>
+<modified><datetime dst='true'>20110920T133005,20-04</datetime></modified>
+<revised><datetime dst='true'>20110920T133005,19-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20110920T133005,19-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20110512T171933,30-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=David Taieb/OU=Cambridge/O=IBM</name></updatedby>
+<wassignedby><name>CN=David Taieb/OU=Cambridge/O=IBM</name></wassignedby><code
+ event='postsave'><lotusscript>Sub Postsave(Source As Notesuidocument)
+	Source.Refresh
+End Sub</lotusscript></code>
+<actionbar bgcolor='#f0f0f0' bordercolor='black'>
+<actionbuttonstyle bgcolor='#f0f0f0'/><font color='system'/><border style='solid'
+ width='0px 0px 1px'/></actionbar>
+<body><richtext>
+<pardef id='1' align='center'/>
+<par def='1'><run><font size='14pt' style='bold' name='user-interface' color='purple'/>Domino OS</run><run
+><font size='14pt' style='bold' name='user-interface' color='purple'/>Gi Configuration for Server </run><run
+><font size='14pt' color='purple' style='bold' name='user-interface'/><field
+ type='names' kind='computed' name='Server'><code event='defaultvalue'><formula
+>Server</formula></code></field></run><run><font size='14pt' style='bold'
+ name='user-interface' color='purple'/></run></par>
+<par def='1'><run><font size='14pt' style='bold' name='user-interface' color='purple'/>Profile </run><run
+><font size='14pt' color='purple' style='bold' name='user-interface'/><field
+ type='text' kind='computed' name='$OSGi_Profile'><code event='defaultvalue'><formula
+>$OSGi_Profile</formula></code></field></run><compositedata type='98' prevtype='65418'
+ nexttype='222' afterparcount='9' containertype='65418' aftercontainercount='1'
+ afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata><run><font size='14pt' style='bold' name='user-interface'
+ color='purple'/></run></par>
+<pardef id='2'/>
+<par def='2'/>
+<table widthtype='fitwindow' rowdisplay='tabs' leftmargin='0.7417in' refwidth='11.5069in'><tablecolumn
+ width='100%'/>
+<tablerow tablabel='OSGi Options'>
+<tablecell>
+<pardef id='4' keepwithnext='true' keeptogether='true'/>
+<par def='4'/>
+<par def='4'/>
+<table leftmargin='0.0083in' widthtype='fixedleft' refwidth='10.4903in'><tablecolumn
+ width='3.0972in'/><tablecolumn width='3.0972in'/><tablecolumn width='0.2153in'/><tablecolumn
+ width='1.7903in'/><tablecolumn width='2.2903in'/>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#9f9fe0'>
+<pardef id='6' keepwithnext='true' keeptogether='true'/>
+<par def='6'><run><font style='bold'/>OSGi Options</run></par>
+<par def='6'/></tablecell>
+<tablecell borderwidth='0px' bgcolor='#9f9fe0'>
+<pardef id='7' keepwithnext='true' keeptogether='true'/>
+<par def='7'/></tablecell>
+<tablecell borderwidth='0px' bgcolor='#9f9fe0'>
+<pardef id='8' keepwithnext='true' keeptogether='true'/>
+<par def='8'/></tablecell>
+<tablecell borderwidth='0px' bgcolor='#9f9fe0'>
+<pardef id='9' keepwithnext='true' keeptogether='true'/>
+<par def='9'><run><font style='bold'/>OSGi Remote Controller</run></par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#9f9fe0'>
+<pardef id='10' keepwithnext='true' keeptogether='true'/>
+<par def='10'/></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='6'>Clean OSGi environment on Startup (-clean):</par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='7'><field borderstyle='inset' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' allowmultivalues='true' kind='editable' name='arg_clean' listinputseparators='comma'
+ listdisplayseparator='comma'><keywords helperbutton='false' recalconchange='true'
+ recalcchoices='true' columns='1' ui='checkbox'><textlist><text>Enabled|1</text></textlist></keywords><code
+ event='defaultvalue'><formula>"1"</formula></code></field></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='8'/></tablecell>
+<tablecell borderwidth='0px'>
+<par def='9'>Type:</par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='10'><field usenotesstyle='false' height='0.2500in' width='1in' multiline='true'
+ borderstyle='inset' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' kind='editable' name='Remote_Controller'><keywords helperbutton='false'
+ recalconchange='true' columns='1' ui='combobox'><textlist><text>None|0</text><text
+>Embedded|1</text></textlist></keywords><code event='defaultvalue'><formula
+>"0"</formula></code></field></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='6'/></tablecell>
+<tablecell borderwidth='0px'>
+<par def='7'/></tablecell>
+<tablecell borderwidth='0px'>
+<par def='8'/></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='11' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>Remote_Controller!="1"</formula></code></pardef>
+<par def='11'>Port:</par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='12' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>Remote_Controller!="1"</formula></code></pardef>
+<par def='12'><field type='number' kind='editable' name='Remote_Controller_Port'><numberformat
+ format='general' varying='true' digits='2' punctuated='false' parens='false'
+ percent='false' bytes='false'/><code event='exiting'><lotusscript>Sub Exiting(Source As Field)
+	Dim workspace As New NotesUIWorkspace
+	Dim uidoc As NotesUIDocument
+	Set uidoc = workspace.CurrentDocument
+	uidoc.Refresh
+End Sub</lotusscript></code></field></par>
+<par def='12'/></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='6'>List of plugins to automatically start:</par>
+<par def='6'><run><font color='gray'/>(example syntax: com.ibm.someplugin@4)</run></par></tablecell>
+<tablecell columnspan='4' borderwidth='0px'>
+<pardef id='13' keepwithnext='true' keeptogether='true'/>
+<par def='13'><field usenotesstyle='false' height='2.2500in' width='6in' multiline='true'
+ borderstyle='single' type='text' allowmultivalues='true' kind='editable'
+ name='Starting_plugins' listinputseparators='comma semicolon newline blankline'
+ listdisplayseparator='newline'><code event='exiting'><lotusscript>Sub Exiting(Source As Field)
+	Dim workspace As New NotesUIWorkspace
+	Dim uidoc As NotesUIDocument
+	Set uidoc = workspace.CurrentDocument
+	uidoc.Refresh	
+End Sub</lotusscript></code></field></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='14' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>Remote_Controller!="1"</formula></code></pardef>
+<par def='14'/></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='15' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>Remote_Controller!="1"</formula></code></pardef>
+<par def='15'/></tablecell>
+<tablecell borderwidth='0px'>
+<par def='8'/></tablecell>
+<tablecell borderwidth='0px'>
+<par def='9'/></tablecell>
+<tablecell borderwidth='0px'>
+<par def='10'/></tablecell></tablerow></table></tablecell></tablerow>
+<tablerow tablabel='Sites'>
+<tablecell>
+<pardef id='16' keepwithnext='true' keeptogether='true'/>
+<par def='16'/>
+<table leftmargin='0.0083in' widthtype='fixedleft' refwidth='11.5069in'><tablecolumn
+ width='2.6875in'/><tablecolumn width='0.9639in'/><tablecolumn width='2.6875in'/><tablecolumn
+ width='5.1681in'/>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#e1e1e1' columnheader='true'>
+<pardef id='18' keepwithnext='true' keeptogether='true'/>
+<par def='18'>List of Eclipse sites included in this profile:</par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#e1e1e1' columnheader='true'>
+<pardef id='19' keepwithnext='true' keeptogether='true'/>
+<par def='19'/></tablecell>
+<tablecell borderwidth='0px' bgcolor='#e1e1e1'>
+<pardef id='20' keepwithnext='true' keeptogether='true'/>
+<par def='20'>List of Features (optional, none means includes every feature)</par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#e1e1e1'>
+<pardef id='21' keepwithnext='true' keeptogether='true'/>
+<par def='21'/></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='18'><field usenotesstyle='false' height='1.2500in' width='3in' multiline='true'
+ borderstyle='single' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' kind='editable' name='SiteList'><keywords helperbutton='false'
+ recalconchange='true' recalcchoices='true' columns='1' ui='listbox'><formula
+>SiteListUrls</formula></keywords></field></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='19'><button width='2in' widthtype='maximum' maxlines='1' wraptext='true'
+ bgcolor='system'><code event='click'><formula>result := @Prompt([OkCancelEdit]; "Enter the site url"; "New Site url (urls can start wth file: or osginsf:)"; "");
+index := @Text( @Elements(SiteListurls) );
+@SetField("SiteListUrls"; @Trim(SiteListUrls: (result + "|" + index )));
+@Command([ViewRefreshFields]);
+@True</formula></code>Add Site</button></par>
+<par def='19'><button width='2in' widthtype='maximum' maxlines='1' wraptext='true'
+ bgcolor='system'><code event='click'><formula>@If( SiteList = ""; @Do( @Prompt([Ok];"Error"; "Select a site first");@Return(True) ); "");
+Position:=@Member(SiteList; @Right( SiteListUrls; "|")  );
+@If ( Position = 0; @Do( @Prompt([Ok];"Error"; "Cannot find selected site in the list" );@Return(True) ); "");
+Elements := @Elements(SiteListUrls);
+Bool := @If(Elements = Position; "L"; Position = 1; "F"; "M");
+FIELD SiteListUrls := @If(Bool = "F" &amp; Elements &gt; 1; @Subset(SiteListUrls; -(Elements - 1));Bool = "L" &amp; Elements = 1;""; Bool = "L"; @Subset(SiteListUrls; (Elements - 1)); @Trim(@If(Position&gt;0;@Subset(SiteListUrls; (Position - 1));"") : @Subset(SiteListUrls; -(Elements - Position))));
+@SetField( "FeatureList" + SiteList; @DeleteField);
+@SetField(  "SitePermList" + SiteList + "deny"; @DeleteField );
+@SetField(  "SitePermList" + SiteList + "allow"; @DeleteField );
+@Command([ViewRefreshFields])</formula></code>Remove Site</button></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='20'><field usenotesstyle='false' height='1.2500in' width='3in' multiline='true'
+ borderstyle='single' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' kind='editable' name='FeatureListDisplay'><keywords helperbutton='false'
+ recalconchange='true' recalcchoices='true' columns='1' ui='listbox'><formula
+>@GetField( "FeatureList" + SiteList )</formula></keywords><code event='defaultvalue'><formula
+>SiteList</formula></code></field></par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='21'><button width='2in' widthtype='maximum' maxlines='1' wraptext='true'
+ bgcolor='system'><code event='click'><formula>@If( SiteList = ""; @Do( @Prompt([Ok];"Error"; "Select a site first");@Return(True) ); "");
+result := @Prompt([OkCancelEdit]; "Feature id"; "Enter the new feature id to include in this site"; "");
+@SetField("FeatureList" + SiteList; @Trim(@GetField("FeatureList" + SiteList): result ));
+@Command([ViewRefreshFields])</formula></code>Add Feature</button></par>
+<par def='21'><button width='2in' widthtype='maximum' maxlines='1' wraptext='true'
+ bgcolor='system'><code event='click'><formula>@If( FeatureListDisplay = ""; @Do( @Prompt([Ok];"Error"; "Select a feature first");@Return(True) ); "");
+@If( SiteList = ""; @Do( @Prompt([Ok];"Error"; "Select a site first");@Return(True) ); "");
+fieldName := "FeatureList" + SiteList;
+featureList := @GetField(fieldName);
+Position:=@Member(FeatureListDisplay; featureList );
+@If ( Position = 0; @Do( @Prompt([Ok];"Error"; "Cannot find selected feature in the list" );@Return(True) ); "");
+Elements := @Elements(featureList);
+Bool := @If(Elements = Position; "L"; Position = 1; "F"; "M");
+newFeatureList := @If(Bool = "F" &amp; Elements &gt; 1; @Subset(featureList; -(Elements - 1));Bool = "L" &amp; Elements = 1;""; Bool = "L"; @Subset(featureList; (Elements - 1)); @Trim(@If(Position&gt;0;@Subset(featureList; (Position - 1));"") : @Subset(featureList; -(Elements - Position))));
+@SetField( fieldName; newFeatureList );
+@Command([ViewRefreshFields])</formula></code>Remove Feature</button></par></tablecell></tablerow></table>
+<par def='16'/>
+<par def='16'/></tablecell></tablerow>
+<tablerow tablabel='Security'>
+<tablecell>
+<par def='4'/>
+<table leftmargin='0.1000in' widthtype='fixedleft' refwidth='6.5736in'><tablecolumn
+ width='1.1535in'/><tablecolumn width='5.4201in'/>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='23' keepwithnext='true' keeptogether='true'/>
+<par def='23'>Enable Security:</par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='24' keepwithnext='true' keeptogether='true'/>
+<par def='24'> <field borderstyle='inset' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' allowmultivalues='true' kind='editable' name='enableSecurity'
+ listinputseparators='comma' listdisplayseparator='comma'><keywords helperbutton='false'
+ recalconchange='true' columns='1' ui='checkbox'><textlist><text>Enabled|1</text></textlist></keywords></field></par></tablecell></tablerow></table>
+<pardef id='25' keepwithnext='true' keeptogether='true'><code event='hidewhen'
+ enabled='false'><formula>disableSecurity="1"</formula></code></pardef>
+<par def='25'/>
+<pardef id='26' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>enableSecurity!="1" | SiteListUrls =""</formula></code></pardef>
+<par def='26'/>
+<table leftmargin='0.3000in' widthtype='fixedleft' refwidth='7.3139in'><tablecolumn
+ width='3.1569in'/><tablecolumn width='4.1569in'/>
+<tablerow>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<pardef id='28' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>enableSecurity!="1" | SiteListUrls =""</formula></code></pardef>
+<par def='28'>Select Site for which to set permission:</par></tablecell>
+<tablecell borderwidth='0px' bgcolor='#efefef'>
+<pardef id='29' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>enableSecurity!="1" | SiteListUrls =""</formula></code></pardef>
+<par def='29'><field usenotesstyle='false' height='0.2500in' width='5in' multiline='true'
+ borderstyle='inset' lookupeachchar='false' lookupaddressonrefresh='false'
+ type='keyword' kind='editable' name='SiteList_1'><keywords helperbutton='false'
+ recalconchange='true' recalcchoices='true' columns='1' ui='combobox'><formula
+>SiteListUrls</formula></keywords><code event='defaultvalue'><formula>SiteList_1</formula></code><code
+ event='inputtranslation'><formula>@If( SiteList_1 = ""; @Return( SiteList_1 ); "");
+fieldName:="SitePermList" + SiteList_1 + "deny";
+result := @If( @IsAvailable(fieldName); @GetField( fieldName ); "");
+@SetField("Site_Permission_deny_list"; result);
+
+fieldName:="SitePermList" + SiteList_1 + "allow";
+result := @If( @IsAvailable(fieldName); @GetField( fieldName ); "");
+@SetField("Site_Permission_allow_list"; result);
+ SiteList_1</formula></code></field></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<pardef id='30' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>enableSecurity!="1" | SiteListUrls ="" | SiteList_1 =""</formula></code></pardef>
+<par def='30'/>
+<par def='30'>Permission Deny List:</par></tablecell>
+<tablecell borderwidth='0px'>
+<pardef id='31' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>enableSecurity!="1" | SiteListUrls ="" | SiteList_1 =""</formula></code></pardef>
+<par def='31'><field usenotesstyle='false' height='1.2500in' width='5in' multiline='true'
+ borderstyle='single' type='text' kind='editable' name='Site_Permission_deny_list'><code
+ event='exiting'><lotusscript>Sub Exiting(Source As Field)
+	Dim workspace As New NotesUIWorkspace
+	Dim uidoc As NotesUIDocument
+	Set uidoc = workspace.CurrentDocument
+	siteIndex = uidoc.FieldGetText( "SiteListIndex" )
+	If siteIndex &lt;&gt; "" Then
+		permField = "SitePermList" + siteIndex + "deny"
+		uidoc.Document.RemoveItem permField
+		uidoc.Document.AppendItemValue permField, uidoc.FieldGetText("Site_Permission_deny_list")
+		uidoc.Refresh
+	End If
+	
+End Sub</lotusscript></code></field></par></tablecell></tablerow>
+<tablerow>
+<tablecell borderwidth='0px'>
+<par def='30'>Permission Allow List:</par></tablecell>
+<tablecell borderwidth='0px'>
+<par def='31'><field usenotesstyle='false' height='1.2500in' width='5in' multiline='true'
+ borderstyle='single' type='text' kind='editable' name='Site_Permission_allow_list'><code
+ event='exiting'><lotusscript>Sub Exiting(Source As Field)
+	Dim workspace As New NotesUIWorkspace
+	Dim uidoc As NotesUIDocument
+	Set uidoc = workspace.CurrentDocument
+	siteIndex = uidoc.FieldGetText( "SiteListIndex" )
+	If siteIndex &lt;&gt; "" Then
+		permField = "SitePermList" + siteIndex + "allow"
+		uidoc.Document.RemoveItem permField
+		uidoc.Document.AppendItemValue permField, uidoc.FieldGetText("Site_Permission_allow_list")
+		uidoc.Refresh
+	End If
+End Sub</lotusscript></code></field></par></tablecell></tablerow></table>
+<pardef id='32' keepwithnext='true' keeptogether='true'><code event='hidewhen'><formula
+>enableSecurity!="1" | SiteListUrls ="" | SiteList_1=""</formula></code></pardef>
+<par def='32'/>
+<par def='32'><run><font color='gray'/>Example permission: (org.osgi.framework.BundlePermission "com.acme.myPlugin" "require")</run></par></tablecell></tablerow>
+<tablerow tablabel='XML Source'>
+<tablecell>
+<par def='4'><field type='text' kind='computed' name='XMLSource'><code event='defaultvalue'><formula
+>retValue:="&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;";
+tmp := @If( enableSecurity="1"; "false" ; "true");
+retValue := retValue + @Char(0) + "&lt;osgiProfile disableSecurity=\"" + tmp +"\"&gt;";
+@If( Remote_Controller = "1";
+	retValue := retValue + @Char(0)+ @Char(9) + "&lt;remoteCommands type=\"embedded\" port=\"" + @Text(Remote_Controller_Port) + "\"/&gt;";
+	"");
+
+retValue := retValue + @Char(0) + @Char(9) + "&lt;osgiOptions clean=\"" + @If( arg_clean="1"; "true"; "false") + "\"" + "&gt;";
+@If( Starting_plugins = ""; "";
+	@For( i :=1; i &lt;= @Elements( Starting_plugins ); i := i+1;
+		retValue := retValue + @Char(0) + @Char(9) +  @Char(9) +"&lt;startPlugin id=\"" + @Subset( @Subset( Starting_plugins; i ) ; -1) + "\"/&gt;"
+	)
+);
+retValue := retValue + @Char(0) + @Char(9) + "&lt;/osgiOptions&gt;";
+SiteListUrls2 := @Left( SiteListUrls; "|");
+@For (n:=0;
+	n&lt;@Elements(SiteListUrls2);
+	n:=n+1;
+	@Do(
+		retValue := retValue + @Char(0) + @Char(9) + "&lt;site url=\"" + @Subset( @Subset( SiteListUrls2; n + 1 ) ; -1)+ "\"&gt;";
+		features:=@GetField( "FeatureList" + @Text(n) );
+		@For( i:=0; i&lt;@Elements( features );i:=i+1;
+			retValue := retValue + @Char(0) + @Char(9) + @Char(9) + "&lt;feature id=\"" +  @Subset( @Subset( features; i + 1 ) ; -1)+ "\"/&gt;"
+		);
+		denys := @GetField( "SitePermList" + @Text(n) + "deny" );
+		allows := 	@GetField( "SitePermList" + @Text(n) + "allow" );
+		@If( denys != "" | allows !=""; retValue := retValue + @Char(0) + @Char(9) + @Char(9) + "&lt;security&gt;"; "" );
+		@If( denys != "" ; retValue := retValue + @Char(0) + @Char(9) + @Char(9) + @Char(9) + "&lt;deny&gt;" + @Char(0) + denys + @Char(0) + @Char(9) + @Char(9) + @Char(9) + "&lt;/deny&gt;" ; "" );
+		@If( allows != "" ; retValue := retValue + @Char(0) + @Char(9) + @Char(9) + @Char(9) + "&lt;allow&gt;" + @Char(0) + allows + @Char(0) + @Char(9) + @Char(9) + @Char(9) + "&lt;/allow&gt;"; "" );
+		@If( denys != "" | allows !=""; retValue := retValue + @Char(0) + @Char(9) + @Char(9) + "&lt;/security&gt;"; "" );
+		retValue := retValue + @Char(0) + @Char(9) + "&lt;/site&gt;"
+	)
+);
+retValue + @Char(0) + "&lt;/osgiProfile&gt;"</formula></code></field><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></tablecell></tablerow></table>
+<par def='2'/>
+<par def='2'/>
+<pardef id='33' hide='notes web mobile'/>
+<par def='33'/>
+<pardef id='34' hide='notes web mobile'><code event='hidewhen' enabled='false'><formula
+>disableSecurity!="1" | SiteListUrls =""</formula></code></pardef>
+<par def='34'><field type='text' kind='computed' name='SiteListIndex'><code
+ event='defaultvalue'><formula>SiteList_1</formula></code></field><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='8' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>RootConfiguration</text></item>
+<item name='$Starting_plugins_O' sign='true'>
+<rawitemdata type='14'>
+AQAAAkxTT0IDABQIZW4AAAQAEABOAAQAAADkA8wBAAAAAAAAAALcAgAAAAAkAJwAGAA4AP//AABU
+AAAAAAAAAAIAAAAEAFgBAAAAAFgBWAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAABAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAMAAAC4ANwC3ALcArgAuAAMAgwCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAEABQBMb3R1cyBQcm9kdWN0AAAAVjAuMAAAAAAAAAAAAAAAAAAA
+AAAEAAAATgAAAAAAAADkAwAAzAEAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAA
+AAUAAABXMzJJJQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAwDQAQAAAAC4AAgAKgBEAEEAQwBGADYAMgA0AAAAAABsAAMATgBFAFcAAACAAAYARABFAEwA
+RQBUAEUAAAAAAAwBCgBJAE4ASQBUAEkAQQBMAEkAWgBFAAAAAABgAQkAVABFAFIATQBJAE4AQQBU
+AEUAAABMAQYATwBCAEoARQBDAFQAAAAAAIgAAAAAAAAA1AAGAFMATwBVAFIAQwBFAAAAAADkAAoA
+QgBJAE4ARABFAFYARQBOAFQAUwAAAAAAJAELAE8AQgBKAEUAQwBUAE4AQQBNAEUAXwAAAPgABQBG
+AEkARQBMAEQAAAD//wYAJQBMAFMASQBEAEUAAAAAAP//BwBFAFgASQBUAEkATgBHAAAAcAEJAFcA
+TwBSAEsAUwBQAEEAQwBFAAAAlAEQAE4ATwBUAEUAUwBVAEkAVwBPAFIASwBTAFAAQQBDAEUAAAAA
+AP//BgAlAEwAUwBYAFUASQAAAAAA//8FAFUASQBEAE8AQwAAALgBDwBOAE8AVABFAFMAVQBJAEQA
+TwBDAFUATQBFAE4AVAAAAP//DwBDAFUAUgBSAEUATgBUAEQATwBDAFUATQBFAE4AVAAAAP//BwBS
+AEUARgBSAEUAUwBIAAAABQDoAwAAAAALoLT6CAAAAFgBAACgAAAAAAAAAAIAAACcAEgBAAAAAAAA
+AAAAAAAAAAAAAJwAnAAAAAAAAAAAAAAAAAAAAAAAAAAAAEgBSAEAAAAAAAAAAAEAAAACAAAAAwAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAADAAEASAEAALwABggAAAAAGgAAAOgA//8AAAAAEAAAAAwCAADYAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMW
+EyntLmkQv10A3QERhrcAAAAAAAAAAAAAAAAAAAAAZAAAAFAzQ2MAAAAAAAAAAAIArAAAAHwDAAAA
+AFwEAQD//wAAAwAgAAAAAACMAAkCAAC4AAgAAAAAAAAA/AAAAAAAAAADAAAA8AFsAwAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAABsA2wDAAAAAAAAAADwAfABzALMAgAAAAABAAAACwAAACEAAAAI
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAwABAMwCAACMAAkCAAC4ABoArABQAf//AAAAABAAAADcAgAAKAEAAAAAAAABAAAAjAOM
+AwAAAACMA4wDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACFRMp
+7S5pEL9dAN0BEYa3AAAAAAAAAAAAAAAAAAAAAGQAAABQ6UhjAAAAAAAAAAACAAACnAIAALgAAAAK
+AAEA//8AABIAFAAAAAAA//8JAgAAAAAABgAAAAAMAgAC//8AAAAABAABAAAACQIMAgkCDAIZAAMA
+AgBsAwAAEAEJAgAADAIQAAAAAAAAAHQBAAAAAAAAAQAAALADsAMAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwA7ADBBUTKe0uaRC/XQDdARGGtwAAAAAAAAAA
+AAAAAAAAAABkAAAAUOlIYwAAAAAAAAAAAgAAAgAAAAAMAgAACgABAP//AAADAAIAAAAAAGQBCQIE
+ANwCEwAAAPwAAADXAAAAAAAAABEAEAUAAAAAmAEJAuIFAAAAAAAAAAAAAAAAAAAAAAAAAADcAhIA
+FAAAAAAAvAEKAAAAAADYBgAAAADcAgAC//8AAAAABgAEAAAACgAJAtwCgACAAIAAGQAEAFIAAAAA
+AB0AABoLAFtIAUmcAMq4AKYaDABHSAHL1wAAAFgBGg0AHRoRAF7MAisMAiSmGhMAXmwDS8wCLYwD
+I6YaFABLbAMssAOLAIsAiwAjGhUAHQIAAAARABgAAAAAAP//AQADAAMAAAAGAKAACAD8AA8ACgAA
+AA==
+</rawitemdata></item>
+<item name='$Site_Permission_deny_list_O' sign='true'>
+<rawitemdata type='14'>
+AQAAAkxTT0IDABQIZW4AAAQAHQCwAAQAAAAYB2gDAAAAAAAAJAQcBgAAAAAkAAAAGAA4ALgBuABU
+AAAAAAAAAAIAAAAEAFgBAAAAAFgBWAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAABAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAYAAAC4ABwG3AIwBLgAuAAMAgwCAAAAAPQE9AQAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAcBhwGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAEABQBMb3R1cyBQcm9kdWN0AAAAVjAuMAAAAAAAAAAAAAAAAAAA
+AAAEAAAAsAAAAAAAAAAYBwAAaAMAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAA
+AAUAAABXMzJJJQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAwBsAwAAAACcAAkAKgAxADkARABBAEEARQAyADQAAABsAAMATgBFAFcAAACAAAYARABFAEwA
+RQBUAEUAAAAAAAwBCgBJAE4ASQBUAEkAQQBMAEkAWgBFAAAAAABgAQkAVABFAFIATQBJAE4AQQBU
+AEUAAABMAQYATwBCAEoARQBDAFQAAAAAAIgAAAAAAAAA1AAGAFMATwBVAFIAQwBFAAAAAADkAAoA
+QgBJAE4ARABFAFYARQBOAFQAUwAAAAAAJAELAE8AQgBKAEUAQwBUAE4AQQBNAEUAXwAAAPgABQBG
+AEkARQBMAEQAAABwAgYAJQBMAFMASQBEAEUAAAAAANABBwBFAFgASQBUAEkATgBHAAAAcAEJAFcA
+TwBSAEsAUwBQAEEAQwBFAAAAlAEQAE4ATwBUAEUAUwBVAEkAVwBPAFIASwBTAFAAQQBDAEUAAAAA
+AP//BgAlAEwAUwBYAFUASQAAAAAA/AIFAFUASQBEAE8AQwAAACgCDwBOAE8AVABFAFMAVQBJAEQA
+TwBDAFUATQBFAE4AVAAAAPABDwBDAFUAUgBSAEUATgBUAEQATwBDAFUATQBFAE4AVAAAABACCQBT
+AEkAVABFAEkATgBEAEUAWAAAAIwCDABGAEkARQBMAEQARwBFAFQAVABFAFgAVAAAAAAAWAINAFMA
+aQB0AGUATABpAHMAdABJAG4AZABlAHgAAABIAgkAUABFAFIATQBGAEkARQBMAEQAAADoAgwAUwBp
+AHQAZQBQAGUAcgBtAEwAaQBzAHQAAAAAAP//BABkAGUAbgB5AAAAAACwAggARABPAEMAVQBNAEUA
+TgBUAAAAAAD//woAUgBFAE0ATwBWAEUASQBUAEUATQAAAAAA//8PAEEAUABQAEUATgBEAEkAVABF
+AE0AVgBBAEwAVQBFAAAAUAMZAFMAaQB0AGUAXwBQAGUAcgBtAGkAcwBzAGkAbwBuAF8AZABlAG4A
+eQBfAGwAaQBzAHQAAAAcAwcAUgBFAEYAUgBFAFMASAAAADADDQBOAE8AVABFAFMARABPAEMAVQBN
+AEUATgBUAAAA//8GACUATABTAFgAQgBFAAAAAAD//w0ATgBPAFQARQBTAEQAQQBUAEEAQgBBAFMA
+RQAAAP//CQBOAE8AVABFAFMASQBUAEUATQAAAAUAHAcAAAAARvl7sQgAAABYAQAAoAAAAAAAAAAC
+AAAAnABIAQAAAAAAAAAAAAAAAAAAAACcAJwAAAAAAAAAAAAAAAAAAAAAAAAAAABIAUgBAAAAAAAA
+AAABAAAAAgAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAwABAEgBAAC8AAYIAAAAABoAAADoAP//AAAAABAAAAAMAgAA
+2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAADFhMp7S5pEL9dAN0BEYa3AAAAAAAAAAAAAAAAAAAAAGQAAABQM0NjAAAAAAAA
+AAACAKwAAAB8AwAAAABcBAEA//8AAAMAIAAAAAAAjAAJAgAAuAAIAAAAAAAAAPwAAAAAAAAABQAA
+APAB8AMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbANsA7ADsAMAAAAA8AHwAcwCzALwA/AD
+AQAAABQAAAAhAAAAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAMAAQDMAgAAjAAJAgAAuAAaAKwAUAH//wAAAAAQAAAA3AIAACgB
+AAAAAAAAAQAAAIwDjAMAAAAAjAOMAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAhUTKe0uaRC/XQDdARGGtwAAAAAAAAAAAAAAAAAAAABkAAAAUOlIYwAAAAAAAAAA
+AgAAApwCAAC4AAAACgABAP//AAASABQAAAAAAP//CQIAAAAAAAYAAAAADAIAAv//AAAAAAQAAQAA
+AAkCDAIJAgwCGQADAAIAbAMAABABCQIAAAwCEAAAADAEMAR0AQAAAAAAAAMAAADAA+QGAAAAAAAA
+AAAAAAAAAAAAAMADwAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAE5AbkBgQVEyntLmkQv10A
+3QERhrcAAAAAAAAAAAAAAAAAAAAAZAAAAFDpSGMAAAAAAAAAAAIAAAIAAAAADAIAAAoAAQD//wAA
+AwACALADAABkAQkCBADcAhMAAAD8AAAA1wAAAAAAAAARABAFAAAAAJgBCQLiBQAAAAAAAAAAAAAA
+AAAAAAAAAAAA3AIDAAIA8AMAALwBAAAIAAAAEgAUAAAEAADUAQYIAAAAAN8GAAAAANwCAAL//wAA
+AAAEAAIAAAAGCAkC3AKmCBkAAwACAAAAAAAUAgAAGAAAABEAEAXkBgAAXAIJAqgGAAAAAAAAAAAA
+AAAAAAAAAAAAAAAwBBoAAAIgA///AAAAABAABAD0BAAAAAMAAAAAAAACAAAAuAXoBegF6AUAAAAA
+AAAAAAAAAAAAAAAAuAW4BQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEFBMp7S5pEL9dAN0B
+EYa3LhQTKe0uaRC/XQDdARGGt2QAAAAgLcxhAAAAAAAAAAACACQEwAQAAPQEAAACAAEA//8AABIA
+FAAAAAAA//8JAgAAAACNBAAAAAAwBCQE//8AAAAABgACAAAACQIwBAkCMAQJAvQEGQAQAAAAHAYA
+ADQDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAhQTKe0uaRC/XQDdARGGtwAAAAAAAAAAAAAAAAAAAABkAAAAIC3MYQAAAAAA
+AAAAAgAkBIQFAADcAgAAAgABAP//AAASABQAAAAAAP//CQIAAAAAEgQAAAAA9AQkBP//AAAAAAYA
+AwAAAAkC9AQJAvQEBggGCBkAEgAUAOgFAAB0AgoAAAAAAJEEAAAAADAEJAT//wAAAAAEAAIAAAAK
+AAkCMAQGCBkAEgAUAAAAAACQAgmCAAAAAJYEAAAAADAEJAT//wAAAAAGAAMAAAAJAhwGCQIwBAYI
+AAAZABAAAAAAAAAAVAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFFBMp7S5pEL9dAN0BEYa3LhQTKe0uaRC/XQDdARGGt2QA
+AAAgLcxhAAAAAAAAAAACACQErAYAADAEAAACAAEA//8AABIAFAAAAAAA//8JAgAAAAAoBAAAAAAc
+BiQE//8AAAAACQAFAAAACQIcBgkCHAYJCjAEBggAAIEIEgAUAAAAAADsAgoAAAAAANgGAAAAANwC
+AAL//wAAAAAGAAQAAAAKAAkC3AKAAIAAgAAZAAQAtAAAAAAAHQAAGgsAW0gBSZwAyrgAphoMAEdI
+AcvXAAAAWAEaDQAdGhEAXswCKwwCJKYaEwBebANLzAItjAMjphoUAF6wA0tsAyzAA330ASOlGhUA
+SrADfYQAuzhRABoWAF7wA30sAkqwA6x9TAKspRoXAEtsAy0ABCMsuAVK8AObIxoYAEtsAy0ABCMs
+6AVK8AObS2wDLMADfbQCIyMxGhkAS2wDLOQGiwCLAIsAIxoaABocAB0CAAAAEQAYAAAAAAD//wEA
+AwADAAAABgCgAAgA/AAPAAoAAAA=
+</rawitemdata></item>
+<item name='$Site_Permission_allow_list_O' sign='true'>
+<rawitemdata type='14'>
+AQAAAkxTT0IDABQIZW4AAAQAHQCwAAQAAAAYB2wDAAAAAAAAJAQcBgAAAAAkAJwAAAA4ALgBuABU
+AAAAAAAAAAIAAAAEAFgBAAAAAFgBWAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAABAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAYAAAC4ABwG3AIwBLgAuAAMAgwCAAAAAPQE9AQAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAcBhwGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAEABQBMb3R1cyBQcm9kdWN0AAAAVjAuMAAAAAAAAAAAAAAAAAAA
+AAAEAAAAsAAAAAAAAAAYBwAAbAMAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAA
+AAUAAABXMzJJJQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAwBwAwAAAAAYAAkAKgAxADkARAA2AEMAMAAyADQAAABsAAMATgBFAFcAAACAAAYARABFAEwA
+RQBUAEUAAAAAAAwBCgBJAE4ASQBUAEkAQQBMAEkAWgBFAAAAAABgAQkAVABFAFIATQBJAE4AQQBU
+AEUAAABMAQYATwBCAEoARQBDAFQAAAAAAIgAAAAAAAAA1AAGAFMATwBVAFIAQwBFAAAAAADkAAoA
+QgBJAE4ARABFAFYARQBOAFQAUwAAAAAAJAELAE8AQgBKAEUAQwBUAE4AQQBNAEUAXwAAAPgABQBG
+AEkARQBMAEQAAABwAgYAJQBMAFMASQBEAEUAAAAAANABBwBFAFgASQBUAEkATgBHAAAAcAEJAFcA
+TwBSAEsAUwBQAEEAQwBFAAAAlAEQAE4ATwBUAEUAUwBVAEkAVwBPAFIASwBTAFAAQQBDAEUAAAAA
+AEgCBgAlAEwAUwBYAFUASQAAAAAAAAMFAFUASQBEAE8AQwAAACgCDwBOAE8AVABFAFMAVQBJAEQA
+TwBDAFUATQBFAE4AVAAAAPABDwBDAFUAUgBSAEUATgBUAEQATwBDAFUATQBFAE4AVAAAABACCQBT
+AEkAVABFAEkATgBEAEUAWAAAAIwCDABGAEkARQBMAEQARwBFAFQAVABFAFgAVAAAAAAAWAINAFMA
+aQB0AGUATABpAHMAdABJAG4AZABlAHgAAAD//wkAUABFAFIATQBGAEkARQBMAEQAAADsAgwAUwBp
+AHQAZQBQAGUAcgBtAEwAaQBzAHQAAAAAALACBQBhAGwAbABvAHcAAABUAwgARABPAEMAVQBNAEUA
+TgBUAAAAAAD//woAUgBFAE0ATwBWAEUASQBUAEUATQAAAAAA//8PAEEAUABQAEUATgBEAEkAVABF
+AE0AVgBBAEwAVQBFAAAA//8aAFMAaQB0AGUAXwBQAGUAcgBtAGkAcwBzAGkAbwBuAF8AYQBsAGwA
+bwB3AF8AbABpAHMAdAAAAAAAIAMHAFIARQBGAFIARQBTAEgAAAA0Aw0ATgBPAFQARQBTAEQATwBD
+AFUATQBFAE4AVAAAAP//BgAlAEwAUwBYAEIARQAAAAAA//8NAE4ATwBUAEUAUwBEAEEAVABBAEIA
+QQBTAEUAAAD//wkATgBPAFQARQBTAEkAVABFAE0AAAAFABwHAAAAAO5/gMAIAAAAWAEAAKAAAAAA
+AAAAAgAAAJwASAEAAAAAAAAAAAAAAAAAAAAAnACcAAAAAAAAAAAAAAAAAAAAAAAAAAAASAFIAQAA
+AAAAAAAAAQAAAAIAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAQBIAQAAvAAGCAAAAAAaAAAA6AD//wAAAAAQAAAA
+DAIAANgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAxYTKe0uaRC/XQDdARGGtwAAAAAAAAAAAAAAAAAAAABkAAAAUDNDYwAA
+AAAAAAAAAgCsAAAAfAMAAAAAXAQBAP//AAADACAAAAAAAIwACQIAALgACAAAAAAAAAD8AAAAAAAA
+AAUAAADwAfADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGwDbAOwA7ADAAAAAPAB8AHMAswC
+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
+//8BAAMAAwAAAAYAoAAIAPwADwAKAAAA
+</rawitemdata></item>
+<item name='$Remote_Controller_Port_O' sign='true'>
+<rawitemdata type='14'>
+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
+AA==
+</rawitemdata></item>
+<item name='Remote_Controller_Port' summary='false'><number>0</number></item></form>
+</database>
+

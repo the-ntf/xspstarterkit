@@ -24,7 +24,7 @@ import com.ibm.xsp.FacesExceptionEx;
 import com.ibm.xsp.model.DataObject;
 
 public class ImplicitObject implements DataObject {
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 
 	/*
 	 * This could be any object you want it to be.

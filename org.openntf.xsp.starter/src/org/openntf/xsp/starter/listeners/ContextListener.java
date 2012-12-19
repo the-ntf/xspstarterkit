@@ -24,7 +24,7 @@ import com.ibm.xsp.event.FacesContextListener;
 public class ContextListener extends AbstractListener implements FacesContextListener {
 	public final static boolean ATTACH_LISTENER = true; // change this to false if you don't want to bother.
 
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	static {
 		if (_debug)
 			System.out.println(ContextListener.class.getName() + " loaded");

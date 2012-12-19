@@ -6,9 +6,11 @@ Bundle-Version: 3.6.0.qualifier
 Bundle-Vendor: GBS
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Import-Package: com.ibm.xsp.library,
+Import-Package: com.ibm.commons.util,
+ com.ibm.xsp.library,
+ com.ibm.xsp.model.domino,
  org.eclipse.core.runtime,
- org.osgi.framework;version="1.4.0"
+ org.osgi.framework
 Bundle-Activator: org.openntf.apache.lucene.Activator
 Bundle-ClassPath: .,
  lib/lucene-lib/icu4j-4.8.1.1.jar,

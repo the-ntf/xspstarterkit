@@ -21,7 +21,7 @@ import javax.faces.event.ValueChangeEvent;
 import org.openntf.xsp.starter.Activator;
 
 public class ValueChangeListener extends AbstractListener implements javax.faces.event.ValueChangeListener {
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	static {
 		if (_debug)
 			System.out.println(ValueChangeListener.class.getName() + " loaded");

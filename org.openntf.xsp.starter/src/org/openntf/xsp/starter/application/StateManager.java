@@ -28,7 +28,7 @@ import com.ibm.xsp.util.Delegation;
 
 public class StateManager extends StateManagerImpl {
 	private final javax.faces.application.StateManager _delegate;
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 
 	public StateManager(javax.faces.application.StateManager paramStateManager) {
 		super(paramStateManager);

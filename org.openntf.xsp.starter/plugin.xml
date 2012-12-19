@@ -32,6 +32,9 @@
     <extension point="com.ibm.commons.Extension">
          <service type="com.ibm.xsp.library.Contributor" class="org.openntf.xsp.starter.library.StarterContributor" />
    </extension>
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.stylekit.StyleKitFactory" class="org.openntf.xsp.starter.themes.StarterStyleKitFactory" />
+   </extension>
  <!--   <extension
           point="com.ibm.commons.Extension">
        <service

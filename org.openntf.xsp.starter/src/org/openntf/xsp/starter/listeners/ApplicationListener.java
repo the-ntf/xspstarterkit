@@ -21,7 +21,7 @@ import com.ibm.xsp.application.ApplicationEx;
 
 public class ApplicationListener implements com.ibm.xsp.application.events.ApplicationListener {
 	public final static boolean ATTACH_LISTENER = true; // change this to false if you don't want to bother.
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	static {
 		if (_debug)
 			System.out.println(ApplicationListener.class.getName() + " loaded");

@@ -30,7 +30,7 @@ import com.ibm.xsp.domino.context.DominoFacesContextFactoryImpl;
 public class StarterFacesContextFactory extends FacesContextFactory {
 	private final FacesContextFactory _delegate;
 	private ContextListener _contextListener;
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	static {
 		if (_debug)
 			System.out.println(StarterFacesContextFactory.class.getName() + " loaded");

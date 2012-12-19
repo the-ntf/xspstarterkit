@@ -26,7 +26,7 @@ import org.openntf.xsp.starter.Activator;
 
 public class ViewHandler extends com.ibm.xsp.application.ViewHandlerExImpl {
 	private final javax.faces.application.ViewHandler _handler;
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 
 	public ViewHandler(javax.faces.application.ViewHandler paramViewHandler) {
 		super(paramViewHandler);

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************** -->
+<!-- © Copyright IBM Corp. 2009,2010	-->
+<!-- 					-->
+<!-- Licensed under the Apache License, Version 2.0 (the "License"); 		-->
+<!-- you may not use this file except in compliance with the License. 		-->
+<!-- You may obtain a copy of the License at:		-->
+<!-- 									-->
+<!-- http://www.apache.org/licenses/LICENSE-2.0			-->
+<!-- 									-->
+<!-- Unless required by applicable law or agreed to in writing, software 	-->
+<!-- distributed under the License is distributed on an "AS IS" BASIS, 		-->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 	-->
+<!-- implied. See the License for the specific language governing 			-->
+<!-- permissions and limitations under the License.					-->
+<!-- ********************************************************************** -->
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.ibm.dots.task">
+   <!--   <task
+            class="com.ibm.dots.samples.ScheduledTask"
+            description="Scheduled Task"
+            filter="com.ibm.dots.samples.ScheduledTaskFilter"
+            id="com.ibm.dots.samples.scheduled">
+         <run every="5" unit="minute"/>
+         <run every="1" unit="day"/>
+      </task>
+      <task id="com.ibm.dots.samples.listViews" 
+      	description="Sample task that list the views of a database. Options: [dbPath]" 
+      	class="com.ibm.dots.samples.ListViewsExample"
+      	runOnStart="false">
+      </task>
+      <task id="com.ibm.dots.samples.sendMail" 
+      	description="Sample task that send a summary email for all the databases available on the server. Options: [emailaddress]" 
+      	class="com.ibm.dots.samples.SendMailExample"
+      	runOnStart="false"></task> -->
+      <task id="com.ibm.dots.samples.triggered" 
+      	description="Sample task triggered by Extension manager events" 
+      	class="com.ibm.dots.samples.TriggeredExample"
+      	runOnStart="false"
+      	triggered="true">
+      </task>
+     
+       <task id="com.ibm.dots.samples.annotated" 
+      	description="Sample task showing tasklets defined by java annotation" 
+      	class="com.ibm.dots.samples.AnnotatedTasklet">
+      </task>
+   <!--   <task
+            class="com.ibm.dots.samples.RunOnStartTask"
+            id="com.ibm.dots.samples.runOnStart"
+            runOnStart="true">
+      </task>
+     
+      <task
+            class="com.ibm.dots.samples.TimedTask"
+            description="Scheduled between specific times of the day"
+            id="com.ibm.dots.samples.timedTask"
+            runOnStart="false"
+            triggered="false">
+         <run
+               every="2"
+               startAt="2:00 PM"
+               stopAt="3:00 PM"
+               unit="minute">
+         </run>
+      </task>-->
+   </extension>
+   <!--
+   <extension
+         point="com.ibm.dots.multitask">
+      <multiTask
+            id="com.ibm.dots.samples.multiTask1">
+         <taskRef id="com.ibm.dots.samples.sendMail">
+         	<param name="to" value="john.smith@acme.com"/>
+         	<param name="cc" value="fred.manager@acme.com"/>
+         </taskRef>
+         <taskRef id="com.ibm.dots.samples.sendMail">
+         	<param name="to" value="ted.smith@acme.com"/>
+         	<param name="bcc" value="bill.vp@acme.com"/>
+         </taskRef>
+         <taskRef id="com.ibm.dots.samples.sendMail">
+         	<param name="to" value="{toName}"/>
+         </taskRef>
+      </multiTask>
+   </extension>
+   
+    
+   <extension
+         point="com.ibm.dots.argResolver">
+      <argResolver
+            class="com.ibm.dots.samples.ArgumentResolver"
+            id="com.ibm.dots.samples.argResolver">
+      </argResolver>
+   </extension>
+   -->
+</plugin>

@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- ********************************************************************** -->
+<!-- © Copyright IBM Corp. 2009,2010	-->
+<!-- 					-->
+<!-- Licensed under the Apache License, Version 2.0 (the "License"); 		-->
+<!-- you may not use this file except in compliance with the License. 		-->
+<!-- You may obtain a copy of the License at:		-->
+<!-- 									-->
+<!-- http://www.apache.org/licenses/LICENSE-2.0			-->
+<!-- 									-->
+<!-- Unless required by applicable law or agreed to in writing, software 	-->
+<!-- distributed under the License is distributed on an "AS IS" BASIS, 		-->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 	-->
+<!-- implied. See the License for the specific language governing 			-->
+<!-- permissions and limitations under the License.					-->
+<!-- ********************************************************************** -->
+<!-- Schema file written by PDE -->
+<schema targetNamespace="com.ibm.dots" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="com.ibm.dots" id="task" name="Server Addin Task"/>
+      </appinfo>
+      <documentation>
+         [Enter description of this extension point.]
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <sequence>
+            <element ref="task" minOccurs="1" maxOccurs="unbounded"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="task">
+      <complexType>
+         <sequence minOccurs="0" maxOccurs="unbounded">
+            <element ref="run"/>
+         </sequence>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Fully qualified class name, must extend com.ibm.dots.task.AbstractServerTask.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="com.ibm.dots.task.AbstractServerTask:"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Unique id for this task
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="identifier"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="description" type="string">
+            <annotation>
+               <documentation>
+                  Task description
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="runOnStart" type="boolean">
+            <annotation>
+               <documentation>
+                  Indicates if the task should be run once when the javaddin task starts.
+True by default
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="triggered" type="boolean">
+            <annotation>
+               <documentation>
+                  If true, this task will be triggered by extension manager event. RunWhen contains the information about the event.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="filter" type="string">
+            <annotation>
+               <documentation>
+                  Optional class that must implement the com.ibm.dots.task.ITaskFilterITaskFilter interface to dynamically prevent this task from loading in the container.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":com.ibm.dots.task.ITaskFilter"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="run">
+      <complexType>
+         <attribute name="every" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Schedule Frequency for the server task
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="unit" use="required">
+            <annotation>
+               <documentation>
+                  Frequency unit for the Task
+Can be second, minute or day.
+If day, then &quot;every&quot; attribute is not used and the task will run once a day.
+               </documentation>
+            </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="second">
+                  </enumeration>
+                  <enumeration value="minute">
+                  </enumeration>
+                  <enumeration value="day">
+                  </enumeration>
+               </restriction>
+            </simpleType>
+         </attribute>
+         <attribute name="startAt" type="string">
+            <annotation>
+               <documentation>
+                  Optional attribute to start the run at a particular time, value must be compliant with the java.text.DateFormat SHORT pattern (e.g. 10:00 AM)
+This attribute takes a different meaning based on the value of the every and unit attribute:
+1. unit = day: the tasklet run every day at the same time
+2. unit = minute or second. The tasklet run at times synchronized with the startAt attribute. For example, if startAt=1PM and run is every 1 hour. then the tasklet will run every hour on the hour
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="stopAt" type="string">
+            <annotation>
+               <documentation>
+                  Optional attribute to specify the time at which the run will stop. If not defined, run will execute all day. Valid only if startAt has been defined.
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         [Enter the first release in which this extension point appears.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         &lt;extension
+         point=&quot;com.ibm.dots.task&quot;&gt;
+      &lt;task id=&quot;com.ibm.dots.sample.hello&quot; 
+       description=&quot;Hello World Sample&quot; 
+       class=&quot;com.ibm.dots.sample.HelloWorldTask1&quot;
+       runOnStart=&quot;true&quot;&gt;
+         &lt;run every=&quot;5&quot; unit=&quot;minute&quot;/&gt;
+         &lt;run every=&quot;1&quot; unit=&quot;day&quot;/&gt;
+      &lt;/task&gt;
+   &lt;/extension&gt;
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiinfo"/>
+      </appinfo>
+      <documentation>
+         [Enter API information here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="implementation"/>
+      </appinfo>
+      <documentation>
+         [Enter information about supplied implementation of this extension point.]
+      </documentation>
+   </annotation>
+
+
+</schema>

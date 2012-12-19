@@ -18,9 +18,44 @@ package org.openntf.xsp.starter;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
+import com.ibm.commons.Platform;
+import com.ibm.commons.util.StringUtil;
+
 public class Activator extends Plugin {
 	public static final String PLUGIN_ID = Activator.class.getPackage().getName();
-	public static final boolean _debug = false;
+	private static Boolean DEBUG = null;
+
+	public static boolean isDebug() {
+		if (DEBUG = null) {
+			DEBUG = Boolean.FALSE;
+			String[] envs = getEnvironmentStrings();
+			for (String s : envs) {
+				if (s.equalsIgnoreCase("debug")) {
+					DEBUG = Boolean.TRUE;
+				}
+			}
+		}
+		return DEBUG.booleanValue();
+	}
+
+	public static String[] getEnvironmentStrings() {
+		String[] result = null;
+		try {
+			String setting = Platform.getInstance().getProperty(PLUGIN_ID); // $NON-NLS-1$
+			if (StringUtil.isEmpty(setting)) {
+				setting = System.getProperty(PLUGIN_ID); // $NON-NLS-1$
+				if (StringUtil.isEmpty(setting)) {
+					setting = com.ibm.xsp.model.domino.DominoUtils.getEnvironmentString(PLUGIN_ID); // $NON-NLS-1$
+				}
+			}
+			if (StringUtil.isNotEmpty(setting)) {
+				result = StringUtil.splitString(setting, ',');
+			}
+		} catch (Throwable t) {
+
+		}
+		return result;
+	}
 
 	public static Activator instance;
 

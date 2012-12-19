@@ -24,7 +24,7 @@ import com.ibm.xsp.domino.context.DominoFacesContext;
 public class StarterFacesContext extends DominoFacesContext {
 
 	private ExternalContext external;
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	static {
 		if (_debug)
 			System.out.println(StarterFacesContext.class.getName() + " loaded");

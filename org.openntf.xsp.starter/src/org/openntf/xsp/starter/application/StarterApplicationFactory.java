@@ -24,7 +24,7 @@ import com.ibm.xsp.application.ApplicationEx;
 import com.ibm.xsp.application.ApplicationFactoryImpl;
 
 public class StarterApplicationFactory extends ApplicationFactoryImpl {
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 
 	static {
 		if (_debug) {

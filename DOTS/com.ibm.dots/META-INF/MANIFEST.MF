@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Domino OSGi Tasklet Service Core Plugin
+Bundle-SymbolicName: com.ibm.dots;singleton:=true
+Bundle-Version: 9.0.1.qualifier
+Bundle-Activator: com.ibm.dots.Activator
+Bundle-Vendor: IBM
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
+ J2SE-1.5
+Import-Package: lotus.domino,
+ org.osgi.framework
+Bundle-ActivationPolicy: lazy
+Export-Package: com.ibm.dots.annotation,
+ com.ibm.dots.event,
+ com.ibm.dots.perf,
+ com.ibm.dots.preferences,
+ com.ibm.dots.session,
+ com.ibm.dots.startup,
+ com.ibm.dots.task,
+ com.ibm.dots.utils
+Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
+ org.eclipse.osgi

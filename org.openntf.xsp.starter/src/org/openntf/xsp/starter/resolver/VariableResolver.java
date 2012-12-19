@@ -25,7 +25,7 @@ import com.ibm.xsp.util.Delegation;
 
 public class VariableResolver extends javax.faces.el.VariableResolver {
 	protected final javax.faces.el.VariableResolver _resolver;
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 
 	public VariableResolver() throws FacesException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		this._resolver = ((javax.faces.el.VariableResolver) Delegation.getImplementation("variable-resolver"));

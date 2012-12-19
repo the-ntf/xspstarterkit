@@ -51,9 +51,25 @@ public class CommonsLibrary extends AbstractXspLibrary {
 	// return files;
 	// }
 
+	private static Boolean GLOBAL = null;
+
+	private static boolean isGlobal() {
+		org.slf4j.LoggerFactory lf;
+		if (GLOBAL = null) {
+			GLOBAL = Boolean.FALSE;
+			String[] envs = Activator.getEnvironmentStrings();
+			for (String s : envs) {
+				if (s.equalsIgnoreCase("global")) {
+					GLOBAL = Boolean.TRUE;
+				}
+			}
+		}
+		return GLOBAL.booleanValue();
+	}
+
 	@Override
 	public boolean isGlobalScope() {
-		return false;
+		return isGlobal();
 	}
 
 }

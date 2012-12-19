@@ -12,7 +12,7 @@ import org.openntf.xsp.starter.Activator;
 import com.sun.faces.renderkit.RenderKitImpl;
 
 public class OpenNTFRenderKit extends RenderKitImpl {
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	static {
 		if (_debug)
 			System.out.println(OpenNTFRenderKit.class.getName() + " loaded");

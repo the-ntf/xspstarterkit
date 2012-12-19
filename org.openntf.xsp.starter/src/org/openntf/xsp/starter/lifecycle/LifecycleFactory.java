@@ -9,7 +9,7 @@ import org.openntf.xsp.starter.Activator;
 public class LifecycleFactory extends javax.faces.lifecycle.LifecycleFactory {
 	public static final String STARTER_LIFECYCLE_ID = "StarterLifecycle";
 	private javax.faces.lifecycle.LifecycleFactory delegate;
-	private final static boolean _debug = Activator._debug;
+	private final static boolean _debug = Activator.isDebug();
 	static {
 		if (_debug)
 			System.out.println(LifecycleFactory.class.getName() + " loaded");
