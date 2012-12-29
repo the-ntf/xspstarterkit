@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFNoteExtractFileEvent extends AbstractEMEvent {
-	
+	private static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Noteid, DotsEventParams.Itemname,
+			DotsEventParams.Filename };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private String itemName;
 	private String fileName;
 
@@ -31,17 +40,26 @@ public class NSFNoteExtractFileEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFNoteExtractFileEvent() {
+		super(IExtensionManagerEvent.EM_NSFNOTEEXTRACTFILE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%x,%s,%s", szPathName, noteID, item_name, file_name );
 		checkValues(values, 4);
-		setDbPath( values[0] );
-		setNoteId( values[1] );
-		setItemName( values[2] );
-		setFileName( values[3] );
+		setDbPath(values[0]);
+		setNoteId(values[1]);
+		setItemName(values[2]);
+		setFileName(values[3]);
 		return true;
 	}
 
@@ -53,7 +71,8 @@ public class NSFNoteExtractFileEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param itemName the itemName to set
+	 * @param itemName
+	 *            the itemName to set
 	 */
 	private void setItemName(String itemName) {
 		this.itemName = itemName;
@@ -67,7 +86,8 @@ public class NSFNoteExtractFileEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param fileName the fileName to set
+	 * @param fileName
+	 *            the fileName to set
 	 */
 	private void setFileName(String fileName) {
 		this.fileName = fileName;

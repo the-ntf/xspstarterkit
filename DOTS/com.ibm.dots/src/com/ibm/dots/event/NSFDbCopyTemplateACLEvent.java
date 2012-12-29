@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFDbCopyTemplateACLEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.DestDbpath, DotsEventParams.Manager,
+			DotsEventParams.DefaultAccess };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private String manager;
 	private int defaultAccessLevel;
 
@@ -31,17 +40,26 @@ public class NSFDbCopyTemplateACLEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFDbCopyTemplateACLEvent() {
+		super(IExtensionManagerEvent.EM_NSFDBCOPYTEMPLATEACL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%s,%s,%x", szSrcPathName, szDestPathName, (Manager==NULL?"":Manager), defaultAccessLevel );
 		checkValues(values, 4);
-		setDbPath( values[0] );
-		setDestDbPath( values[1] );
-		setManager( values[2] );
-		setDefaultAccessLevel( parseInt( values[3] ) );
+		setDbPath(values[0]);
+		setDestDbPath(values[1]);
+		setManager(values[2]);
+		setDefaultAccessLevel(parseInt(values[3]));
 		return true;
 	}
 
@@ -53,7 +71,8 @@ public class NSFDbCopyTemplateACLEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param manager the manager to set
+	 * @param manager
+	 *            the manager to set
 	 */
 	private void setManager(String manager) {
 		this.manager = manager;
@@ -67,7 +86,8 @@ public class NSFDbCopyTemplateACLEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param defaultAccessLevel the defaultAccessLevel to set
+	 * @param defaultAccessLevel
+	 *            the defaultAccessLevel to set
 	 */
 	private void setDefaultAccessLevel(int defaultAccessLevel) {
 		this.defaultAccessLevel = defaultAccessLevel;

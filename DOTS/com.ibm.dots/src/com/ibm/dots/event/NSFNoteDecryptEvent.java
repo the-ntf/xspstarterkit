@@ -15,12 +15,20 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFNoteDecryptEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Noteid, DotsEventParams.Flag };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private int decryptFlags;
 
 	/**
@@ -30,27 +38,36 @@ public class NSFNoteDecryptEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFNoteDecryptEvent() {
+		super(IExtensionManagerEvent.EM_NSFNOTEDECRYPT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%x,%x", szPathName, noteID, decryptFlags );
 		checkValues(values, 3);
-		
-		setDbPath( values[0] );
-		setNoteId( values[1] );
-		setDecryptFlags( parseInt( values[2] ) );
+
+		setDbPath(values[0]);
+		setNoteId(values[1]);
+		setDecryptFlags(parseInt(values[2]));
 		return true;
 	}
-	
+
 	/**
 	 * @param decryptFlags
 	 */
 	private void setDecryptFlags(int decryptFlags) {
 		this.decryptFlags = decryptFlags;
 	}
-	
+
 	/**
 	 * @return
 	 */

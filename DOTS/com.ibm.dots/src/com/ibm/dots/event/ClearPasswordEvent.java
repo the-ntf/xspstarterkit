@@ -15,11 +15,19 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class ClearPasswordEvent extends AbstractEMEvent {
+	private static DotsEventParams[] params = {};
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
 
 	/**
 	 * @param eventId
@@ -28,11 +36,20 @@ public class ClearPasswordEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public ClearPasswordEvent() {
+		super(IExtensionManagerEvent.EM_CLEARPASSWORD);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		checkValues(values, 0);
 		return true;
 	}

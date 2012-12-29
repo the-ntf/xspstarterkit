@@ -15,11 +15,22 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
- * @author dtaieb
- * Signature: STATUS LNPUBLIC NSFDbCloseSession( DBHANDLE  hDB );
+ * @author dtaieb Signature: STATUS LNPUBLIC NSFDbCloseSession( DBHANDLE hDB );
  */
 public class NSFDbCloseEvent extends AbstractEMEvent {
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
+	public NSFDbCloseEvent() {
+		super(IExtensionManagerEvent.EM_NSFDBCLOSE);
+	}
 
 	/**
 	 * @param eventId
@@ -28,14 +39,16 @@ public class NSFDbCloseEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
 	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		checkValues(values, 1);
 
-		setDbPath( values[0] );
+		setDbPath(values[0]);
 		return true;
 	}
 

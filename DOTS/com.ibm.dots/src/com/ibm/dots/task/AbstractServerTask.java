@@ -15,6 +15,7 @@
  */
 package com.ibm.dots.task;
 
+import lotus.domino.NotesException;
 import lotus.domino.Session;
 
 /**
@@ -22,8 +23,15 @@ import lotus.domino.Session;
  * 
  */
 public abstract class AbstractServerTask implements IServerTaskRunnable {
+	private static ThreadLocal<Session> localSession = new ThreadLocal<Session>() {
+		@Override
+		protected Session initialValue() {
+			return null;
+		}
 
-	private Session session;
+	};
+
+	// private Session session;
 	private ServerConsole serverConsole;
 
 	/**
@@ -47,18 +55,35 @@ public abstract class AbstractServerTask implements IServerTaskRunnable {
 	 * @return
 	 */
 	public Session getSession() {
-		return session;
+		return localSession.get();
+		// return session;
 	}
 
 	/**
 	 * @param session
 	 */
 	public void setSession(Session session) {
-		if (this.session != null && this.session != session) {
-
-			// throw new DotsException("Session already set"); // $NON-NLS-1$
+		if (localSession.get() != null) {
+			Session curSess = localSession.get();
+			if (curSess == session) {
+				// all good. We're just re-entrant on the same thread
+			} else {
+				serverConsole
+						.logMessage("WARNING!! Attempting to set a session on a task that already has a different thread local session!!!! This will not end well.");
+				localSession.set(session);
+			}
+		} else {
+			localSession.set(session);
 		}
-		this.session = session;
+	}
+
+	public void clearSession() {
+		localSession.set(null);
+	}
+
+	public void recycleSession() throws NotesException {
+		localSession.get().recycle();
+		localSession.set(null);
 	}
 
 	/**

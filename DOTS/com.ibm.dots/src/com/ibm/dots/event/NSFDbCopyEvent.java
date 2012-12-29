@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFDbCopyEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.DestDbpath, DotsEventParams.SinceTimeDate,
+			DotsEventParams.NoteClass };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private String sinceTimeDate;
 	private int noteClassMask;
 
@@ -31,17 +40,26 @@ public class NSFDbCopyEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFDbCopyEvent() {
+		super(IExtensionManagerEvent.EM_NSFDBCOPY);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%s,%s,%x", szSrcPathName, szDestPathName, since_text, noteClassMask );
 		checkValues(values, 4);
-		setDbPath( values[0] );
-		setDestDbPath( values[1] );
-		setSinceTimeDate( values[2] );
-		setNoteClassMask( parseInt( values[3] ) );
+		setDbPath(values[0]);
+		setDestDbPath(values[1]);
+		setSinceTimeDate(values[2]);
+		setNoteClassMask(parseInt(values[3]));
 		return true;
 	}
 
@@ -53,7 +71,8 @@ public class NSFDbCopyEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param sinceTimeDate the sinceTimeDate to set
+	 * @param sinceTimeDate
+	 *            the sinceTimeDate to set
 	 */
 	private void setSinceTimeDate(String sinceTimeDate) {
 		this.sinceTimeDate = sinceTimeDate;
@@ -67,7 +86,8 @@ public class NSFDbCopyEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param noteClassMask the noteClassMask to set
+	 * @param noteClassMask
+	 *            the noteClassMask to set
 	 */
 	private void setNoteClassMask(int noteClassMask) {
 		this.noteClassMask = noteClassMask;

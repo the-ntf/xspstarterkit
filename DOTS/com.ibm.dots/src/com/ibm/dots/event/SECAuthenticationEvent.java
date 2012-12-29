@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class SECAuthenticationEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.WEvent, DotsEventParams.RemoteName, DotsEventParams.Flag,
+			DotsEventParams.NetProtocol, DotsEventParams.NetAddress };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private int wEvent;
 	private String remoteName;
 	private long flags;
@@ -34,18 +43,28 @@ public class SECAuthenticationEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public SECAuthenticationEvent() {
+		super(IExtensionManagerEvent.EM_SECAUTHENTICATION);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
-		// sprintf( szBuffer, "%x,%s,%x,%x,%s", wEvent, pRemoteName == NULL ? "" : pRemoteName , dwFlags, wNetProtocol, netAddress == NULL ? "" : netAddress );
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
+		// sprintf( szBuffer, "%x,%s,%x,%x,%s", wEvent, pRemoteName == NULL ? "" : pRemoteName , dwFlags, wNetProtocol, netAddress == NULL ?
+		// "" : netAddress );
 		checkValues(values, 5);
-		setwEvent( parseInt( values[0] ) );
-		setRemoteName( values[1] );
-		setFlags( parseLong( values[2] ) );
-		setNetProtocol( parseInt( values[3] ) );
-		setNetAddress( values[4] );
+		setwEvent(parseInt(values[0]));
+		setRemoteName(values[1]);
+		setFlags(parseLong(values[2]));
+		setNetProtocol(parseInt(values[3]));
+		setNetAddress(values[4]);
 		return true;
 	}
 
@@ -57,7 +76,8 @@ public class SECAuthenticationEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param wEvent the wEvent to set
+	 * @param wEvent
+	 *            the wEvent to set
 	 */
 	private void setwEvent(int wEvent) {
 		this.wEvent = wEvent;
@@ -71,7 +91,8 @@ public class SECAuthenticationEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param remoteName the remoteName to set
+	 * @param remoteName
+	 *            the remoteName to set
 	 */
 	private void setRemoteName(String remoteName) {
 		this.remoteName = remoteName;
@@ -85,7 +106,8 @@ public class SECAuthenticationEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param flags the flags to set
+	 * @param flags
+	 *            the flags to set
 	 */
 	private void setFlags(long flags) {
 		this.flags = flags;
@@ -99,7 +121,8 @@ public class SECAuthenticationEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param netProtocol the netProtocol to set
+	 * @param netProtocol
+	 *            the netProtocol to set
 	 */
 	private void setNetProtocol(int netProtocol) {
 		this.netProtocol = netProtocol;
@@ -113,7 +136,8 @@ public class SECAuthenticationEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param netAddress the netAddress to set
+	 * @param netAddress
+	 *            the netAddress to set
 	 */
 	private void setNetAddress(String netAddress) {
 		this.netAddress = netAddress;

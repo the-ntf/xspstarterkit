@@ -15,12 +15,20 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFDbCopyACLEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.DestDbpath };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	/**
 	 * @param eventId
 	 */
@@ -28,15 +36,24 @@ public class NSFDbCopyACLEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFDbCopyACLEvent() {
+		super(IExtensionManagerEvent.EM_NSFDBCOPYACL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
-		//sprintf( szBuffer, "%s,%s", szSrcPathName, szDestPathName );
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
+		// sprintf( szBuffer, "%s,%s", szSrcPathName, szDestPathName );
 		checkValues(values, 2);
-		setDbPath( values[0] );
-		setDestDbPath ( values[1] );
+		setDbPath(values[0]);
+		setDestDbPath(values[1]);
 		return true;
 	}
 

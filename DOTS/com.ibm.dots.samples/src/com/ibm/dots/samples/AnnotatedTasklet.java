@@ -16,32 +16,32 @@
 
 package com.ibm.dots.samples;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import lotus.domino.Database;
 import lotus.domino.Document;
 import lotus.domino.NotesException;
+import lotus.domino.Session;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import com.ibm.dots.annotation.Run;
-import com.ibm.dots.annotation.RunEvery;
-import com.ibm.dots.annotation.RunOnStart;
 import com.ibm.dots.annotation.Triggered;
 import com.ibm.dots.event.IExtensionManagerEvent;
-import com.ibm.dots.event.NSFNoteUpdateExtendedEvent;
-import com.ibm.dots.task.AbstractServerTaskExt;
-import com.ibm.dots.task.RunWhen;
-import com.ibm.dots.task.RunWhen.RunUnit;
+import com.ibm.dots.tasklet.AbstractTasklet;
+import com.ibm.dots.tasklet.events.DotsEvent;
+import com.ibm.dots.tasklet.events.DotsEventParams;
+import com.ibm.dots.thread.SessionContext;
 
 /**
  * @author dtaieb
  * 
  */
-public class AnnotatedTasklet extends AbstractServerTaskExt {
-
-	private final transient Map<String, Database> dbCache_ = new HashMap<String, Database>();
+public class AnnotatedTasklet extends AbstractTasklet {
 
 	/**
 	 * 
@@ -50,18 +50,15 @@ public class AnnotatedTasklet extends AbstractServerTaskExt {
 	}
 
 	private Database getDatabase(String key) {
-		if (!dbCache_.containsKey(key)) {
-			try {
-				Database db = getSession().getDatabase("", key);
-				if (db.isOpen()) {
-					dbCache_.put(key, db);
-				}
-			} catch (Throwable t) {
-				this.logException(t);
-			}
+		Database result = null;
+		try {
+			Session s = SessionContext.getSession();
+			result = s.getDatabase("", key);
+		} catch (Throwable t) {
+			t.printStackTrace();
 		}
 
-		return dbCache_.get(key);
+		return result;
 	}
 
 	/*
@@ -72,51 +69,128 @@ public class AnnotatedTasklet extends AbstractServerTaskExt {
 	public void dispose() throws NotesException {
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ibm.dots.task.AbstractServerTaskExt#doRun(com.ibm.dots.task.RunWhen, org.eclipse.core.runtime.IProgressMonitor)
-	 */
-	@Override
-	protected void doRun(RunWhen runWhen, IProgressMonitor monitor) throws NotesException {
-	}
-
-	@RunOnStart
-	public void runOnStart(IProgressMonitor monitor) {
-		logMessage("Annotated onStart method");
-	}
+	// @RunOnStart
+	// public void runOnStart(IProgressMonitor monitor) {
+	// logMessage("Annotated onStart method");
+	// }
 
 	@Run(id = "manual")
 	public void runManual(String[] args, IProgressMonitor monitor) {
 		logMessage("Annotated run method with id=manual");
 	}
 
-	@RunOnStart
-	@RunEvery(every = 60, unit = RunUnit.second)
-	public void runEvery60seconds(IProgressMonitor monitor) {
-		logMessage("Called from annotated method every 60 seconds");
-	}
+	// @RunOnStart
+	// @RunEvery(every = 60, unit = TimeUnit.SECONDS)
+	// public void runEvery60seconds(IProgressMonitor monitor) {
+	// logMessage("Called from annotated method every 60 seconds");
+	// }
 
-	private int updateCount = 0;
+	private final Map<String, Integer> updateMap_ = new HashMap<String, Integer>();
+	private static ThreadLocal<DateFormat> formatter_ = new ThreadLocal<DateFormat>() {
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.lang.ThreadLocal#initialValue()
+		 */
+		@Override
+		protected DateFormat initialValue() {
+			return new SimpleDateFormat("HHmmSS");
+		}
+	};
 
 	@Triggered(eventId = { IExtensionManagerEvent.EM_NSFNOTEUPDATEXTENDED, IExtensionManagerEvent.EM_NSFNOTEUPDATE })
-	public void runTriggered(NSFNoteUpdateExtendedEvent event, IProgressMonitor monitor) {
+	public void runTriggered2(DotsEvent event, IProgressMonitor monitor) {
+		System.out.println("Starting runTriggered");
 		String formName = "";
-		Database db = getDatabase(event.getDbPath());
+		String path = (String) event.getEventParam(DotsEventParams.SourceDbpath);
+		String noteid = (String) event.getEventParam(DotsEventParams.Noteid);
+		Database db = getDatabase(path);
 
 		if (db != null) {
 			try {
-				Document doc = db.getDocumentByID(event.getNoteId());
+				Document doc = db.getDocumentByID(noteid);
 				formName = doc.getItemValueString("form");
 				doc.recycle();
 			} catch (Throwable t) {
 				this.logException(t);
 			}
 		}
-		logMessage(updateCount++ + " annotated UPDATE methods " + event.getDbPath() + " : " + event.getNoteId() + " Form: " + formName);
+		if (!updateMap_.containsKey(path)) {
+			updateMap_.put(path, 1);
+		} else {
+			updateMap_.put(path, updateMap_.get(path) + 1);
+		}
+
+		System.out.println(formatter_.get().format(new Date()) + "  " + updateMap_.get(path) + " annotated UPDATE methods " + path + " : "
+				+ noteid + " Form: " + formName);
 	}
 
-	private int openCount = 0;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ibm.dots.tasklet.AbstractTasklet#isResident()
+	 */
+	@Override
+	public boolean isResident() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ibm.dots.tasklet.AbstractTasklet#localInitialization(java.lang.Object[])
+	 */
+	@Override
+	public void localInitialization(Object... args) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ibm.dots.tasklet.AbstractTasklet#localTeardown(java.lang.Object[])
+	 */
+	@Override
+	public void localTeardown(Object... args) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ibm.dots.tasklet.AbstractTasklet#getName()
+	 */
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return "Test Annotated Tasklet";
+	}
+
+	// @Triggered(eventId = { IExtensionManagerEvent.EM_NSFNOTEUPDATEXTENDED, IExtensionManagerEvent.EM_NSFNOTEUPDATE })
+	// public void runTriggered(NSFNoteUpdateExtendedEvent event, IProgressMonitor monitor) {
+	// String formName = "";
+	// String path = event.getDbPath();
+	// Database db = getDatabase(path);
+	//
+	// if (db != null) {
+	// try {
+	// Document doc = db.getDocumentByID(event.getNoteId());
+	// formName = doc.getItemValueString("form");
+	// doc.recycle();
+	// } catch (Throwable t) {
+	// this.logException(t);
+	// }
+	// }
+	// if (!updateMap_.containsKey(path)) {
+	// updateMap_.put(path, 1);
+	// } else {
+	// updateMap_.put(path, updateMap_.get(path) + 1);
+	// }
+	// logMessage(updateMap_.get(path) + " annotated UPDATE methods " + path + " : " + event.getNoteId() + " Form: " + formName);
+	// }
 
 	// @Triggered(eventId = { IExtensionManagerEvent.EM_NSFNOTEOPEN })
 	// public void runTriggered(NSFNoteOpenEvent event, IProgressMonitor monitor) {

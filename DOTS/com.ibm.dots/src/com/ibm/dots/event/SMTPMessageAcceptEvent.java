@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class SMTPMessageAcceptEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SessionId, DotsEventParams.SourceDbpath, DotsEventParams.Noteid,
+			DotsEventParams.SMTPReply, DotsEventParams.SMTPReplyLength };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private long sessionID;
 	private String SMTPReply;
 	private long SMTPReplyLength;
@@ -32,18 +41,27 @@ public class SMTPMessageAcceptEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public SMTPMessageAcceptEvent() {
+		super(IExtensionManagerEvent.EM_SMTPMESSAGEACCEPT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%x,%s,%x,%s,%x", sessionID, szPathName, noteID, safeCharPtr( smtpReply ), SMTPReplyLength );
 		checkValues(values, 5);
-		setSessionID( Long.parseLong( values[0] ) );
-		setDbPath( values[1]);
-		setNoteId( values[2] );
-		setSMTPReply( values[3] );
-		setSMTPReplyLength( Long.parseLong( values[4] ) );
+		setSessionID(Long.parseLong(values[0]));
+		setDbPath(values[1]);
+		setNoteId(values[2]);
+		setSMTPReply(values[3]);
+		setSMTPReplyLength(Long.parseLong(values[4]));
 		return true;
 	}
 
@@ -55,7 +73,8 @@ public class SMTPMessageAcceptEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param sessionID the sessionID to set
+	 * @param sessionID
+	 *            the sessionID to set
 	 */
 	private void setSessionID(long sessionID) {
 		this.sessionID = sessionID;
@@ -69,7 +88,8 @@ public class SMTPMessageAcceptEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param sMTPReply the sMTPReply to set
+	 * @param sMTPReply
+	 *            the sMTPReply to set
 	 */
 	private void setSMTPReply(String sMTPReply) {
 		SMTPReply = sMTPReply;
@@ -83,7 +103,8 @@ public class SMTPMessageAcceptEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param sMTPReplyLength the sMTPReplyLength to set
+	 * @param sMTPReplyLength
+	 *            the sMTPReplyLength to set
 	 */
 	private void setSMTPReplyLength(long sMTPReplyLength) {
 		SMTPReplyLength = sMTPReplyLength;

@@ -15,12 +15,20 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFNoteCloseEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Noteid };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	/**
 	 * @param eventId
 	 */
@@ -28,16 +36,25 @@ public class NSFNoteCloseEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+ * 
+ */
+	public NSFNoteCloseEvent() {
+		super(IExtensionManagerEvent.EM_NSFNOTECLOSE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
 	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
-		//sprintf( szBuffer, "%s,%x", szPathName, noteId);
+		// sprintf( szBuffer, "%s,%x", szPathName, noteId);
 		checkValues(values, 2);
 
-		setDbPath( values[0] );
-		setNoteId( values[1] );
+		setDbPath(values[0]);
+		setNoteId(values[1]);
 		return true;
 	}
 }

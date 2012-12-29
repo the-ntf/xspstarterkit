@@ -15,11 +15,19 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class AdminPProcessRequestEvent extends AbstractEMEvent {
+	private static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.RequestNoteid, DotsEventParams.ResponseNoteid };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
 
 	private String noteIdResponse;
 	private String noteIdRequest;
@@ -31,17 +39,26 @@ public class AdminPProcessRequestEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public AdminPProcessRequestEvent() {
+		super(IExtensionManagerEvent.EM_ADMINPPROCESSREQUEST);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
 	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
-		checkValues( values, 3 );		
+		checkValues(values, 3);
 
-		setDbPath( values[0] );
-		setNoteIdRequest( values[1] );
-		setNoteIdResponse( values[2] );
-		
+		setDbPath(values[0]);
+		setNoteIdRequest(values[1]);
+		setNoteIdResponse(values[2]);
+
 		return true;
 	}
 
@@ -51,14 +68,14 @@ public class AdminPProcessRequestEvent extends AbstractEMEvent {
 	private void setNoteIdResponse(String noteId) {
 		this.noteIdResponse = noteId;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public String getNoteIdResponse() {
 		return noteIdResponse;
 	}
-	
+
 	/**
 	 * @return
 	 */

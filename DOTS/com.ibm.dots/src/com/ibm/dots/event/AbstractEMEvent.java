@@ -25,6 +25,7 @@ public abstract class AbstractEMEvent implements IExtensionManagerEvent {
 	private String dbPath;
 	private String destDbPath;
 	private String noteId;
+	private String username;
 
 	/**
 	 * @param eventId
@@ -87,12 +88,26 @@ public abstract class AbstractEMEvent implements IExtensionManagerEvent {
 	}
 
 	/**
+	 * @return
+	 */
+	protected final void setUsername(String username) {
+		this.username = username;
+	}
+
+	/**
+	 * @return
+	 */
+	public final String getUsername() {
+		return username;
+	}
+
+	/**
 	 * @param values
 	 * @param length
 	 * @throws InvalidEventException
 	 */
 	protected void checkValues(String[] values, int length) throws InvalidEventException {
-		if (values.length != length) {
+		if (values.length >= length) { // why shouldn't we accept more information in the buffer than we expect?
 			throw new InvalidEventException();
 		}
 	}

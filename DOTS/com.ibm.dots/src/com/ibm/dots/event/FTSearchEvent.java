@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class FTSearchEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Query, DotsEventParams.Options,
+			DotsEventParams.Limit, DotsEventParams.DocsReturned };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private String query;
 	private long options;
 	private int limit;
@@ -33,29 +42,38 @@ public class FTSearchEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public FTSearchEvent() {
+		super(IExtensionManagerEvent.EM_FTSEARCH);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
 	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
-		//sprintf( szBuffer, "%s,%s,%x,%x,%x", szPathName, query, options, limit, retNumDocs == NULL ? 0 : *retNumDocs );
+		// sprintf( szBuffer, "%s,%s,%x,%x,%x", szPathName, query, options, limit, retNumDocs == NULL ? 0 : *retNumDocs );
 		checkValues(values, 5);
 
-		setDbPath( values[0] );
-		setQuery( values[1] );
-		setOptions( parseLong( values[2] ) );
-		setLimit( parseInt( values[3] ) );
-		setRetNumDocs( Long.parseLong( values[4] ) ) ;
+		setDbPath(values[0]);
+		setQuery(values[1]);
+		setOptions(parseLong(values[2]));
+		setLimit(parseInt(values[3]));
+		setRetNumDocs(Long.parseLong(values[4]));
 		return true;
 	}
-	
+
 	/**
 	 * @param query
 	 */
 	private void setQuery(String query) {
 		this.query = query;
 	}
-	
+
 	/**
 	 * @return
 	 */
@@ -71,7 +89,8 @@ public class FTSearchEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param options the options to set
+	 * @param options
+	 *            the options to set
 	 */
 	private void setOptions(long options) {
 		this.options = options;
@@ -85,7 +104,8 @@ public class FTSearchEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param limit the limit to set
+	 * @param limit
+	 *            the limit to set
 	 */
 	private void setLimit(int limit) {
 		this.limit = limit;
@@ -99,12 +119,11 @@ public class FTSearchEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param retNumDocs the retNumDocs to set
+	 * @param retNumDocs
+	 *            the retNumDocs to set
 	 */
 	private void setRetNumDocs(long retNumDocs) {
 		this.retNumDocs = retNumDocs;
 	}
-	
-	
 
 }

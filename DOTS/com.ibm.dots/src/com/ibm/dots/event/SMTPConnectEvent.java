@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class SMTPConnectEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SessionId, DotsEventParams.RemoteIP, DotsEventParams.RemoteHost,
+			DotsEventParams.PossibileRelay, DotsEventParams.SMTPGreeting, DotsEventParams.SMTPMaxGreetingLen };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private long sessionID;
 	private String remoteIP;
 	private String remoteHost;
@@ -35,19 +44,29 @@ public class SMTPConnectEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public SMTPConnectEvent() {
+		super(IExtensionManagerEvent.EM_SMTPCONNECT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)	throws InvalidEventException {
-		// sprintf( szBuffer, "%x,%s,%s,%x,%s,%x", sessionID, safeCharPtr( remoteIP ), safeCharPtr( remoteHost ), possibleRelay, safeCharPtr( greeting ), maxGreetingLength );
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
+		// sprintf( szBuffer, "%x,%s,%s,%x,%s,%x", sessionID, safeCharPtr( remoteIP ), safeCharPtr( remoteHost ), possibleRelay,
+		// safeCharPtr( greeting ), maxGreetingLength );
 		checkValues(values, 6);
-		setSessionID( Long.parseLong( values[0] ) );
-		setRemoteIP( values[1] );
-		setRemoteHost( values[2] );
-		setPossibleRelay( Boolean.parseBoolean( values[3] ) );
-		setGreeting( values[4] );
-		setMaxGreetingLen( Long.parseLong( values[5] ) );
+		setSessionID(Long.parseLong(values[0]));
+		setRemoteIP(values[1]);
+		setRemoteHost(values[2]);
+		setPossibleRelay(Boolean.parseBoolean(values[3]));
+		setGreeting(values[4]);
+		setMaxGreetingLen(Long.parseLong(values[5]));
 		return true;
 	}
 
@@ -59,7 +78,8 @@ public class SMTPConnectEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param sessionID the sessionID to set
+	 * @param sessionID
+	 *            the sessionID to set
 	 */
 	private void setSessionID(long sessionID) {
 		this.sessionID = sessionID;
@@ -73,7 +93,8 @@ public class SMTPConnectEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param remoteIP the remoteIP to set
+	 * @param remoteIP
+	 *            the remoteIP to set
 	 */
 	private void setRemoteIP(String remoteIP) {
 		this.remoteIP = remoteIP;
@@ -87,7 +108,8 @@ public class SMTPConnectEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param remoteHost the remoteHost to set
+	 * @param remoteHost
+	 *            the remoteHost to set
 	 */
 	private void setRemoteHost(String remoteHost) {
 		this.remoteHost = remoteHost;
@@ -101,7 +123,8 @@ public class SMTPConnectEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param possibleRelay the possibleRelay to set
+	 * @param possibleRelay
+	 *            the possibleRelay to set
 	 */
 	private void setPossibleRelay(boolean possibleRelay) {
 		this.possibleRelay = possibleRelay;
@@ -115,7 +138,8 @@ public class SMTPConnectEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param greeting the greeting to set
+	 * @param greeting
+	 *            the greeting to set
 	 */
 	private void setGreeting(String greeting) {
 		this.greeting = greeting;
@@ -129,7 +153,8 @@ public class SMTPConnectEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param maxGreetingLen the maxGreetingLen to set
+	 * @param maxGreetingLen
+	 *            the maxGreetingLen to set
 	 */
 	private void setMaxGreetingLen(long maxGreetingLen) {
 		this.maxGreetingLen = maxGreetingLen;

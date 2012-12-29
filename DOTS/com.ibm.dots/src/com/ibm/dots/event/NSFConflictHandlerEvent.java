@@ -15,11 +15,19 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFConflictHandlerEvent extends AbstractEMEvent {
+	private static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Noteid };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
 
 	/**
 	 * @param eventId
@@ -28,16 +36,25 @@ public class NSFConflictHandlerEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFConflictHandlerEvent() {
+		super(IExtensionManagerEvent.EM_NSFCONFLICTHANDLER);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)	throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%x", szPathName, noteID );
 		checkValues(values, 2);
-		
-		setDbPath( values[0] );
-		setNoteId( values[1] );
+
+		setDbPath(values[0]);
+		setNoteId(values[1]);
 		return true;
 	}
 

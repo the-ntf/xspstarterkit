@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class SMTPCommandEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SessionId, DotsEventParams.Command, DotsEventParams.MaxCommandLen,
+			DotsEventParams.SMTPReply, DotsEventParams.SMTPReplyLength };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private long sessionID;
 	private String command;
 	private long maxCommandLength;
@@ -34,18 +43,28 @@ public class SMTPCommandEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public SMTPCommandEvent() {
+		super(IExtensionManagerEvent.EM_SMTPCOMMAND);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
 	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
-		//sprintf( szBuffer, "%x,%s,%x,%s,%x", sessionID, safeCharPtr( command ), maxCommandLength, safeCharPtr( smtpReply ), SMTPReplyLength );
-		checkValues(values, 5 );
-		setSessionID( Long.parseLong( values[0] ) );
-		setCommand( values[1] );
-		setMaxCommandLength( Long.parseLong( values[2] ));
-		setSMTPReply( values[3] );
-		setSMTPReplyLength( Long.parseLong( values[4] ) );
+		// sprintf( szBuffer, "%x,%s,%x,%s,%x", sessionID, safeCharPtr( command ), maxCommandLength, safeCharPtr( smtpReply ),
+		// SMTPReplyLength );
+		checkValues(values, 5);
+		setSessionID(Long.parseLong(values[0]));
+		setCommand(values[1]);
+		setMaxCommandLength(Long.parseLong(values[2]));
+		setSMTPReply(values[3]);
+		setSMTPReplyLength(Long.parseLong(values[4]));
 		return true;
 	}
 
@@ -57,7 +76,8 @@ public class SMTPCommandEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param sessionID the sessionID to set
+	 * @param sessionID
+	 *            the sessionID to set
 	 */
 	private void setSessionID(long sessionID) {
 		this.sessionID = sessionID;
@@ -71,7 +91,8 @@ public class SMTPCommandEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param command the command to set
+	 * @param command
+	 *            the command to set
 	 */
 	private void setCommand(String command) {
 		this.command = command;
@@ -85,7 +106,8 @@ public class SMTPCommandEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param maxCommandLength the maxCommandLength to set
+	 * @param maxCommandLength
+	 *            the maxCommandLength to set
 	 */
 	private void setMaxCommandLength(long maxCommandLength) {
 		this.maxCommandLength = maxCommandLength;
@@ -99,7 +121,8 @@ public class SMTPCommandEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param sMTPReply the sMTPReply to set
+	 * @param sMTPReply
+	 *            the sMTPReply to set
 	 */
 	private void setSMTPReply(String sMTPReply) {
 		SMTPReply = sMTPReply;
@@ -113,7 +136,8 @@ public class SMTPCommandEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param sMTPReplyLength the sMTPReplyLength to set
+	 * @param sMTPReplyLength
+	 *            the sMTPReplyLength to set
 	 */
 	private void setSMTPReplyLength(long sMTPReplyLength) {
 		SMTPReplyLength = sMTPReplyLength;

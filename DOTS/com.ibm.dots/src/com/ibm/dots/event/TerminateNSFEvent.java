@@ -15,11 +15,19 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class TerminateNSFEvent extends AbstractEMEvent {
+	public static DotsEventParams[] params = {};
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
 
 	/**
 	 * @param eventId
@@ -28,12 +36,21 @@ public class TerminateNSFEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public TerminateNSFEvent() {
+		super(IExtensionManagerEvent.EM_TERMINATENSF);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)	throws InvalidEventException {
-		//szBuffer[0] = '\0';
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
+		// szBuffer[0] = '\0';
 		return true;
 	}
 

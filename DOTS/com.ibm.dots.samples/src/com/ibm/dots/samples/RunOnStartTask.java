@@ -39,7 +39,7 @@ public class RunOnStartTask extends AbstractServerTask {
 	 * @see com.ibm.dots.task.IServerTaskRunnable#run(com.ibm.dots.task.RunWhen, java.lang.String[], org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	public void run(RunWhen runWhen, String[] args, IProgressMonitor monitor)throws NotesException {
-		logMessage( "RunOnStart Task executed");
+		logMessage( "RunStart Task executed");
 	}
 
 	/* (non-Javadoc)

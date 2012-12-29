@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFDbCreateAndCopyEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.DestDbpath, DotsEventParams.NoteClass,
+			DotsEventParams.Limit, DotsEventParams.Flag };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private int noteClass;
 	private int limit;
 	private long flags;
@@ -32,18 +41,27 @@ public class NSFDbCreateAndCopyEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFDbCreateAndCopyEvent() {
+		super(IExtensionManagerEvent.EM_NSFDBCREATEANDCOPY);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%s,%x,%x,%x", szSrcPathName, szDestPathName, noteClass, limit, flags );
 		checkValues(values, 5);
-		setDbPath( values[0] );
-		setDestDbPath( values[1] );
-		setNoteClass( parseInt( values[2] ) ); 
-		setLimit( parseInt( values[3] ) );
-		setFlags( parseLong( values[4] ) );
+		setDbPath(values[0]);
+		setDestDbPath(values[1]);
+		setNoteClass(parseInt(values[2]));
+		setLimit(parseInt(values[3]));
+		setFlags(parseLong(values[4]));
 		return true;
 	}
 
@@ -55,7 +73,8 @@ public class NSFDbCreateAndCopyEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param noteClass the noteClass to set
+	 * @param noteClass
+	 *            the noteClass to set
 	 */
 	private void setNoteClass(int noteClass) {
 		this.noteClass = noteClass;
@@ -69,7 +88,8 @@ public class NSFDbCreateAndCopyEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param limit the limit to set
+	 * @param limit
+	 *            the limit to set
 	 */
 	private void setLimit(int limit) {
 		this.limit = limit;
@@ -83,7 +103,8 @@ public class NSFDbCreateAndCopyEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param flags the flags to set
+	 * @param flags
+	 *            the flags to set
 	 */
 	private void setFlags(long flags) {
 		this.flags = flags;

@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFHookNoteUpdateEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.Username, DotsEventParams.SourceDbpath, DotsEventParams.Noteid,
+			DotsEventParams.Flag };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private String userName;
 	private int updateFlag;
 
@@ -31,17 +40,26 @@ public class NSFHookNoteUpdateEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFHookNoteUpdateEvent() {
+		super(IExtensionManagerEvent.HOOK_EVENT_NOTE_UPDATE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
 	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
-		//sprintf( szParams, "%s,%s,%x,%x", UserName, szPathName, noteId, pwUpdateFlags == NULL ? 0 : *pwUpdateFlags );
-		checkValues(values, 4 );
-		setUserName( values[0] );
-		setDbPath( values[1] );
-		setNoteId( values[2] );
-		setUpdateFlag( parseInt( values[3] ) );
+		// sprintf( szParams, "%s,%s,%x,%x", UserName, szPathName, noteId, pwUpdateFlags == NULL ? 0 : *pwUpdateFlags );
+		checkValues(values, 4);
+		setUserName(values[0]);
+		setDbPath(values[1]);
+		setNoteId(values[2]);
+		setUpdateFlag(parseInt(values[3]));
 		return true;
 	}
 
@@ -53,7 +71,8 @@ public class NSFHookNoteUpdateEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param userName the userName to set
+	 * @param userName
+	 *            the userName to set
 	 */
 	private void setUserName(String userName) {
 		this.userName = userName;
@@ -67,7 +86,8 @@ public class NSFHookNoteUpdateEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param updateFlag the updateFlag to set
+	 * @param updateFlag
+	 *            the updateFlag to set
 	 */
 	private void setUpdateFlag(int updateFlag) {
 		this.updateFlag = updateFlag;

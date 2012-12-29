@@ -15,12 +15,20 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFDbOpenExtendedEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Options };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private int options;
 
 	/**
@@ -30,26 +38,35 @@ public class NSFDbOpenExtendedEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFDbOpenExtendedEvent() {
+		super(IExtensionManagerEvent.EM_NSFDBOPENEXTENDED);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%x", pathName, options );
 		checkValues(values, 2);
-		
-		setDbPath( values[0] );
-		setOptions( parseInt( values[1] ) );
+
+		setDbPath(values[0]);
+		setOptions(parseInt(values[1]));
 		return true;
 	}
-	
+
 	/**
 	 * @param options
 	 */
 	private void setOptions(int options) {
 		this.options = options;
 	}
-	
+
 	/**
 	 * @return
 	 */

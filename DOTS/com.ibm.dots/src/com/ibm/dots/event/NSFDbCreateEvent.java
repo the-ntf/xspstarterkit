@@ -15,31 +15,39 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFDbCreateEvent extends AbstractEMEvent {
-	
-	public static final int	DBCLASS_NSFTESTFILE	= 0xff00;
-	public static final int	DBCLASS_NOTEFILE	= 0xff01;
-	public static final int	DBCLASS_DESKTOP	= 0xff02;
-	public static final int	DBCLASS_NOTECLIPBOARD	= 0xff03;
-	public static final int	DBCLASS_TEMPLATEFILE	= 0xff04;
-	public static final int	DBCLASS_GIANTNOTEFILE	= 0xff05;
-	public static final int	DBCLASS_HUGENOTEFILE	= 0xff06;
-	public static final int	DBCLASS_ONEDOCFILE	= 0xff07;	/* Not a mail message */
-	public static final int	DBCLASS_V2NOTEFILE	= 0xff08;
-	public static final int	DBCLASS_ENCAPSMAILFILE	= 0xff09;	/* Specifically used by alt mail */
-	public static final int	DBCLASS_LRGENCAPSMAILFILE	= 0xff0a;	/* Specifically used by alt mail */
-	public static final int	DBCLASS_V3NOTEFILE	= 0xff0b;
-	public static final int	DBCLASS_OBJSTORE	= 0xff0c;	/* Object store */
-	public static final int DBCLASS_V3ONEDOCFILE	= 0xff0d;
-	public static final int	DBCLASS_V4NOTEFILE	= 0xff0e;
-	public static final int	DBCLASS_V5NOTEFILE	= 0xff0f;
-	public static final int	DBCLASS_V6NOTEFILE	= 0xff10;
-	public static final int	DBCLASS_V8NOTEFILE	= 0xff11;
-	public static final int	DBCLASS_V85NOTEFILE	= 0xff12;
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Dbclass, DotsEventParams.Forcecreate };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
+	public static final int DBCLASS_NSFTESTFILE = 0xff00;
+	public static final int DBCLASS_NOTEFILE = 0xff01;
+	public static final int DBCLASS_DESKTOP = 0xff02;
+	public static final int DBCLASS_NOTECLIPBOARD = 0xff03;
+	public static final int DBCLASS_TEMPLATEFILE = 0xff04;
+	public static final int DBCLASS_GIANTNOTEFILE = 0xff05;
+	public static final int DBCLASS_HUGENOTEFILE = 0xff06;
+	public static final int DBCLASS_ONEDOCFILE = 0xff07; /* Not a mail message */
+	public static final int DBCLASS_V2NOTEFILE = 0xff08;
+	public static final int DBCLASS_ENCAPSMAILFILE = 0xff09; /* Specifically used by alt mail */
+	public static final int DBCLASS_LRGENCAPSMAILFILE = 0xff0a; /* Specifically used by alt mail */
+	public static final int DBCLASS_V3NOTEFILE = 0xff0b;
+	public static final int DBCLASS_OBJSTORE = 0xff0c; /* Object store */
+	public static final int DBCLASS_V3ONEDOCFILE = 0xff0d;
+	public static final int DBCLASS_V4NOTEFILE = 0xff0e;
+	public static final int DBCLASS_V5NOTEFILE = 0xff0f;
+	public static final int DBCLASS_V6NOTEFILE = 0xff10;
+	public static final int DBCLASS_V8NOTEFILE = 0xff11;
+	public static final int DBCLASS_V85NOTEFILE = 0xff12;
 
 	private boolean bForceCreation;
 	private int wDbClass;
@@ -51,14 +59,18 @@ public class NSFDbCreateEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
+	public NSFDbCreateEvent() {
+		super(IExtensionManagerEvent.EM_NSFDBCREATE);
+	}
+
 	@Override
 	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		checkValues(values, 3);
-		
-		setDbPath( values[0] );
-		setDbClass( values[1] );
-		setForceCreation( values[2] );
-		
+
+		setDbPath(values[0]);
+		setDbClass(values[1]);
+		setForceCreation(values[2]);
+
 		return true;
 	}
 
@@ -66,13 +78,13 @@ public class NSFDbCreateEvent extends AbstractEMEvent {
 	 * @param sBool
 	 */
 	private void setForceCreation(String sBool) {
-		this.bForceCreation = Boolean.parseBoolean( sBool );
+		this.bForceCreation = Boolean.parseBoolean(sBool);
 	}
-	
+
 	/**
 	 * @return
 	 */
-	public boolean isForceCreation(){
+	public boolean isForceCreation() {
 		return bForceCreation;
 	}
 
@@ -80,13 +92,13 @@ public class NSFDbCreateEvent extends AbstractEMEvent {
 	 * @param dbClass
 	 */
 	private void setDbClass(String dbClass) {
-		this.wDbClass = parseInt( dbClass );
+		this.wDbClass = parseInt(dbClass);
 	}
-	
+
 	/**
 	 * @return
 	 */
-	public int getDbClass(){
+	public int getDbClass() {
 		return wDbClass;
 	}
 }

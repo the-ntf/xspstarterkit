@@ -17,7 +17,7 @@ package com.ibm.dots.event;
 
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFNoteUpdateMailBoxEvent extends NSFNoteUpdateExtendedEvent {
 
@@ -26,6 +26,13 @@ public class NSFNoteUpdateMailBoxEvent extends NSFNoteUpdateExtendedEvent {
 	 */
 	public NSFNoteUpdateMailBoxEvent(int eventId) {
 		super(eventId);
+	}
+
+	/**
+	 * 
+	 */
+	public NSFNoteUpdateMailBoxEvent() {
+		super(IExtensionManagerEvent.EM_NSFNOTEUPDATEMAILBOX);
 	}
 
 }

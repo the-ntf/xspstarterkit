@@ -15,11 +15,20 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class AgentOpenEvent extends AbstractEMEvent {
+	private static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Noteid };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private String agentNoteId;
 
 	/**
@@ -29,25 +38,34 @@ public class AgentOpenEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public AgentOpenEvent() {
+		super(IExtensionManagerEvent.EM_AGENTOPEN);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)	throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%x", szPathName, agentNoteID );
 		checkValues(values, 2);
-		setDbPath( values[0] );
-		setAgentNoteId( values[1] );
+		setDbPath(values[0]);
+		setAgentNoteId(values[1]);
 		return true;
 	}
-	
+
 	/**
 	 * @param agentNoteId
 	 */
 	private void setAgentNoteId(String agentNoteId) {
 		this.agentNoteId = agentNoteId;
 	}
-	
+
 	/**
 	 * @return
 	 */

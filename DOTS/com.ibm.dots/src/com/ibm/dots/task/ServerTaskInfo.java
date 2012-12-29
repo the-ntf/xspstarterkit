@@ -47,7 +47,7 @@ import com.ibm.dots.utils.TimeUtils;
  * @author dtaieb
  * 
  */
-class ServerTaskInfo {
+public class ServerTaskInfo {
 
 	private IConfigurationElement configurationElement;
 	private IServerTaskRunnable serverTaskRunnable;
@@ -184,10 +184,10 @@ class ServerTaskInfo {
 						Annotation annotation = m.getAnnotation(RunEvery.class);
 						if (annotation instanceof RunEvery) {
 							RunEvery runEvery = (RunEvery) annotation;
-							RunWhen r = new RunWhen(runEvery.unit(), runEvery.every(), TimeUtils.getTimeOfDay(runEvery.startAt()),
-									TimeUtils.getTimeOfDay(runEvery.stopAt()));
-							r.annotatedMethod = m;
-							runWhenList.add(r);
+							// RunWhen r = new RunWhen(runEvery.unit(), runEvery.every(), TimeUtils.getTimeOfDay(runEvery.startAt()),
+							// TimeUtils.getTimeOfDay(runEvery.stopAt()));
+							// r.annotatedMethod = m;
+							// runWhenList.add(r);
 						}
 					}
 				}

@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class FTIndexEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Options, DotsEventParams.Stopfile,
+			DotsEventParams.DocsAdded, DotsEventParams.DocsUpdated, DotsEventParams.DocsDelete, DotsEventParams.BytesIndexed };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private int options;
 	private String stopFile;
 	private long docsAdded;
@@ -35,101 +44,114 @@ public class FTIndexEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+ * 
+ */
+	public FTIndexEvent() {
+		super(IExtensionManagerEvent.EM_FTINDEX);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
 	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
-		//sprintf( szBuffer, "%s,%x,%s,%x,%x,%x,%x", szPathName, options, stopFile, retStats->DocsAdded, retStats->DocsUpdated, retStats->DocsDeleted, retStats->BytesIndexed );
-		checkValues(values, 7 );
-		
-		setDbPath( values[0] );
-		setOptions( parseInt( values[1] ) );
-		setStopFile( values[2] );
-		setDocsAdded( parseLong( values[3] ) );
-		setDocsUpdated( parseLong( values[4] ) );
-		setDocsDeleted( parseLong( values[5] ) );
-		setBytesIndexed( parseLong( values[6] ) );
+		// sprintf( szBuffer, "%s,%x,%s,%x,%x,%x,%x", szPathName, options, stopFile, retStats->DocsAdded, retStats->DocsUpdated,
+		// retStats->DocsDeleted, retStats->BytesIndexed );
+		checkValues(values, 7);
+
+		setDbPath(values[0]);
+		setOptions(parseInt(values[1]));
+		setStopFile(values[2]);
+		setDocsAdded(parseLong(values[3]));
+		setDocsUpdated(parseLong(values[4]));
+		setDocsDeleted(parseLong(values[5]));
+		setBytesIndexed(parseLong(values[6]));
+		if (values.length > 7) {
+			setUsername(values[7]);
+		}
 		return true;
 	}
-	
+
 	/**
 	 * @param options
 	 */
 	private void setOptions(int options) {
 		this.options = options;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public int getOptions() {
 		return options;
 	}
-	
+
 	/**
 	 * @param stopFile
 	 */
 	private void setStopFile(String stopFile) {
 		this.stopFile = stopFile;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public String getStopFile() {
 		return stopFile;
 	}
-	
+
 	/**
 	 * @param docsAdded
 	 */
 	public void setDocsAdded(long docsAdded) {
 		this.docsAdded = docsAdded;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public long getDocsAdded() {
 		return docsAdded;
 	}
-	
+
 	/**
 	 * @param docsDeleted
 	 */
 	public void setDocsDeleted(long docsDeleted) {
 		this.docsDeleted = docsDeleted;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public long getDocsDeleted() {
 		return docsDeleted;
 	}
-	
+
 	/**
 	 * @param docsUpdated
 	 */
 	public void setDocsUpdated(long docsUpdated) {
 		this.docsUpdated = docsUpdated;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public long getDocsUpdated() {
 		return docsUpdated;
 	}
-	
+
 	/**
 	 * @param bytesIndexed
 	 */
 	public void setBytesIndexed(long bytesIndexed) {
 		this.bytesIndexed = bytesIndexed;
 	}
-	
+
 	/**
 	 * @return
 	 */

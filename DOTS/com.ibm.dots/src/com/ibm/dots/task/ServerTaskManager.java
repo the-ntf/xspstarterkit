@@ -58,11 +58,12 @@ import org.eclipse.osgi.framework.console.CommandInterpreter;
 
 import com.ibm.dots.Activator;
 import com.ibm.dots.annotation.RunOnStart;
-import com.ibm.dots.event.ExtensionManagerBridge;
+import com.ibm.dots.event.AbstractEMEvent;
 import com.ibm.dots.event.IExtensionManagerEvent;
 import com.ibm.dots.internal.OSGIConsoleAdaptor;
 import com.ibm.dots.internal.OSGiServerConsoleAdaptor;
 import com.ibm.dots.task.RunWhen.RunUnit;
+import com.ibm.dots.tasklet.TaskletManager;
 import com.ibm.dots.utils.FileLog;
 import com.ibm.dots.utils.StringUtils;
 import com.ibm.dots.utils.TimeUtils;
@@ -170,7 +171,7 @@ public enum ServerTaskManager implements TaskletService {
 	// }
 
 	private ServerTaskManager() {
-		System.out.println("Created new ServerTaskManager!");
+		// System.out.println("Created new ServerTaskManager!");
 	}
 
 	private void setRegistry(IExtensionRegistry registry) {
@@ -198,11 +199,21 @@ public enum ServerTaskManager implements TaskletService {
 	/**
 	 * @return
 	 */
-	private ITaskService getTriggeredThread() {
+	private ITaskService getGeneralTriggeredThread() {
 		if (triggeredThread == null) {
 			triggeredThread = new ServiceThread(threadGroup, TRIGGERED_THREAD);
 		}
 		return triggeredThread;
+	}
+
+	private final Map<String, ITaskService> triggerThreadMap_ = new HashMap<String, ITaskService>();
+
+	private ITaskService getNsfTriggerThread(String nsfPath) {
+		if (!triggerThreadMap_.containsKey(nsfPath)) {
+			ITaskService service = new ServiceThread(threadGroup, TRIGGERED_THREAD + " for " + nsfPath);
+			triggerThreadMap_.put(nsfPath, service);
+		}
+		return triggerThreadMap_.get(nsfPath);
 	}
 
 	/**
@@ -226,9 +237,9 @@ public enum ServerTaskManager implements TaskletService {
 	 * Start listening to changes in the registry
 	 */
 	public void start() {
-		trackExtensionPoint(EXTENSIONPOINT_ID);
-		trackExtensionPoint(ALIAS_EXTENSIONPOINT_ID);
-		trackExtensionPoint(MULTI_TASK_EXTENSIONPOINT_ID);
+		// trackExtensionPoint(EXTENSIONPOINT_ID);
+		// trackExtensionPoint(ALIAS_EXTENSIONPOINT_ID);
+		// trackExtensionPoint(MULTI_TASK_EXTENSIONPOINT_ID);
 	}
 
 	/**
@@ -312,6 +323,10 @@ public enum ServerTaskManager implements TaskletService {
 
 		if (triggeredThread != null) {
 			triggeredThread.dispose();
+		}
+
+		for (ITaskService service : triggerThreadMap_.values()) {
+			service.dispose();
 		}
 
 		if (bDisplayExitTrace) {
@@ -455,7 +470,7 @@ public enum ServerTaskManager implements TaskletService {
 						if (serverTask.isRunOnStart()) {
 							queueRun(getManualThread(), RunWhen.RunOnStart, serverTask, new String[0]);
 						} else {
-							// Check if RunOnStart annotation is set at the class level
+							// Check if RunStart annotation is set at the class level
 							RunOnStart ros = serverTask.getServerTaskRunnable().getClass().getAnnotation(RunOnStart.class);
 							if (ros != null) {
 								queueRun(getManualThread(), RunWhen.RunOnStart, serverTask, new String[0]);
@@ -532,7 +547,7 @@ public enum ServerTaskManager implements TaskletService {
 	public static ServerTaskManager createInstance(IExtensionRegistry registry) {
 		ServerTaskManager result = ServerTaskManager.INSTANCE;
 		if (!result.isRegistrySet()) {
-			result.setRegistry(registry);
+			// result.setRegistry(registry);
 		}
 		return result;
 	}
@@ -548,7 +563,7 @@ public enum ServerTaskManager implements TaskletService {
 	}
 
 	public boolean registerTriggerableTasks(int eventId, ServerTaskInfo task) {
-		System.out.println("Registering tasklet for event " + eventId + ": " + task.getDescription());
+		// System.out.println("Registering tasklet for event " + eventId + ": " + task.getDescription());
 		boolean result = false;
 		Set<ServerTaskInfo> set = null;
 		synchronized (triggerTaskMap) {
@@ -597,7 +612,7 @@ public enum ServerTaskManager implements TaskletService {
 
 				// Check if the task can be triggered by EM Event
 				if (serverTask.hasTriggerableAnnotatedMethods()) {
-					System.out.println("Task has triggerable methods " + serverTask.getDescription());
+					// System.out.println("Task has triggerable methods " + serverTask.getDescription());
 					int[] events = serverTask.getTriggeredEventIds();
 					if (events.length > 0) {
 						for (int event : events) {
@@ -664,7 +679,7 @@ public enum ServerTaskManager implements TaskletService {
 	public void registerEventQueue(int eventId) {
 		synchronized (eventQueueMap_) {
 			if (!eventQueueMap_.containsKey(eventId)) {
-				System.out.println("Creating new event queue for eventid " + eventId);
+				// System.out.println("Creating new event queue for eventid " + eventId);
 				Queue<IExtensionManagerEvent> queue = new ConcurrentLinkedQueue<IExtensionManagerEvent>();
 				eventQueueMap_.put(eventId, queue);
 			}
@@ -703,39 +718,59 @@ public enum ServerTaskManager implements TaskletService {
 		return result;
 	}
 
-	private void scheduleNextTrigger(ServerTaskInfo info, IExtensionManagerEvent event) {
+	public void scheduleNextTrigger(ServerTaskInfo info, IExtensionManagerEvent event) {
 		RunWhen rw = new RunWhen(event);
 		Method[] annotatedMethods = info.getTriggeredAnnotatedMethods(event);
 		for (Method annotatedMethod : annotatedMethods) {
 			rw.annotatedMethod = annotatedMethod;
-			queueRun(getTriggeredThread(), rw, info, new String[0]);
+			String triggerKey = null;
+			if (event instanceof AbstractEMEvent) {
+				triggerKey = ((AbstractEMEvent) event).getDbPath();
+			}
+			if (triggerKey == null) {
+				queueRun(getGeneralTriggeredThread(), rw, info, new String[0]);
+			} else {
+				queueRun(getNsfTriggerThread(triggerKey), rw, info, new String[0]);
+			}
 			// System.out.println("queued a run for " + annotatedMethod.getName() + " for an event of type " + event.getEventId());
 		}
 	}
 
+	private static final boolean THREADED_DISPATCH = false;
+
 	private void dispatchEvent(final int eventId) {
 		final Set<ServerTaskInfo> tasks = getTriggerableTasks(eventId);
 
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				synchronized (tasks) {
-					IExtensionManagerEvent curEvent = getQueuedEvent(eventId);
-					if (curEvent != null) {
-						for (ServerTaskInfo info : tasks) {
-							scheduleNextTrigger(info, curEvent);
+		if (THREADED_DISPATCH) {
+			if (tasks != null) {
+				Thread t = new Thread(new Runnable() {
+					@Override
+					public void run() {
+						synchronized (tasks) {
+							IExtensionManagerEvent curEvent = getQueuedEvent(eventId);
+							if (curEvent != null) {
+								for (ServerTaskInfo info : tasks) {
+									scheduleNextTrigger(info, curEvent);
+								}
+							} else {
+								// System.out.println("Attempted to dispatch an eventid of " + eventId
+								// + " but no event was found in the queue!");
+							}
 						}
-					} else {
-						System.out.println("Attempted to dispatch an eventid of " + eventId + " but no event was found in the queue!");
-					}
-				}
 
+					}
+				});
+				t.start();
 			}
-		});
-		if (tasks != null) {
-			t.start();
 		} else {
-			// System.out.println("No triggerable tasks for event " + eventId);
+			IExtensionManagerEvent curEvent = getQueuedEvent(eventId);
+			if (curEvent != null) {
+				for (ServerTaskInfo info : tasks) {
+					scheduleNextTrigger(info, curEvent);
+				}
+			} else {
+				// System.out.println("Attempted to dispatch an eventid of " + eventId + " but no event was found in the queue!");
+			}
 		}
 	}
 
@@ -744,29 +779,30 @@ public enum ServerTaskManager implements TaskletService {
 	 *            Called from the C side to process server adding commands
 	 */
 	public void processCommand(final String commandBuffer) {
+		TaskletManager.INSTANCE.processCommand(commandBuffer);
 		// Check if it's an extension manager event command
-		IExtensionManagerEvent emEvent = ExtensionManagerBridge.getEventFromCommand(commandBuffer);
-		if (emEvent != null) {
-			if (queueEvent(emEvent)) {
-				dispatchEvent(emEvent.getEventId());
-			}
-			return;
-		}
-		// Parse the commandBuffer
-		StringTokenizer st = new StringTokenizer(commandBuffer, " ");
-		ArrayList<String> args = new ArrayList<String>();
-		while (st.hasMoreTokens()) {
-			String arg = st.nextToken().trim();
-			if (!filterArg(arg)) {
-				args.add(arg);
-			}
-		}
-
-		if (commandBuffer != null && args.isEmpty()) {
-			// Must be from load command, don't process further
-			return;
-		}
-		_processCommand(args.toArray(new String[0]));
+		// IExtensionManagerEvent emEvent = ExtensionManagerBridge.getEventFromCommand(commandBuffer);
+		// if (emEvent != null) {
+		// if (queueEvent(emEvent)) {
+		// dispatchEvent(emEvent.getEventId());
+		// }
+		// return;
+		// }
+		// // Parse the commandBuffer
+		// StringTokenizer st = new StringTokenizer(commandBuffer, " ");
+		// ArrayList<String> args = new ArrayList<String>();
+		// while (st.hasMoreTokens()) {
+		// String arg = st.nextToken().trim();
+		// if (!filterArg(arg)) {
+		// args.add(arg);
+		// }
+		// }
+		//
+		// if (commandBuffer != null && args.isEmpty()) {
+		// // Must be from load command, don't process further
+		// return;
+		// }
+		// _processCommand(args.toArray(new String[0]));
 	}
 
 	/**

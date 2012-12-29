@@ -18,7 +18,7 @@
 <plugin>
    <extension
          point="com.ibm.dots.task">
-   <!--   <task
+     <task
             class="com.ibm.dots.samples.ScheduledTask"
             description="Scheduled Task"
             filter="com.ibm.dots.samples.ScheduledTaskFilter"
@@ -34,7 +34,7 @@
       <task id="com.ibm.dots.samples.sendMail" 
       	description="Sample task that send a summary email for all the databases available on the server. Options: [emailaddress]" 
       	class="com.ibm.dots.samples.SendMailExample"
-      	runOnStart="false"></task> -->
+      	runOnStart="false"></task> 
       <task id="com.ibm.dots.samples.triggered" 
       	description="Sample task triggered by Extension manager events" 
       	class="com.ibm.dots.samples.TriggeredExample"
@@ -46,7 +46,7 @@
       	description="Sample task showing tasklets defined by java annotation" 
       	class="com.ibm.dots.samples.AnnotatedTasklet">
       </task>
-   <!--   <task
+      <task
             class="com.ibm.dots.samples.RunOnStartTask"
             id="com.ibm.dots.samples.runOnStart"
             runOnStart="true">
@@ -64,9 +64,9 @@
                stopAt="3:00 PM"
                unit="minute">
          </run>
-      </task>-->
+      </task>
    </extension>
-   <!--
+   
    <extension
          point="com.ibm.dots.multitask">
       <multiTask
@@ -93,5 +93,5 @@
             id="com.ibm.dots.samples.argResolver">
       </argResolver>
    </extension>
-   -->
+   
 </plugin>

@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFNoteCipherExtractFileEvent extends AbstractEMEvent {
-	
+	private static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Noteid, DotsEventParams.Flag,
+			DotsEventParams.Itemname, DotsEventParams.Filename };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private long extractFlags;
 	private String itemName;
 	private String fileName;
@@ -32,18 +41,27 @@ public class NSFNoteCipherExtractFileEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFNoteCipherExtractFileEvent() {
+		super(IExtensionManagerEvent.EM_NSFNOTECIPHEREXTRACTFILE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%x,%x,%s,%s", szPathName, noteID, extractFlags, safeCharPtr( item_name ), safeCharPtr( fileName ) );
 		checkValues(values, 5);
-		setDbPath( values[0]);
-		setNoteId( values[1] );
-		setExtractFlags( Long.parseLong( values[2] ) );
-		setItemName( values[3] );
-		setFileName( values[4] );
+		setDbPath(values[0]);
+		setNoteId(values[1]);
+		setExtractFlags(Long.parseLong(values[2]));
+		setItemName(values[3]);
+		setFileName(values[4]);
 		return true;
 	}
 
@@ -55,7 +73,8 @@ public class NSFNoteCipherExtractFileEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param extractFlags the extractFlags to set
+	 * @param extractFlags
+	 *            the extractFlags to set
 	 */
 	private void setExtractFlags(long extractFlags) {
 		this.extractFlags = extractFlags;
@@ -69,7 +88,8 @@ public class NSFNoteCipherExtractFileEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param itemName the itemName to set
+	 * @param itemName
+	 *            the itemName to set
 	 */
 	private void setItemName(String itemName) {
 		this.itemName = itemName;
@@ -83,7 +103,8 @@ public class NSFNoteCipherExtractFileEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param fileName the fileName to set
+	 * @param fileName
+	 *            the fileName to set
 	 */
 	private void setFileName(String fileName) {
 		this.fileName = fileName;

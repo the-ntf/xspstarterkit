@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NIFOpenCollectionEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.DataDbpath, DotsEventParams.Noteid,
+			DotsEventParams.Flag };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private String dataDbPath;
 	private String viewNoteID;
 	private int openFlags;
@@ -32,19 +41,28 @@ public class NIFOpenCollectionEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NIFOpenCollectionEvent() {
+		super(IExtensionManagerEvent.EM_NIFOPENCOLLECTION);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
 	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
-		//sprintf( szBuffer, "%s,%s,%x,%x", szViewDBPathName, szDataDBPathName, viewNoteID, openFlags );
-		checkValues(values, 4 );
-		
-		setDbPath( values[0] );
-		setDataDbPath ( values[1] );
-		setViewNoteID( values[2] );
-		setOpenFlags( parseInt( values[3] ) );
-		
+		// sprintf( szBuffer, "%s,%s,%x,%x", szViewDBPathName, szDataDBPathName, viewNoteID, openFlags );
+		checkValues(values, 4);
+
+		setDbPath(values[0]);
+		setDataDbPath(values[1]);
+		setViewNoteID(values[2]);
+		setOpenFlags(parseInt(values[3]));
+
 		return true;
 	}
 
@@ -56,7 +74,8 @@ public class NIFOpenCollectionEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param dataDbPath the dataDbPath to set
+	 * @param dataDbPath
+	 *            the dataDbPath to set
 	 */
 	private void setDataDbPath(String dataDbPath) {
 		this.dataDbPath = dataDbPath;
@@ -70,7 +89,8 @@ public class NIFOpenCollectionEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param viewNoteID the viewNoteID to set
+	 * @param viewNoteID
+	 *            the viewNoteID to set
 	 */
 	private void setViewNoteID(String viewNoteID) {
 		this.viewNoteID = viewNoteID;
@@ -84,7 +104,8 @@ public class NIFOpenCollectionEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param openFlags the openFlags to set
+	 * @param openFlags
+	 *            the openFlags to set
 	 */
 	private void setOpenFlags(int openFlags) {
 		this.openFlags = openFlags;

@@ -15,11 +15,20 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFDbNoteUnlockEvent extends AbstractEMEvent {
+	private static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Noteid, DotsEventParams.Flag };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private long flags;
 
 	/**
@@ -29,19 +38,28 @@ public class NSFDbNoteUnlockEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFDbNoteUnlockEvent() {
+		super(IExtensionManagerEvent.EM_NSFDBNOTEUNLOCK);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%x,%x", szPathName, noteID, flags);
 		checkValues(values, 3);
-		setDbPath( values[0] );
-		setNoteId( values[1] );
-		setFlags( Long.parseLong( values[2] ) );
+		setDbPath(values[0]);
+		setNoteId(values[1]);
+		setFlags(Long.parseLong(values[2]));
 		return true;
 	}
-	
+
 	/**
 	 * @return the flags
 	 */
@@ -50,7 +68,8 @@ public class NSFDbNoteUnlockEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param flags the flags to set
+	 * @param flags
+	 *            the flags to set
 	 */
 	private void setFlags(long flags) {
 		this.flags = flags;

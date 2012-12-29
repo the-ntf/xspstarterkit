@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFDbCompactEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Options, DotsEventParams.SizeBefore,
+			DotsEventParams.SizeAfter };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private int compactOptions;
 	private long beforeSize;
 	private long afterSize;
@@ -32,18 +41,27 @@ public class NSFDbCompactEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFDbCompactEvent() {
+		super(IExtensionManagerEvent.EM_NSFDBCOMPACT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
 	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
-		//sprintf( szBuffer, "%s,%x,%x,%x", szPathName, options, retStats[0], retStats[1] );
+		// sprintf( szBuffer, "%s,%x,%x,%x", szPathName, options, retStats[0], retStats[1] );
 		checkValues(values, 4);
 
-		setDbPath( values[0] );
-		setCompactOptions( parseInt( values[1] ) );
-		setBeforeSize( parseLong( values[2] ) );
-		setAfterSize( parseLong( values[3] ) );
+		setDbPath(values[0]);
+		setCompactOptions(parseInt(values[1]));
+		setBeforeSize(parseLong(values[2]));
+		setAfterSize(parseLong(values[3]));
 		return true;
 	}
 
@@ -55,7 +73,8 @@ public class NSFDbCompactEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param compactOptions the compactOptions to set
+	 * @param compactOptions
+	 *            the compactOptions to set
 	 */
 	private void setCompactOptions(int compactOptions) {
 		this.compactOptions = compactOptions;
@@ -69,7 +88,8 @@ public class NSFDbCompactEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param beforeSize the beforeSize to set
+	 * @param beforeSize
+	 *            the beforeSize to set
 	 */
 	private void setBeforeSize(long beforeSize) {
 		this.beforeSize = beforeSize;
@@ -83,7 +103,8 @@ public class NSFDbCompactEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param afterSize the afterSize to set
+	 * @param afterSize
+	 *            the afterSize to set
 	 */
 	private void setAfterSize(long afterSize) {
 		this.afterSize = afterSize;

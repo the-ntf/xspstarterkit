@@ -15,11 +15,19 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class UnknownEMEvent implements IExtensionManagerEvent {
+	public static DotsEventParams[] params = {};
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
 
 	/**
 	 * 
@@ -27,9 +35,12 @@ public class UnknownEMEvent implements IExtensionManagerEvent {
 	public UnknownEMEvent() {
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.IExtensionManagerEvent#getEventId()
 	 */
+	@Override
 	public int getEventId() {
 		return 0;
 	}

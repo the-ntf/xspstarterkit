@@ -17,6 +17,10 @@ Export-Package: com.ibm.dots.annotation,
  com.ibm.dots.session,
  com.ibm.dots.startup,
  com.ibm.dots.task,
+ com.ibm.dots.tasklet,
+ com.ibm.dots.tasklet.events,
+ com.ibm.dots.tasklet.events.exception,
+ com.ibm.dots.thread,
  com.ibm.dots.utils
 Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.osgi

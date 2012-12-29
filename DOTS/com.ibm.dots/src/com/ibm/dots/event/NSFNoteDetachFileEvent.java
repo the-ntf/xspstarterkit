@@ -15,12 +15,20 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFNoteDetachFileEvent extends AbstractEMEvent {
-	
+	private static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Noteid, DotsEventParams.Filename };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private String fileName;
 
 	/**
@@ -30,26 +38,35 @@ public class NSFNoteDetachFileEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFNoteDetachFileEvent() {
+		super(IExtensionManagerEvent.EM_NSFNOTEDETACHFILE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
 	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%x,%s", szPathName, noteID, item_name );
 		checkValues(values, 3);
-		setDbPath( values[0] );
-		setNoteId( values[1] );
-		setFileName( values[2] );
+		setDbPath(values[0]);
+		setNoteId(values[1]);
+		setFileName(values[2]);
 		return true;
 	}
-	
+
 	/**
 	 * @param fileName
 	 */
 	private void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	
+
 	/**
 	 * @return
 	 */

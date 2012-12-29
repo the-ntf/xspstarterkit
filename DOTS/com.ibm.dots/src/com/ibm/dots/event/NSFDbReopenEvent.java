@@ -15,11 +15,19 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFDbReopenEvent extends AbstractEMEvent {
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
 
 	/**
 	 * @param eventId
@@ -28,14 +36,23 @@ public class NSFDbReopenEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFDbReopenEvent() {
+		super(IExtensionManagerEvent.EM_NSFDBREOPEN);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s", szPathName );
-		checkValues( values, 1 );
-		setDbPath( values[0] );
+		checkValues(values, 1);
+		setDbPath(values[0]);
 		return true;
 	}
 

@@ -15,12 +15,20 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class SMTPDisconnectEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SessionId };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private long sessionID;
 
 	/**
@@ -30,24 +38,33 @@ public class SMTPDisconnectEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public SMTPDisconnectEvent() {
+		super(IExtensionManagerEvent.EM_SMTPDISCONNECT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%x", sessionID);
 		checkValues(values, 1);
-		setSessionID( Long.parseLong( values[0] ) );
+		setSessionID(Long.parseLong(values[0]));
 		return true;
 	}
-	
+
 	/**
 	 * @param sessionID
 	 */
 	private void setSessionID(long sessionID) {
 		this.sessionID = sessionID;
 	}
-	
+
 	/**
 	 * @return
 	 */

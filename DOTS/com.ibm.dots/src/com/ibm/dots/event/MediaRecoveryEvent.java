@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class MediaRecoveryEvent extends AbstractEMEvent {
-	
+	private static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Noteid, DotsEventParams.Insert,
+			DotsEventParams.Update, DotsEventParams.Delete };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private boolean isInsert;
 	private boolean isUpdate;
 	private boolean isDelete;
@@ -32,18 +41,27 @@ public class MediaRecoveryEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public MediaRecoveryEvent() {
+		super(IExtensionManagerEvent.EM_MEDIARECOVERY_NOTE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%x,%x,%x,%x", szPathName, noteID, isInsert, isUpdate, isDelete );
 		checkValues(values, 5);
-		setDbPath( values[0] );
-		setNoteId( values[1] );		
-		setInsert( Boolean.parseBoolean( values[2] ) ) ;
-		setUpdate( Boolean.parseBoolean( values[3] ) ) ;
-		setDelete( Boolean.parseBoolean( values[4] ) ) ;
+		setDbPath(values[0]);
+		setNoteId(values[1]);
+		setInsert(Boolean.parseBoolean(values[2]));
+		setUpdate(Boolean.parseBoolean(values[3]));
+		setDelete(Boolean.parseBoolean(values[4]));
 		return true;
 	}
 
@@ -55,7 +73,8 @@ public class MediaRecoveryEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param isInsert the isInsert to set
+	 * @param isInsert
+	 *            the isInsert to set
 	 */
 	private void setInsert(boolean isInsert) {
 		this.isInsert = isInsert;
@@ -69,7 +88,8 @@ public class MediaRecoveryEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param isUpdate the isUpdate to set
+	 * @param isUpdate
+	 *            the isUpdate to set
 	 */
 	private void setUpdate(boolean isUpdate) {
 		this.isUpdate = isUpdate;
@@ -83,7 +103,8 @@ public class MediaRecoveryEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param isDelete the isDelete to set
+	 * @param isDelete
+	 *            the isDelete to set
 	 */
 	private void setDelete(boolean isDelete) {
 		this.isDelete = isDelete;

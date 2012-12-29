@@ -15,11 +15,19 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFNoteDeleteEvent extends AbstractEMEvent {
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Noteid, DotsEventParams.Flag };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
 
 	private int flag;
 
@@ -30,26 +38,35 @@ public class NSFNoteDeleteEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFNoteDeleteEvent() {
+		super(IExtensionManagerEvent.EM_NSFNOTEDELETE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
 	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		checkValues(values, 3);
-		setDbPath( values[0] );
-		setNoteId( values[1] );
-		setFlag( values[2] );
-		
+		setDbPath(values[0]);
+		setNoteId(values[1]);
+		setFlag(values[2]);
+
 		return true;
 	}
 
 	/**
 	 * @param flag
 	 */
-	private void setFlag(String flag ) {
-		this.flag = parseInt( flag );
+	private void setFlag(String flag) {
+		this.flag = parseInt(flag);
 	}
-	
+
 	/**
 	 * @return
 	 */

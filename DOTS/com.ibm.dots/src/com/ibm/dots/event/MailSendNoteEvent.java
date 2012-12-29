@@ -15,12 +15,20 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class MailSendNoteEvent extends AbstractEMEvent {
-	
+	private static DotsEventParams[] params = { DotsEventParams.From, DotsEventParams.Flag };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private String from;
 	private int flags;
 
@@ -31,39 +39,48 @@ public class MailSendNoteEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public MailSendNoteEvent() {
+		super(IExtensionManagerEvent.EM_MAILSENDNOTE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)	throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%x", szFrom, flags );
-		checkValues(values, 2 );
-		setFrom( values[0] );
-		setFlags( parseInt( values[1] ) );
+		checkValues(values, 2);
+		setFrom(values[0]);
+		setFlags(parseInt(values[1]));
 		return true;
 	}
-	
+
 	/**
 	 * @param from
 	 */
 	private void setFrom(String from) {
 		this.from = from;
 	}
-	
+
 	/**
 	 * @param flags
 	 */
 	private void setFlags(int flags) {
 		this.flags = flags;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public String getFrom() {
 		return from;
 	}
-	
+
 	/**
 	 * @return
 	 */

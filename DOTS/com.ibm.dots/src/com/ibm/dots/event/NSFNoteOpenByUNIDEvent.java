@@ -15,12 +15,20 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFNoteOpenByUNIDEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Unid, DotsEventParams.Flag };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private String unid;
 	private int openFlag;
 
@@ -31,41 +39,51 @@ public class NSFNoteOpenByUNIDEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFNoteOpenByUNIDEvent() {
+		super(IExtensionManagerEvent.EM_NSFNOTEOPENBYUNID);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
 	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
-		//sprintf( szBuffer, "%s,%x%x%x%x,%x", szPathName, pUNID->File.Innards[0], pUNID->File.Innards[1], pUNID->Note.Innards[0], pUNID->Note.Innards[1], openFlags);
+		// sprintf( szBuffer, "%s,%x%x%x%x,%x", szPathName, pUNID->File.Innards[0], pUNID->File.Innards[1], pUNID->Note.Innards[0],
+		// pUNID->Note.Innards[1], openFlags);
 		checkValues(values, 6);
-		
-		setDbPath( values[0] );
-		setUnid( values[1]+values[2]+values[3]+values[4] );
-		setOpenFlag( parseInt( values[5] ) );
+
+		setDbPath(values[0]);
+		setUnid(values[1] + values[2] + values[3] + values[4]);
+		setOpenFlag(parseInt(values[5]));
 		return true;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public String getUnid() {
 		return unid;
 	}
-	
+
 	/**
 	 * @param unid
 	 */
 	public void setUnid(String unid) {
 		this.unid = unid;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public int getOpenFlag() {
 		return openFlag;
 	}
-	
+
 	/**
 	 * @param openFlag
 	 */

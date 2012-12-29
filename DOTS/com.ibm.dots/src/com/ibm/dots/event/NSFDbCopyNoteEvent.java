@@ -15,12 +15,20 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFDbCopyNoteEvent extends AbstractEMEvent {
-	
+	private static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Noteid, DotsEventParams.DestDbpath };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private String destPathName;
 
 	/**
@@ -30,26 +38,35 @@ public class NSFDbCopyNoteEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFDbCopyNoteEvent() {
+		super(IExtensionManagerEvent.EM_NSFDBCOPYNOTE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)	throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%x,%s", szSrcPathName, srcNoteID, szDestPathName );
 		checkValues(values, 3);
-		setDbPath( values[0] );
-		setNoteId( values[1] );
-		setDestPathName( values[2] );
+		setDbPath(values[0]);
+		setNoteId(values[1]);
+		setDestPathName(values[2]);
 		return true;
 	}
-	
+
 	/**
 	 * @param destPathName
 	 */
 	private void setDestPathName(String destPathName) {
 		this.destPathName = destPathName;
 	}
-	
+
 	/**
 	 * @return
 	 */

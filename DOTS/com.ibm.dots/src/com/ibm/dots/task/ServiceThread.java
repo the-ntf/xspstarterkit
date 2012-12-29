@@ -34,7 +34,6 @@ import com.ibm.dots.event.ExtensionManagerBridge;
 import com.ibm.dots.event.IExtensionManagerEvent;
 import com.ibm.dots.internal.ServerTaskProgressMonitor;
 import com.ibm.dots.task.ServerTaskManager.ITaskService;
-import com.ibm.dots.utils.NotesUtils;
 import com.ibm.dots.utils.ThreadMonitor;
 
 /**
@@ -42,6 +41,52 @@ import com.ibm.dots.utils.ThreadMonitor;
  * 
  */
 class ServiceThread extends Thread implements ITaskService {
+	static class LocalSession extends ThreadLocal<Session> {
+		private boolean isCleared = false;
+
+		@Override
+		protected Session initialValue() {
+			Session result = null;
+			if (!isCleared) {
+				try {
+					result = NotesFactory.createTrustedSession();
+				} catch (Throwable t) {
+					t.printStackTrace();
+				}
+			}
+			return result;
+		};
+
+		public void recycle() {
+			try {
+				super.get().recycle();
+			} catch (Throwable t) {
+				// t.printStackTrace();
+			}
+		}
+
+		public void clear() {
+			// System.out.println("Clearing a thread local session object...");
+			isCleared = true;
+			recycle();
+			super.set(null);
+		}
+
+		@Override
+		public Session get() {
+			if (super.get() == null) {
+				try {
+					super.set(NotesFactory.createTrustedSession());
+					// System.out.println("Created a new trusted session in thread local!");
+				} catch (Throwable t) {
+					t.printStackTrace();
+				}
+			}
+			return super.get();
+		}
+	}
+
+	private static LocalSession localSession = new LocalSession();
 
 	private Object sleepMonitor = new Object(); // Monitor the sleeping of the thread
 	// private volatile boolean bRunning = false; //indicate that the Thread is currently running
@@ -175,7 +220,7 @@ class ServiceThread extends Thread implements ITaskService {
 						// This is a em triggered tasklet
 						Class<?> emEventClass = ExtensionManagerBridge.getEMEventClass(emEvent);
 						if (emEventClass == null) {
-							System.out.println("Unable to find emEventClass from emEvent " + emEvent.getEventId());
+							// System.out.println("Unable to find emEventClass from emEvent " + emEvent.getEventId());
 						} else {
 							if (Arrays.equals(runWhen.annotatedMethod.getParameterTypes(), new Class<?>[] { emEventClass,
 									IProgressMonitor.class })) {
@@ -185,8 +230,8 @@ class ServiceThread extends Thread implements ITaskService {
 								for (Class c : runWhen.annotatedMethod.getParameterTypes()) {
 									sb.append("Class " + c.getName());
 								}
-								System.out.println("Method " + runWhen.annotatedMethod.getName() + " has wrong param signature. "
-										+ sb.toString() + " when we have a " + emEventClass.getName());
+								// System.out.println("Method " + runWhen.annotatedMethod.getName() + " has wrong param signature. "
+								// + sb.toString() + " when we have a " + emEventClass.getName());
 							}
 						}
 					}
@@ -196,6 +241,9 @@ class ServiceThread extends Thread implements ITaskService {
 				e.printStackTrace();
 			} finally {
 				progressMonitor = null;
+				if (taskRunnable instanceof AbstractServerTask) {
+					((AbstractServerTask) taskRunnable).clearSession();
+				}
 				// System.out.println("Completed running a tasklet " + serverTaskInfo);
 			}
 		}
@@ -282,24 +330,25 @@ class ServiceThread extends Thread implements ITaskService {
 		super.start();
 	}
 
+	private Session getSession() {
+		return localSession.get();
+	}
+
 	@Override
 	public void run() {
 		// Initialize the thread
 		NotesThread.sinitThread();
 		// bRunning = true;
 
-		Session session = null;
-
 		try {
 			// Create a session for the duration of this thread
-			session = NotesFactory.createTrustedSession();
 
 			// Main loop
 			while (keepAlive()) {
 				ServiceTask task = this.getNextTask();
 				while (task != null) {
 					try {
-						task.run(session);
+						task.run(getSession());
 						// Yield to other threads
 						Thread.yield();
 					} catch (Throwable t) {
@@ -311,6 +360,7 @@ class ServiceThread extends Thread implements ITaskService {
 					task = this.getNextTask();
 				}
 
+				localSession.clear();
 				if (keepAlive()) {
 					try {
 						synchronized (sleepMonitor) {
@@ -336,8 +386,7 @@ class ServiceThread extends Thread implements ITaskService {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		} finally {
-			NotesUtils.recycle(session);
-			session = null;
+			localSession.clear();
 
 			NotesThread.stermThread();
 
@@ -421,7 +470,8 @@ class ServiceThread extends Thread implements ITaskService {
 		// //already stopped, nothing to do
 		// return;
 		// }
-		System.out.println("Disposing of thread " + Thread.currentThread().getName());
+		System.out.println("Disposing of thread " + getName());
+		localSession.clear();
 		shouldStop = true;
 
 		// Cancel the current task if any

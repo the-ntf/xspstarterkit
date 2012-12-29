@@ -35,8 +35,8 @@ import com.ibm.dots.internal.ServerTaskProgressProvider;
 import com.ibm.dots.internal.preferences.DominoOSGiPreferences;
 import com.ibm.dots.internal.preferences.DominoOSGiScope;
 import com.ibm.dots.internal.preferences.RunInitConfigurationsJob;
-import com.ibm.dots.task.AliasTaskInfo;
 import com.ibm.dots.task.ServerTaskManager;
+import com.ibm.dots.tasklet.TaskletManager;
 
 public class Activator extends Plugin implements ServiceTrackerCustomizer, CommandProvider {
 	public static final String PLUGIN_ID = "com.ibm.dots"; // $NON-NLS-1$
@@ -81,6 +81,7 @@ public class Activator extends Plugin implements ServiceTrackerCustomizer, Comma
 	@Override
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
+		TaskletManager.INSTANCE.teardown();
 
 		if (commandProviderSvcReg != null) {
 			commandProviderSvcReg.unregister();
@@ -119,6 +120,7 @@ public class Activator extends Plugin implements ServiceTrackerCustomizer, Comma
 
 			// Init the ServerTaskManager
 			ServerTaskManager.createInstance(registry).start();
+			TaskletManager.INSTANCE.setup(registry);
 
 			// start the early startup job
 			new RunEarlyStartupExtensionJob(registry).schedule();
@@ -172,24 +174,24 @@ public class Activator extends Plugin implements ServiceTrackerCustomizer, Comma
 		while ((arg = ci.nextArgument()) != null) {
 			taskArgs.add(arg);
 		}
-		ServerTaskManager.getInstance().runTask(ci, taskId, taskArgs.toArray(new String[0]));
+		// ServerTaskManager.getInstance().runTask(ci, taskId, taskArgs.toArray(new String[0]));
 	}
 
 	/**
 	 * @param ci
 	 */
 	public void _aliases(CommandInterpreter ci) {
-		AliasTaskInfo[] aliases = ServerTaskManager.getInstance().getAliases();
-		for (AliasTaskInfo alias : aliases) {
-			ci.print(alias);
-		}
+		// AliasTaskInfo[] aliases = ServerTaskManager.getInstance().getAliases();
+		// for (AliasTaskInfo alias : aliases) {
+		// ci.print(alias);
+		// }
 	}
 
 	/**
 	 * @param ci
 	 */
 	public void _tasklist(CommandInterpreter ci) {
-		ServerTaskManager.getInstance().displayTaskList(ci);
+		// ServerTaskManager.getInstance().displayTaskList(ci);
 	}
 
 	/**
@@ -200,7 +202,7 @@ public class Activator extends Plugin implements ServiceTrackerCustomizer, Comma
 		if (taskId == null) {
 			ci.print("Missing task id");
 		} else {
-			ServerTaskManager.getInstance().displayTaskInfo(ci, taskId);
+			// ServerTaskManager.getInstance().displayTaskInfo(ci, taskId);
 		}
 	}
 
@@ -209,7 +211,7 @@ public class Activator extends Plugin implements ServiceTrackerCustomizer, Comma
 	 */
 	public void _taskstatus(CommandInterpreter ci) {
 		ci.print("Display the list of OSGi tasklets currently in progress");
-		ServerTaskManager.getInstance().displayStatus(ci);
+		// ServerTaskManager.getInstance().displayStatus(ci);
 	}
 
 	/**
@@ -219,10 +221,10 @@ public class Activator extends Plugin implements ServiceTrackerCustomizer, Comma
 		String nextArg = ci.nextArgument();
 		if (nextArg == null) {
 			ci.print("Canceling all running tasks...");
-			ServerTaskManager.getInstance().cancelAllTasks(ci);
+			// ServerTaskManager.getInstance().cancelAllTasks(ci);
 		} else {
 			ci.print(MessageFormat.format("Canceling task {0}...", nextArg));
-			ServerTaskManager.getInstance().cancelTask(nextArg, ci);
+			// ServerTaskManager.getInstance().cancelTask(nextArg, ci);
 		}
 	}
 

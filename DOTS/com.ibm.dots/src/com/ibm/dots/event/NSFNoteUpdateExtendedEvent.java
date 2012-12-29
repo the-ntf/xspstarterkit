@@ -15,13 +15,25 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFNoteUpdateExtendedEvent extends AbstractEMEvent {
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Noteid, DotsEventParams.Flag };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
 
 	private int updateFlag;
+
+	public NSFNoteUpdateExtendedEvent() {
+		super(IExtensionManagerEvent.EM_NSFNOTEUPDATEXTENDED);
+	}
 
 	/**
 	 * @param eventId
@@ -29,25 +41,28 @@ public class NSFNoteUpdateExtendedEvent extends AbstractEMEvent {
 	public NSFNoteUpdateExtendedEvent(int eventId) {
 		super(eventId);
 	}
-	
+
 	@Override
 	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		checkValues(values, 3);
-		
-		setDbPath( values[0] );
-		setNoteId( values[1] );
-		setFlag( values[2] );
-		
+
+		setDbPath(values[0]);
+		setNoteId(values[1]);
+		setFlag(values[2]);
+		if (values.length > 3) {
+			setUsername(values[3]);
+		}
+
 		return true;
 	}
 
 	/**
 	 * @param sFlag
 	 */
-	private void setFlag(String sFlag ) {
-		this.updateFlag = parseInt( sFlag );
+	private void setFlag(String sFlag) {
+		this.updateFlag = parseInt(sFlag);
 	}
-	
+
 	/**
 	 * @return
 	 */

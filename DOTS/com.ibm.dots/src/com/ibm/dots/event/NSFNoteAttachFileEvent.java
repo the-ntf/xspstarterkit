@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFNoteAttachFileEvent extends AbstractEMEvent {
-	
+	private static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Noteid, DotsEventParams.Filename,
+			DotsEventParams.OriginalFilename, DotsEventParams.EncodingType };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private String fileName;
 	private String orgFileName;
 	private int encodingType;
@@ -32,18 +41,27 @@ public class NSFNoteAttachFileEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFNoteAttachFileEvent() {
+		super(IExtensionManagerEvent.EM_NSFNOTEATTACHFILE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)	throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%x,%s,%s,%x", szPathName, noteID,file_name, orgPathName, encodingType );
 		checkValues(values, 5);
-		setDbPath( values[0] );
-		setNoteId( values[1] );
-		setFileName( values[2] );
-		setOrgFileName( values[3] );
-		setEncodingType( parseInt( values[4] ) );
+		setDbPath(values[0]);
+		setNoteId(values[1]);
+		setFileName(values[2]);
+		setOrgFileName(values[3]);
+		setEncodingType(parseInt(values[4]));
 		return true;
 	}
 
@@ -55,7 +73,8 @@ public class NSFNoteAttachFileEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param fileName the fileName to set
+	 * @param fileName
+	 *            the fileName to set
 	 */
 	private void setFileName(String fileName) {
 		this.fileName = fileName;
@@ -69,7 +88,8 @@ public class NSFNoteAttachFileEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param orgFileName the orgFileName to set
+	 * @param orgFileName
+	 *            the orgFileName to set
 	 */
 	private void setOrgFileName(String orgFileName) {
 		this.orgFileName = orgFileName;
@@ -83,7 +103,8 @@ public class NSFNoteAttachFileEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param encodingType the encodingType to set
+	 * @param encodingType
+	 *            the encodingType to set
 	 */
 	private void setEncodingType(int encodingType) {
 		this.encodingType = encodingType;

@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFNoteOpenExtendedEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.Noteid, DotsEventParams.Flag,
+			DotsEventParams.SinceSeqNum };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private long flags;
 	private long sinceSeqNum;
 
@@ -31,17 +40,26 @@ public class NSFNoteOpenExtendedEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+ * 
+ */
+	public NSFNoteOpenExtendedEvent() {
+		super(IExtensionManagerEvent.EM_NSFNOTEOPENEXTENDED);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%x,%x,%x", szPathName, noteid, flags, sinceSeqNum );
 		checkValues(values, 4);
-		setDbPath( values[0] );
-		setNoteId( values[1] );
-		setFlags( Long.parseLong( values[2] ) );
-		setSinceSeqNum( Long.parseLong( values[3] ) );
+		setDbPath(values[0]);
+		setNoteId(values[1]);
+		setFlags(Long.parseLong(values[2]));
+		setSinceSeqNum(Long.parseLong(values[3]));
 		return true;
 	}
 
@@ -51,21 +69,21 @@ public class NSFNoteOpenExtendedEvent extends AbstractEMEvent {
 	private void setFlags(long flags) {
 		this.flags = flags;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public long getFlags() {
 		return flags;
 	}
-	
+
 	/**
 	 * @param sinceSeqNum
 	 */
 	private void setSinceSeqNum(long sinceSeqNum) {
 		this.sinceSeqNum = sinceSeqNum;
 	}
-	
+
 	/**
 	 * @return
 	 */

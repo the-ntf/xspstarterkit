@@ -15,12 +15,21 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFAddToFolderEvent extends AbstractEMEvent {
-	
+	private static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.DataDbpath, DotsEventParams.FolderNoteid,
+			DotsEventParams.Noteid, DotsEventParams.AddOperation };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private String dataDbPath;
 	private String folderNoteID;
 	private String noteID;
@@ -33,18 +42,27 @@ public class NSFAddToFolderEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFAddToFolderEvent() {
+		super(IExtensionManagerEvent.EM_NSFADDTOFOLDER);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
-		//sprintf( szBuffer, "%s,%s,%x,%x,%x", szViewDbPathName, szDataDbPathName, folderNoteID, noteID, isAddOperation );
-		checkValues( values, 5 );
-		setDbPath( values[0] );
-		setDataDbPath( values[1] );
-		setFolderNoteID( values[2] );
-		setNoteID( values[3] );
-		setAddOperation( Boolean.parseBoolean( values[4] ) );
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
+		// sprintf( szBuffer, "%s,%s,%x,%x,%x", szViewDbPathName, szDataDbPathName, folderNoteID, noteID, isAddOperation );
+		checkValues(values, 5);
+		setDbPath(values[0]);
+		setDataDbPath(values[1]);
+		setFolderNoteID(values[2]);
+		setNoteID(values[3]);
+		setAddOperation(Boolean.parseBoolean(values[4]));
 		return true;
 	}
 
@@ -56,7 +74,8 @@ public class NSFAddToFolderEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param dataDbPath the dataDbPath to set
+	 * @param dataDbPath
+	 *            the dataDbPath to set
 	 */
 	private void setDataDbPath(String dataDbPath) {
 		this.dataDbPath = dataDbPath;
@@ -70,7 +89,8 @@ public class NSFAddToFolderEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param folderNoteID the folderNoteID to set
+	 * @param folderNoteID
+	 *            the folderNoteID to set
 	 */
 	private void setFolderNoteID(String folderNoteID) {
 		this.folderNoteID = folderNoteID;
@@ -84,7 +104,8 @@ public class NSFAddToFolderEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param noteID the noteID to set
+	 * @param noteID
+	 *            the noteID to set
 	 */
 	private void setNoteID(String noteID) {
 		this.noteID = noteID;
@@ -98,7 +119,8 @@ public class NSFAddToFolderEvent extends AbstractEMEvent {
 	}
 
 	/**
-	 * @param isAddOperation the isAddOperation to set
+	 * @param isAddOperation
+	 *            the isAddOperation to set
 	 */
 	private void setAddOperation(boolean isAddOperation) {
 		this.isAddOperation = isAddOperation;

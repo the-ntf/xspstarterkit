@@ -15,12 +15,20 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFDbDeleteNotesEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.SourceDbpath, DotsEventParams.DocsCount };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private int count;
 
 	/**
@@ -30,26 +38,35 @@ public class NSFDbDeleteNotesEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFDbDeleteNotesEvent() {
+		super(IExtensionManagerEvent.EM_NSFDBDELETENOTES);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
 	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
-		//sprintf( szBuffer, "%s,%x", szPathName, entriesCount );
+		// sprintf( szBuffer, "%s,%x", szPathName, entriesCount );
 		checkValues(values, 2);
 
-		setDbPath( values[0] );
-		setCount( parseInt( values[1] ) );
+		setDbPath(values[0]);
+		setCount(parseInt(values[1]));
 		return true;
 	}
-	
+
 	/**
 	 * @param count
 	 */
 	private void setCount(int count) {
 		this.count = count;
 	}
-	
+
 	/**
 	 * @return
 	 */

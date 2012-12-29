@@ -15,12 +15,20 @@
  */
 package com.ibm.dots.event;
 
+import com.ibm.dots.tasklet.events.DotsEventParams;
+
 /**
  * @author dtaieb
- *
+ * 
  */
 public class NSFDbRenameEvent extends AbstractEMEvent {
-	
+	public static DotsEventParams[] params = { DotsEventParams.FromName, DotsEventParams.ToName };
+
+	@Override
+	public DotsEventParams[] getParams() {
+		return params;
+	}
+
 	private String toPath;
 
 	/**
@@ -30,26 +38,35 @@ public class NSFDbRenameEvent extends AbstractEMEvent {
 		super(eventId);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * 
+	 */
+	public NSFDbRenameEvent() {
+		super(IExtensionManagerEvent.EM_NSFDBRENAME);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ibm.dots.event.AbstractEMEvent#parseEventBuffer(java.lang.String[])
 	 */
 	@Override
-	protected boolean parseEventBuffer(String[] values)throws InvalidEventException {
+	protected boolean parseEventBuffer(String[] values) throws InvalidEventException {
 		// sprintf( szBuffer, "%s,%s", from, to );
 		checkValues(values, 2);
-		
-		setDbPath( values[0] );
-		setToPath( values[1] );
+
+		setDbPath(values[0]);
+		setToPath(values[1]);
 		return true;
 	}
-	
+
 	/**
 	 * @param toPath
 	 */
 	private void setToPath(String toPath) {
 		this.toPath = toPath;
 	}
-	
+
 	/**
 	 * @return
 	 */
