@@ -48,10 +48,24 @@ public abstract class AbstractTasklet implements Observer, IExecutableExtension 
 		@Override
 		public void run() {
 			try {
-				method_.invoke(tasklet_, (Object[]) null);
+				method_.invoke(tasklet_, (Object) null);
 			} catch (Throwable t) {
+				logMethod();
 				t.printStackTrace();
 			}
+		}
+
+		public void logMethod() {
+			StringBuilder sb = new StringBuilder();
+			sb.append(method_.getName());
+			sb.append(": ");
+			Class<?>[] params = method_.getParameterTypes();
+			for (Class<?> param : params) {
+				sb.append(param.getSimpleName());
+				sb.append(",");
+			}
+
+			System.out.println(sb.toString());
 		}
 	}
 
@@ -99,9 +113,10 @@ public abstract class AbstractTasklet implements Observer, IExecutableExtension 
 		@Override
 		public void run() {
 			try {
-				method_.invoke(tasklet_, (Object[]) null);
+				method_.invoke(tasklet_, (Object) null);
 			} catch (Throwable t) {
-				t.printStackTrace();
+				logMethod();
+				// t.printStackTrace();
 			}
 		}
 
@@ -127,6 +142,19 @@ public abstract class AbstractTasklet implements Observer, IExecutableExtension 
 
 		public TimeUnit getUnit() {
 			return unit_;
+		}
+
+		public void logMethod() {
+			StringBuilder sb = new StringBuilder();
+			sb.append(method_.getName());
+			sb.append(": ");
+			Class<?>[] params = method_.getParameterTypes();
+			for (Class<?> param : params) {
+				sb.append(param.getSimpleName());
+				sb.append(",");
+			}
+
+			System.out.println(sb.toString());
 		}
 	}
 

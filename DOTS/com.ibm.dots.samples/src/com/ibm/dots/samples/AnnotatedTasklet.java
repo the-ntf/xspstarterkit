@@ -30,6 +30,7 @@ import lotus.domino.Session;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import com.ibm.dots.annotation.Run;
+import com.ibm.dots.annotation.RunOnStart;
 import com.ibm.dots.annotation.Triggered;
 import com.ibm.dots.event.IExtensionManagerEvent;
 import com.ibm.dots.tasklet.AbstractTasklet;
@@ -69,10 +70,10 @@ public class AnnotatedTasklet extends AbstractTasklet {
 	public void dispose() throws NotesException {
 	}
 
-	// @RunOnStart
-	// public void runOnStart(IProgressMonitor monitor) {
-	// logMessage("Annotated onStart method");
-	// }
+	@RunOnStart
+	public void runOnStart(IProgressMonitor monitor) {
+		logMessage("Annotated onStart method");
+	}
 
 	@Run(id = "manual")
 	public void runManual(String[] args, IProgressMonitor monitor) {

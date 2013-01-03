@@ -14,7 +14,7 @@ import com.ibm.dots.tasklet.events.DotsEvent;
  * 
  */
 public class Intimidator extends ThreadPoolExecutor {
-	private static final int DEFAULT_MAX_QUEUE = 20000;
+	private static final int DEFAULT_MAX_QUEUE = 500;
 	public static int FORCED_MAX_QUEUE = 0;
 
 	/**

@@ -17,7 +17,13 @@ public class Guardian extends ScheduledThreadPoolExecutor {
 	 */
 	public Guardian(int corePoolSize) {
 		super(corePoolSize, new SessionThreadFactory());
-		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void shutdown() {
+		System.out.println("Beginning shutdown of Guardian...");
+		((SessionThreadFactory) getThreadFactory()).cleanup();
+		super.shutdown();
 	}
 
 }

@@ -126,7 +126,7 @@ public enum TaskletManager implements TaskletService {
 					Set<RunSchedule> schedules = tasklet.getSchedules();
 					if (schedules != null && !schedules.isEmpty()) {
 						for (RunSchedule sched : schedules) {
-							// scheduleExecutor_.scheduleAtFixedRate(sched, 0, sched.getEvery(), sched.getUnit());
+							scheduleExecutor_.scheduleAtFixedRate(sched, 0, sched.getEvery(), sched.getUnit());
 						}
 					}
 					Set<Integer> events = tasklet.getAllTriggerEvents();
@@ -223,7 +223,7 @@ public enum TaskletManager implements TaskletService {
 	public void setup(IExtensionRegistry registry) {
 		setRegistry(registry);
 
-		// scheduleExecutor_ = new Guardian(getFixedScheduleThreads());
+		scheduleExecutor_ = new Guardian(getFixedScheduleThreads());
 		// triggerExecutor_ = Executors.newFixedThreadPool(2, new SessionThreadFactory());
 		// if (triggerExecutor_ instanceof ThreadPoolExecutor) {
 		// ThreadPoolExecutor exec = (ThreadPoolExecutor) triggerExecutor_;
