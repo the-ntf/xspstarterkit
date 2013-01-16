@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xmltools Wrapper
+Bundle-SymbolicName: org.openntf.rome;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Red Pill Development
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: com.ibm.commons.util,
+ com.ibm.xsp.library,
+ com.ibm.xsp.model.domino,
+ org.eclipse.core.runtime,
+ org.jdom2,
+ org.osgi.framework
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Bundle-Activator: org.openntf.rome.Activator
+Export-Package: com.sun.syndication.feed,
+ com.sun.syndication.feed.atom,
+ com.sun.syndication.feed.impl,
+ com.sun.syndication.feed.module,
+ com.sun.syndication.feed.module.impl,
+ com.sun.syndication.feed.rss,
+ com.sun.syndication.feed.synd,
+ com.sun.syndication.feed.synd.impl,
+ com.sun.syndication.io,
+ com.sun.syndication.io.impl,
+ org.openntf.rome
