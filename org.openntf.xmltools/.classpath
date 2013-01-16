@@ -3,30 +3,30 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="lib/dom4j-1.6.1/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="lib/jaxen-1.1.4/jaxen-1.1.4.jar"/>
-	<classpathentry kind="lib" path="lib/jdom-2.0.2/jdom-2.0.2-contrib.jar"/>
-	<classpathentry kind="lib" path="lib/jdom-2.0.2/jdom-2.0.2.jar"/>
-	<classpathentry kind="lib" path="lib/xmlbeans-2.5.0/resolver.jar"/>
-	<classpathentry kind="lib" path="lib/xmlbeans-2.5.0/xbean_xpath.jar"/>
-	<classpathentry kind="lib" path="lib/xmlbeans-2.5.0/xbean.jar"/>
-	<classpathentry kind="lib" path="lib/xmlbeans-2.5.0/xmlpublic.jar"/>
-	<classpathentry kind="lib" path="lib/xom-1.2.8/xom-1.2.8.jar"/>
-	<classpathentry kind="lib" path="lib/dom4j-1.6.1/pull-parser-2.1.10.jar"/>
-	<classpathentry kind="lib" path="lib/dom4j-1.6.1/xpp3-1.1.3.3.jar"/>
-	<classpathentry kind="lib" path="lib/msv/isorelax.jar"/>
-	<classpathentry kind="lib" path="lib/msv/msv.jar"/>
-	<classpathentry kind="lib" path="lib/msv/relaxngDatatype.jar"/>
-	<classpathentry kind="lib" path="lib/msv/xsdlib.jar"/>
-	<classpathentry kind="lib" path="lib/woodstox/woodstox-core-asl-4.1.3.jar"/>
-	<classpathentry kind="lib" path="lib/stax/stax-1.2.0.jar"/>
-	<classpathentry kind="lib" path="lib/xstream/xstream-1.4.2.jar"/>
-	<classpathentry kind="lib" path="lib/jettison/jettison-1.3.1.jar"/>
-	<classpathentry kind="lib" path="lib/kxml/kxml2-2.3.0.jar"/>
-	<classpathentry kind="lib" path="lib/saxon/saxon9-unpack.jar"/>
-	<classpathentry kind="lib" path="lib/saxon/saxon9he.jar"/>
-	<classpathentry kind="lib" path="lib/stax/stax-utils.jar"/>
-	<classpathentry kind="lib" path="lib/simple/simple-xml-2.6.4.jar"/>
-	<classpathentry kind="lib" path="lib/joda/joda-time-1.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/dom4j-1.6.1/dom4j-1.6.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jaxen-1.1.4/jaxen-1.1.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jdom-2.0.2/jdom-2.0.2-contrib.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jdom-2.0.2/jdom-2.0.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xmlbeans-2.5.0/resolver.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xmlbeans-2.5.0/xbean_xpath.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xmlbeans-2.5.0/xbean.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xmlbeans-2.5.0/xmlpublic.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xom-1.2.8/xom-1.2.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/dom4j-1.6.1/pull-parser-2.1.10.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/dom4j-1.6.1/xpp3-1.1.3.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/msv/isorelax.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/msv/msv.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/msv/relaxngDatatype.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/msv/xsdlib.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/woodstox/woodstox-core-asl-4.1.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/stax/stax-1.2.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xstream/xstream-1.4.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jettison/jettison-1.3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/kxml/kxml2-2.3.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/saxon/saxon9-unpack.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/saxon/saxon9he.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/stax/stax-utils.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/simple/simple-xml-2.6.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/joda/joda-time-1.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
