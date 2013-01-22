@@ -16,6 +16,7 @@
 package org.openntf.xsp.starter.application;
 
 import javax.faces.application.Application;
+import javax.faces.application.ViewHandler;
 
 import org.openntf.xsp.starter.Activator;
 import org.openntf.xsp.starter.listeners.ApplicationListener;
@@ -26,6 +27,7 @@ import com.ibm.commons.vfs.VFS;
 import com.ibm.domino.xsp.module.nsf.ModuleClassLoader;
 import com.ibm.xsp.application.ApplicationEx;
 import com.ibm.xsp.application.DesignerApplicationEx;
+import com.ibm.xsp.controller.FacesController;
 
 public class StarterApplicationEx extends DesignerApplicationEx {
 	private final static boolean _debug = Activator.isDebug();
@@ -35,6 +37,17 @@ public class StarterApplicationEx extends DesignerApplicationEx {
 	static {
 		if (_debug)
 			System.out.println(StarterApplicationEx.class.getName() + " loaded");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ibm.xsp.application.ApplicationExImpl#getController()
+	 */
+	@Override
+	public FacesController getController() {
+		// TODO Auto-generated method stub
+		return super.getController();
 	}
 
 	protected StarterApplicationEx(Application paramApplication) {
@@ -81,6 +94,17 @@ public class StarterApplicationEx extends DesignerApplicationEx {
 		ModuleClassLoader nsfLoader = (ModuleClassLoader) designApp.getClassLoader();
 		VFS vfs = designApp.getVFS();
 		vfs.addVFSEventListener(_vfsEvent);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ibm.xsp.application.ApplicationExImpl#getViewHandler()
+	 */
+	@Override
+	public ViewHandler getViewHandler() {
+		// TODO Auto-generated method stub
+		return super.getViewHandler();
 	}
 
 }

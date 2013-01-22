@@ -23,6 +23,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.openntf.rome.Activator;
+
 import com.sun.syndication.io.DelegatingModuleGenerator;
 import com.sun.syndication.io.DelegatingModuleParser;
 import com.sun.syndication.io.WireFeedGenerator;
@@ -136,11 +138,14 @@ public abstract class PluginManager {
 	 * 
 	 */
 	private Class[] getClasses() throws ClassNotFoundException {
-		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		ClassLoader classLoader = Activator.class.getClassLoader();
+		// ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		List classes = new ArrayList();
 		boolean useLoadClass = Boolean.valueOf(System.getProperty("rome.pluginmanager.useloadclass", "false")).booleanValue();
 		for (int i = 0; i < _propertyValues.length; i++) {
-			Class mClass = (useLoadClass ? classLoader.loadClass(_propertyValues[i]) : Class.forName(_propertyValues[i], true, classLoader));
+			Class mClass = classLoader.loadClass(_propertyValues[i]);
+			// Class mClass = (useLoadClass ? classLoader.loadClass(_propertyValues[i]) : Class.forName(_propertyValues[i], true,
+			// classLoader));
 			classes.add(mClass);
 		}
 		Class[] array = new Class[classes.size()];

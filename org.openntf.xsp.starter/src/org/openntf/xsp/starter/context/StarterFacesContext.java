@@ -17,9 +17,12 @@ package org.openntf.xsp.starter.context;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
 import org.openntf.xsp.starter.Activator;
 
+import com.ibm.xsp.application.ComponentData;
 import com.ibm.xsp.domino.context.DominoFacesContext;
+import com.ibm.xsp.webapp.XspHttpServletResponse;
 
 public class StarterFacesContext extends DominoFacesContext {
 
@@ -47,4 +50,36 @@ public class StarterFacesContext extends DominoFacesContext {
 		return external;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ibm.xsp.context.FacesContextExImpl#getXspResponse()
+	 */
+	@Override
+	public XspHttpServletResponse getXspResponse() {
+		// TODO Auto-generated method stub
+		return super.getXspResponse();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ibm.xsp.context.FacesContextExImpl#getContextClassLoader()
+	 */
+	@Override
+	public ClassLoader getContextClassLoader() {
+		// TODO Auto-generated method stub
+		return super.getContextClassLoader();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ibm.xsp.context.FacesContextExImpl#getComponentData()
+	 */
+	@Override
+	public ComponentData getComponentData() {
+		// TODO Auto-generated method stub
+		return super.getComponentData();
+	}
 }
