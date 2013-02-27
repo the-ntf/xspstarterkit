@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+
+  <managed-bean>
+    <managed-bean-name>KleptoBean</managed-bean-name>
+    <managed-bean-class>org.openntf.domino.klepto.KleptoBean</managed-bean-class>
+    <managed-bean-scope>application</managed-bean-scope>
+  </managed-bean>
+</faces-config>
