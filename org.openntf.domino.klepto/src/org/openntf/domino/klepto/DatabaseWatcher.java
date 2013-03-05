@@ -3,6 +3,7 @@ package org.openntf.domino.klepto;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import lotus.domino.Database;
 import lotus.domino.DateTime;
 import lotus.domino.Document;
 import lotus.domino.DocumentCollection;
+import lotus.domino.NotesException;
 import lotus.domino.Session;
 
 import com.ibm.designer.domino.napi.NotesConstants;
@@ -57,6 +59,20 @@ public class DatabaseWatcher implements Serializable, DataObject {
 
 	}
 
+	static class DocSignerComparator implements Comparator<lotus.domino.Document> {
+		@Override
+		public int compare(lotus.domino.Document d1, lotus.domino.Document d2) {
+			int result = 0;
+			try {
+				d1.getSigner().compareTo(d2.getSigner());
+			} catch (NotesException ne) {
+				ne.printStackTrace();
+
+			}
+			return result;
+		}
+	}
+
 	private void _dumpTokenMap() {
 		for (String key : getFieldTokenMap().keySet()) {
 			NavigableSet<String> val = getFieldTokenMap().get(key);
@@ -74,6 +90,7 @@ public class DatabaseWatcher implements Serializable, DataObject {
 		DateTime dt = getLastWatchTime();
 		DocumentCollection result = getDb().search("@True", dt);
 		dt.recycle();
+
 		return result;
 	}
 
