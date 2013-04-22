@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.ibm.commons.Extension">
+      <service
+            class="org.openntf.xsp.responsive.library.XspLibrary"
+            type="com.ibm.xsp.Library">
+      </service>
+   </extension>
+<extension point="com.ibm.commons.Extension">
+         <service
+            type="com.ibm.xsp.resource.DojoModulePathResource"
+            class="org.openntf.xsp.responsive.resources.ModulePath" />
+   </extension>
+    <extension
+         point="com.ibm.commons.Extension">
+      <service
+            class="org.openntf.xsp.responsive.ssjs.JavaScriptProvider"
+            type="com.ibm.designer.runtime.extensions.JavaScriptProvider">
+      </service>
+   </extension>
+   <extension point="com.ibm.commons.Extension">
+      <service type="com.ibm.xsp.GlobalResourceProvider" class="org.openntf.xsp.responsive.resources.ResourceProvider" />
+   </extension>
+    <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.RequestParameters" class="org.openntf.xsp.responsive.resources.RequestCustomizerFactory" />
+   </extension>
+    <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.library.Contributor" class="org.openntf.xsp.responsive.library.LibraryContributor" />
+   </extension>
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.stylekit.StyleKitFactory" class="org.openntf.xsp.responsive.themes.StyleKitFactory" />
+   </extension>
+</plugin>
