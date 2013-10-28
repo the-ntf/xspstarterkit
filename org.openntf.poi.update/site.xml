@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.openntf.poi.feature_1.0.0.201310180113.jar" id="org.openntf.poi.feature" version="1.0.0.201310180113">
+      <category name="org.openntf.pot"/>
+   </feature>
+   <category-def name="org.openntf.pot" label="OpenNTF POI"/>
+</site>
