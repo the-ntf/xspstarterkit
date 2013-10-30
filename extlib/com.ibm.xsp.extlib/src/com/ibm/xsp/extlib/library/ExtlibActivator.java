@@ -9,14 +9,10 @@
 /*                                                                   */
 /* ***************************************************************** */
 
-
-
-
-
-
 package com.ibm.xsp.extlib.library;
 
 import org.eclipse.core.runtime.Plugin;
+import org.osgi.framework.BundleContext;
 
 /**
  * Extlib Bundle Activator.
@@ -25,9 +21,15 @@ import org.eclipse.core.runtime.Plugin;
  */
 public class ExtlibActivator extends Plugin {
 
-    public static ExtlibActivator instance;
-    
-    public ExtlibActivator() {
-        instance = this;
-    }
+	public static ExtlibActivator instance;
+
+	public ExtlibActivator() {
+		instance = this;
+	}
+
+	@Override
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+		System.out.println("Starting custom Extension Library for 9.0.1");
+	}
 }

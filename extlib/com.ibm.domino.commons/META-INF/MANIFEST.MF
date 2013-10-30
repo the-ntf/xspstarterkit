@@ -12,4 +12,4 @@ Require-Bundle: com.ibm.notes.java.api,
 Provide-Package: com.ibm.domino.commons,com.ibm.domino.commons.interna
  l,com.ibm.domino.commons.json,com.ibm.domino.commons.mime,com.ibm.dom
  ino.commons.model,com.ibm.domino.commons.util
-Bundle-Version: 9.0.1.qualifier
+Bundle-Version: 9.0.1.v00_01_qualifier

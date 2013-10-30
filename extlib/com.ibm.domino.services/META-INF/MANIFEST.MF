@@ -32,4 +32,4 @@ Export-Package: com.ibm.domino.services,
  com.ibm.domino.services.util
 Eclipse-LazyStart: true
 Bundle-Activator: com.ibm.domino.services.Activator
-Bundle-Version: 9.0.1.qualifier
+Bundle-Version: 9.0.1.v00_01_qualifier
