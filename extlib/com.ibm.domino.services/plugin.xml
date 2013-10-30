@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!-- Licensed Materials - Property of IBM                                -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 1985, 2013 All Rights Reserved                  -->
+<!--                                                                     -->
+<!-- L-GHUS-8Q8JER                                                       -->
+<!--                                                                     -->
+<!--                                                                     -->
+<!-- US Government Users Restricted Rights - Use, duplication or         --> 
+<!-- disclosure restricted by GSA ADP Schedule Contract with             -->
+<!-- IBM Corp.                                                           --> 
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+
+
+
+
+<plugin>   
+   <!-- contribute the faces-config.xml and .xsp-config files -->
+</plugin>

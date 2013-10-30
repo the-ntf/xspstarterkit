@@ -1,0 +1,66 @@
+<theme>
+	<!-- 
+		Use this pattern to include resources (such as style sheets
+		and JavaScript files that are used by this theme.
+	<resource>
+		<content-type>text/css</content-type>
+		<href>mystylesheet.css</href>
+	</resource>
+	
+		Use this pattern to define property name/value pairs for controls
+	<control>
+		<name>[Control Name]</name>
+		<property>
+			<name>[property Name]</name>
+			<value>[property Value]</value>
+		</property>
+	</control>
+	-->
+	
+	<control>
+       <name>ViewRoot</name>
+       <property mode="concat">
+            <name>styleClass</name>
+            <value>android</value>
+        </property>
+    </control>
+	
+	<control>
+		<name>Outline</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.MobileOutlineNavigator</value>
+		</property>
+	</control>
+	<control>
+		<name>FormLayout.FormTable</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.mobile.MobileFormTable</value>
+		</property>
+	</control>
+	<control>
+		<name>DataIterator.DataView</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.mobile.MobileView</value>
+		</property>
+	</control>
+	
+	<resources> 
+		<metaData> 
+			<name>viewport</name> 
+			<content>width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no</content> 
+		</metaData> 
+		<metaData> 
+			<name>apple-mobile-web-app-capable</name> 
+			<content>yes</content> 
+		</metaData> 
+	</resources> 
+	
+	<resource rendered="#{javascript:return (context.getUserAgent().getUserAgent().indexOf('Android 2.3') > -1);}">
+       <content-type>text/css</content-type>
+       <href>/.ibmxspres/.extlib/css/customAndroid23.css</href>
+    </resource> 
+	
+</theme>

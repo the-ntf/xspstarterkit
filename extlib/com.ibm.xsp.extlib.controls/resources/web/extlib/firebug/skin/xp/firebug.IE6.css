@@ -1,0 +1,30 @@
+/* ***************************************************************** */
+/* Licensed Materials - Property of IBM                              */
+/*                                                                   */
+/* Copyright IBM Corp. 1985, 2013 All Rights Reserved                */
+/*                                                                   */
+/* US Government Users Restricted Rights - Use, duplication or       */
+/* disclosure restricted by GSA ADP Schedule Contract with           */
+/* IBM Corp.                                                         */
+/*                                                                   */
+/* ***************************************************************** */
+/************************************************************************************************/
+#fbToolbarSearch {
+    background-image: url(search.gif) !important;
+}
+/************************************************************************************************/
+.fbErrors {
+    background-image: url(errorIcon.gif) !important;
+}
+/************************************************************************************************/
+.logRow-info {
+    background-image: url(infoIcon.gif) !important;
+}
+
+.logRow-warning {
+    background-image: url(warningIcon.gif) !important;
+}
+
+.logRow-error {
+    background-image: url(errorIcon.gif) !important;
+}
