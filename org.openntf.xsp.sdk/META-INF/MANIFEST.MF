@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Bundle-Vendor: Red Pill Development, LLC
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: OSGi/Minimum-1.2
+Bundle-Name: XPages SDK
+Bundle-SymbolicName: org.openntf.xsp.sdk;singleton:=true
+Bundle-Activator: org.openntf.xsp.sdk.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui
+Bundle-Version: 1.1.0.qualifier
+Export-Package: org.openntf.xsp.sdk,
+ org.openntf.xsp.sdk.components,
+ org.openntf.xsp.sdk.exceptions,
+ org.openntf.xsp.sdk.jre,
+ org.openntf.xsp.sdk.launcher,
+ org.openntf.xsp.sdk.preferences,
+ org.openntf.xsp.sdk.templates,
+ org.openntf.xsp.sdk.utils,
+ org.openntf.xsp.sdk.wizard
+Bundle-ManifestVersion: 2
+Import-Package: org.apache.commons.lang,org.eclipse.core.resources,org
+ .eclipse.core.variables,org.eclipse.debug.core,org.eclipse.debug.inte
+ rnal.core,org.eclipse.jdt.core,org.eclipse.jdt.internal.launching,org
+ .eclipse.jdt.internal.ui.wizards,org.eclipse.jdt.launching,org.eclips
+ e.jdt.ui.wizards,org.eclipse.jface.preference,org.eclipse.jface.text,
+ org.eclipse.pde.core.plugin,org.eclipse.pde.launching,org.eclipse.pde
+ .ui.launcher,org.eclipse.swt,org.eclipse.ui.actions
+
+

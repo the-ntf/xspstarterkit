@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.openntf.xsp.sdk.preferences.XPagesSDKPreferencesPage"
+            id="org.openntf.xsp.sdk.page"
+            name="XPages SDK">
+      </page>
+   </extension>
+   <extension
+         id="org.openntf.xsp.sdk"
+         point="org.eclipse.core.runtime.preferences">
+         <initializer class="org.openntf.xsp.sdk.preferences.XPagesSDKPreferencesInitializer"/>
+   </extension>
+   
+   <extension point="org.eclipse.core.variables.dynamicVariables">
+    <variable 
+       name="notes_install"
+       resolver="org.openntf.xsp.sdk.jre.DynamicVariableResolver"
+       description="Installation folder for IBM Lotus Notes"
+       supportsArgument="false">
+    </variable>
+    <variable 
+       name="rcp_data"
+       resolver="org.openntf.xsp.sdk.jre.DynamicVariableResolver"
+       description="Notes RCP Workspace"
+       supportsArgument="false">
+    </variable>
+    <variable 
+       name="rcp_base"
+       resolver="org.openntf.xsp.sdk.jre.DynamicVariableResolver"
+       description="Notes RCP Base install folder"
+       supportsArgument="false">
+    </variable>
+    <variable 
+       name="rcp_target"
+       resolver="org.openntf.xsp.sdk.jre.DynamicVariableResolver"
+       description="Notes RCP Run Target"
+       supportsArgument="false">
+    </variable>
+    
+    <variable 
+       name="domino_install"
+       resolver="org.openntf.xsp.sdk.jre.DynamicVariableResolver"
+       description="Installation folder for IBM Lotus Domino"
+       supportsArgument="false">
+    </variable>
+    <variable 
+       name="domino_rcp_data"
+       resolver="org.openntf.xsp.sdk.jre.DynamicVariableResolver"
+       description="Domino OSGi Workspace"
+       supportsArgument="false">
+    </variable>
+    <variable 
+       name="domino_rcp_base"
+       resolver="org.openntf.xsp.sdk.jre.DynamicVariableResolver"
+       description="Domino RCP Base install folder"
+       supportsArgument="false">
+    </variable>
+    <variable 
+       name="domino_rcp_target"
+       resolver="org.openntf.xsp.sdk.jre.DynamicVariableResolver"
+       description="Domino OSGi Run Target"
+       supportsArgument="false">
+    </variable>
+    <variable 
+       name="domino_shared_target"
+       resolver="org.openntf.xsp.sdk.jre.DynamicVariableResolver"
+       description="Domino OSGi Shared Target"
+       supportsArgument="false">
+    </variable>
+    
+    <variable 
+       name="dots_rcp_data"
+       resolver="org.openntf.xsp.sdk.jre.DynamicVariableResolver"
+       description="DOTS Workspace"
+       supportsArgument="false">
+    </variable>
+    <variable 
+       name="dots_rcp_base"
+       resolver="org.openntf.xsp.sdk.jre.DynamicVariableResolver"
+       description="DOTS RCP Base install folder"
+       supportsArgument="false">
+    </variable>
+    <variable 
+       name="dots_rcp_target"
+       resolver="org.openntf.xsp.sdk.jre.DynamicVariableResolver"
+       description="DOTS Run Target"
+       supportsArgument="false">
+    </variable>
+    <variable 
+       name="dots_shared_target"
+       resolver="org.openntf.xsp.sdk.jre.DynamicVariableResolver"
+       description="DOTS Shared Target"
+       supportsArgument="false">
+    </variable>
+  </extension>
+   <extension
+         point="org.eclipse.pde.core.targets">
+         <target 
+       id="org.openntf.xsp.sdk.NotesTarget"
+       name="Notes Install Target"
+       definition="setup/Notes.target"/>
+       <target 
+       id="org.openntf.xsp.sdk.DominoTarget"
+       name="Domino Install Target"
+       definition="setup/Domino.target"/>
+        <target 
+       id="org.openntf.xsp.sdk.DOTSTarget"
+       name="DOTS Install Target"
+       definition="setup/DOTS.target"/>
+   </extension>
+
+ <!--  
+<extension point="org.eclipse.jdt.launching.vmInstalls"> 
+      <vmInstall 
+           home="${notes_install}/jvm" 
+            id="com.ibm.rcp.j2se.notes85.x86" 
+            name="Notes SDK JVM" 
+            vmArgs="-Djava.library.path=${notes_install} -Xj9"           
+            vmInstallType="org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType"/> 
+</extension> 
+   -->
+   <!--
+   <extension 
+		id="org.openntf.xsp.sdk.components.XspComponentBuilder" 
+		name="XPages Component Builder" 
+		point="org.eclipse.core.resources.builders">
+		<builder
+        	hasNature="true">
+			<run class="org.openntf.xsp.sdk.components.XspComponentBuilder">
+			</run>
+		</builder>
+	</extension>
+	-->
+   <extension
+		id="org.openntf.xsp.sdk.XspNature"
+		name="XPages Nature"
+		point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run
+				class="org.openntf.xsp.sdk.XspNature">
+			</run> 
+		</runtime>
+	<!--	<builder id="org.openntf.xsp.sdk.components.XspComponentBuilder"/>     -->  
+	</extension>
+   
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="XPages SDK"
+            id="org.openntf.xsp.sdk">
+      </category>
+       <wizard
+             category="org.openntf.xsp.sdk"
+             class="org.openntf.xsp.sdk.wizard.NewXPagesLibraryCreationWizard"
+             icon="icons/XPage.png"
+             id="org.openntf.xsp.sdk.NewXPagesLibraryCreationWizard"
+             name="XPages Library">
+         <!--<class class="org.openntf.xsp.sdk.wizard.NewXPagesLibraryCreationWizard">
+            <parameter name="javatype" value="true"/>
+         </class>-->
+         <description>
+           New XPages Library
+         </description>
+      </wizard>
+      </extension>
+      <extension
+         point="org.eclipse.pde.ui.pluginContent">
+      <!-- contribute to plugin wizards -->
+      <wizard
+            class="org.openntf.xsp.sdk.templates.XPagesLibraryProject"
+           icon="icons/XPage.png"
+            id="org.openntf.xsp.sdk.templates.XPagesLibraryProject"
+            java="true"
+            rcp="false"
+            name="XPages Library Project"
+            ui-content="false">
+         <description>
+            Get yer XPages on!!
+         </description>
+      </wizard>
+     
+      <!-- contribute to rcp wizards -->
+      
+    
+
+      
+   </extension>
+     <extension point="org.eclipse.debug.core.launchConfigurationTypes">
+    <launchConfigurationType
+        name="Designer"
+        delegate="org.openntf.xsp.sdk.launcher.DesignerLaunchConfigurationDelegate"
+        modes="run, debug"               
+        id="org.openntf.xsp.sdk.launcher.Designer">        
+    </launchConfigurationType>
+    </extension>
+    
+   <extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+    <launchConfigurationTypeImage
+        icon="icons/XPage.png"
+        configTypeID="org.openntf.xsp.sdk.launcher.Designer"
+        id="org.eclipse.jdt.debug.ui.launchConfigurationTypeImage.Designer">
+    </launchConfigurationTypeImage>
+</extension>
+   <extension
+         id="OpenNTFDomino"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.equinox.p2.publisher.FeaturesAndBundlesPublisher"
+            name="OpenNTF Domino Definition">
+      </product>
+   </extension>
+<!--
+<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+    <launchConfigurationTabGroup
+        type="org.openntf.xsp.sdk.launcher.Designer"
+        class="org.eclipse.jdt.internal.debug.ui.launcher.JavaAppletTabGroup"
+        id="org.eclipse.jdt.debug.ui.launchConfigurationTabGroup.Designer">
+    </launchConfigurationTabGroup>
+</extension>
+-->
+<!-- <extension point = "org.eclipse.debug.ui.launchGroups">
+	<launchGroup
+		id = "org.eclipse.debug.ui.launchGroup.debug"
+		mode = "debug"
+		label ="Debug"
+		image = "icons/XPage.png"
+		bannerImage = "icons/XPage.png">
+	</launchGroup>
+	<launchGroup
+		id = "org.eclipse.debug.ui.launchGroup.run"
+		mode = "run"
+		label = "Run"
+		image = "icons/XPage.png"
+		bannerImage = "icons/XPage.png">
+	</launchGroup> 
+</extension>
+<extension
+      id="product"
+      point="org.eclipse.core.runtime.products">
+   <product
+        application="com.ibm.rcp.personality.framework.RCPApplication"
+         name="Designer SDK">
+      <property
+            name="appName"
+            value="Designer SDK">
+      </property>
+   </product>
+</extension>
+-->
+</plugin>

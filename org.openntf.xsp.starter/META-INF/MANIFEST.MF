@@ -38,4 +38,5 @@ Export-Package: org.openntf.xsp.starter,
 Require-Bundle: com.ibm.xsp.core;bundle-version="8.5.3",
  com.ibm.xsp.designer;bundle-version="8.5.3",
  com.ibm.xsp.extsn;bundle-version="8.5.3",
- com.ibm.designer.runtime;bundle-version="8.5.3"
+ com.ibm.designer.runtime;bundle-version="8.5.3",
+ com.ibm.domino.napi;bundle-version="9.0.1"
